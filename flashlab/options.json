@@ -1,0 +1,487 @@
+{
+    "Encrypted_Tactical_Inhibit": {
+        "byte_offset": 11,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "_7_800_MHz": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 2
+    },
+    "UHF_Range_2": {
+        "byte_offset": 3,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "OTAR_with_Multikey": {
+        "byte_offset": 2,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "GERMANFEDGOVENABLED_ID": {
+        "byte_offset": 15,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "_125_kHz_FCC_Mandate": {
+        "byte_offset": 7,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "FCC_Conventional_Front_Panel_Programming": {
+        "byte_offset": 10,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "ASTRO_Digital_Operation": {
+        "byte_offset": 1,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "ID_VIQIVOICECONTROL": {
+        "byte_offset": 14,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "RSI_Data": {
+        "byte_offset": 5,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "LTE_ENABLEMENT": {
+        "byte_offset": 15,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "Federal_Government_Front_Panel_Programming_Enhancement": {
+        "byte_offset": 2,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "DVRS_PSU_Activation": {
+        "byte_offset": 7,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "ASTRO_25_9600_Baud_Trunking_Systems_Operation": {
+        "byte_offset": 11,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "APX_Lite_Option": {
+        "byte_offset": 9,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "Extreme_Noise_Reduction": {
+        "byte_offset": 7,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "SMARTZONE_OMNILINK_Multizone_Operation": {
+        "byte_offset": 10,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "P_9600_or_3600_Single_System_Trigger": {
+        "byte_offset": 9,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "ID_DIGITALTONESIGNALING": {
+        "byte_offset": 2,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "ASK_Enable": {
+        "byte_offset": 5,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "VHF": {
+        "byte_offset": 3,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "ID_ATAK_H": {
+        "byte_offset": 15,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "DVRS_MSU_Operation": {
+        "byte_offset": 8,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "UHF_Range_1": {
+        "byte_offset": 3,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "_7_800_MHz_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "VHF_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_Range_1_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_Range_2_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "ETSI_REGULATORY_REGION_ENABLED": {
+        "byte_offset": 15,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "ID_QA08715VOICECONTROLBASIC": {
+        "byte_offset": 15,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "SMARTNET_Systems_Operation": {
+        "byte_offset": 6,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "GPS_Activation": {
+        "byte_offset": 8,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "Personnel_Accountability_Software": {
+        "byte_offset": 12,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "Front_Display_and_Full_Keypad": {
+        "byte_offset": 12,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "Group_Services": {
+        "byte_offset": 6,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "_7_800_MHz_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "VHF_MP_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "VHF_HP_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_R1_MP_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_R1_HP_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_R2_MP_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "_900MHZ_ID": {
+        "byte_offset": 3,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "Encrypted_VPN_Gateway": {
+        "byte_offset": 12,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "RF_Preamp": {
+        "byte_offset": 1,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "Mission_Critical_Geofencing": {
+        "byte_offset": 9,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "Conventional_Tactical_Rekey": {
+        "byte_offset": 7,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "FDNY_Emergency_Rx_Tx_Tone_Set": {
+        "byte_offset": 12,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "DINC_PLUS_AUDIO": {
+        "byte_offset": 4,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "Bluetooth_Id": {
+        "byte_offset": 5,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "Over_the_Air_Provisioning": {
+        "byte_offset": 1,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "SmartConnect": {
+        "byte_offset": 12,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "ID_QA08676ADAPTIVESPEAKERVOLUME": {
+        "byte_offset": 15,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "DVRS_PSU_CONVENTIONAL_SCAN_ENABLED": {
+        "byte_offset": 14,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "Enhancement_Level_2": {
+        "byte_offset": 6,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "Motorcycle_Radio": {
+        "byte_offset": 2,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "Enhanced_Zone_Bank": {
+        "byte_offset": 5,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "Multikey_Id": {
+        "byte_offset": 2,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "Collaborative_Phase_1": {
+        "byte_offset": 11,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "LTE_Operation": {
+        "byte_offset": 8,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "WiFi_Capability": {
+        "byte_offset": 4,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "Extended_Dispatch_Enable": {
+        "byte_offset": 8,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "Advanced_Encryption_Standard": {
+        "byte_offset": 4,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "APX_DES_SOFTWARE_CRYPTO": {
+        "byte_offset": 14,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "Dual_Radio_Operation": {
+        "byte_offset": 11,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "Trunked_Radio_Trace_Remote_Monitor": {
+        "byte_offset": 1,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "P25_Radio_Authentication": {
+        "byte_offset": 2,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "VHF_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_Range_1_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_Range_2_Primary_Band": {
+        "byte_offset": 3,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "Primary_Band_800_900MHz": {
+        "byte_offset": 3,
+        "bit_offset": 5,
+        "bit_size": 2
+    },
+    "V24_Software_Enable": {
+        "byte_offset": 9,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "Night_Vision_Goggle": {
+        "byte_offset": 11,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "Man_Down_Operation": {
+        "byte_offset": 6,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "NYPD_Trigger": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "Enable_Dual_Band_Operation": {
+        "byte_offset": 5,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "Advanced_Digital_Privacy_Software": {
+        "byte_offset": 7,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "Third_Party_Data_Modem_Tethering": {
+        "byte_offset": 10,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "VHF_MPZ_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "VHF_HP_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_R1_MP_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_R1_HP_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "UHF_R2_MP_Secondary_Band": {
+        "byte_offset": 4,
+        "bit_offset": 4,
+        "bit_size": 5
+    },
+    "SmartConnectOverBroadband": {
+        "byte_offset": 14,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "Conventional_Voting_Scan": {
+        "byte_offset": 10,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "Enhanced_Data_Operation": {
+        "byte_offset": 9,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "Enhancement_Level_1": {
+        "byte_offset": 8,
+        "bit_offset": 1,
+        "bit_size": 1
+    },
+    "Legacy_SW_System_Key_Enable": {
+        "byte_offset": 5,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "TDMA_Operation": {
+        "byte_offset": 11,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "Multi_System_OTAR": {
+        "byte_offset": 14,
+        "bit_offset": 2,
+        "bit_size": 1
+    },
+    "P25_Common_Air_Interface": {
+        "byte_offset": 12,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "Packet_Data_Interface": {
+        "byte_offset": 9,
+        "bit_offset": 0,
+        "bit_size": 1
+    },
+    "SMARTZONE_Systems_Operation": {
+        "byte_offset": 6,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "Site_Selectable_Alert_For_P25_Trunking": {
+        "byte_offset": 10,
+        "bit_offset": 3,
+        "bit_size": 1
+    },
+    "Motorola_VML_Data_Modem_Tethering": {
+        "byte_offset": 7,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "ID_GEOFENCEHOPTION": {
+        "byte_offset": 1,
+        "bit_offset": 5,
+        "bit_size": 1
+    },
+    "One_Touch_Status_Message": {
+        "byte_offset": 6,
+        "bit_offset": 4,
+        "bit_size": 1
+    },
+    "ID_TACTICALSERVICES": {
+        "byte_offset": 16,
+        "bit_offset": 0,
+        "bit_size": 1
+    }
+}

@@ -1,0 +1,22 @@
+[project]
+name = "flashlab"
+description = "A simple tool to help creating and editing Motorola APX FLASHcodes"
+authors = [{ name = "k4yt3x", email = "i@k4yt3x.com" }]
+dependencies = ["PyQt6>=6.6.1"]
+requires-python = ">=3.8"
+readme = "README.md"
+license = { text = "ISC" }
+dynamic = ["version"]
+
+[project.scripts]
+flashlab = "flashlab:main"
+
+[tool.isort]
+profile = "black"
+
+[tool.pdm]
+version = { source = "file", path = "flashlab/__init__.py" }
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
