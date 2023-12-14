@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtGui import QKeySequence, QShortcut
 from PyQt6.QtWidgets import (
     QApplication,
@@ -35,6 +35,8 @@ class FlashLabWindow(QMainWindow):
         main_widget = QWidget(self)
         main_layout = QVBoxLayout(main_widget)
         self.setCentralWidget(main_widget)
+
+        QMainWindow.resize(self, QSize(800, 1100))
 
         QShortcut(QKeySequence("Ctrl+Q"), self, QApplication.quit)
         QShortcut(QKeySequence("Ctrl+W"), self, QApplication.quit)
