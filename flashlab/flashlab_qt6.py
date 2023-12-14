@@ -89,7 +89,6 @@ class FlashLabWindow(QMainWindow):
 
         # scrollable list for options
         self.option_items_list = QListWidget(self)
-        # self.option_items_list.setSelectionMode(QListWidget.SelectionMode.NoSelection)
 
         # add all options
         for option in self.flashcode.options:
@@ -137,16 +136,17 @@ class FlashLabWindow(QMainWindow):
                 yield item
 
     def update_options(self):
-        all_options = list(self.flashcode.options)
         selected_options = [
             item.text() for item in self.get_checked_items(self.option_items_list)
         ]
+
+        previous_flashcode = self.flashcode
 
         for option in selected_options:
             if option not in self.flashcode.get_enabled_options():
                 self.flashcode.add_option(option)
 
-        for option in all_options:
+        for option in list(previous_flashcode.get_enabled_options()):
             if option not in selected_options:
                 self.flashcode.remove_option(option)
 
