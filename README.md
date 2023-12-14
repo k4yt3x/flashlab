@@ -17,9 +17,7 @@ If you're looking to create a normal FLASHcode for your radio, you may want to u
 Install the program:
 
 ```shell
-git clone https://github.com/k4yt3x/flashlab.git
-cd flashlab
-pip install .
+pip install git+https://github.com/k4yt3x/flashlab.git
 ```
 
 This program can be launched in two modes: CLI and GUI:
