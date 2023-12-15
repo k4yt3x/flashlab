@@ -121,6 +121,8 @@ class FlashLabWindow(QMainWindow):
             message_box.exec()
             return
 
+        self.clear_options()
+
         for index in range(self.option_items_list.count()):
             item = self.option_items_list.item(index)
             for option in self.flashcode.get_enabled_options():
