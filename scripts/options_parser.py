@@ -7,7 +7,7 @@ import re
 options = {}
 
 # SpecialFeatures.Flashport.FlashRadio.FlashcodeTable
-with open("FlashcodeTable.cs", "r", encoding="utf-8") as file:
+with open("data/FlashcodeTable.cs", "r", encoding="utf-8") as file:
     for line in file:
         if match := re.search(r"new \w+FieldLayout\(([^)]+)\)", line):
             arguments = (
@@ -24,11 +24,21 @@ with open("FlashcodeTable.cs", "r", encoding="utf-8") as file:
             if len(arguments) < 3:
                 continue
 
-            options[arguments[0]] = {
+            name = arguments[0]
+            name = name[1:] if name.startswith("_") else name
+            name = name.replace("_", " ")
+
+            options[name.strip()] = {
                 "byte_offset": int(arguments[1]),
                 "bit_offset": int(arguments[2]),
                 "bit_size": int(arguments[3] if len(arguments) >= 4 else "1"),
             }
 
-with open("options.json", "w") as options_file:
-    options_file.write(json.dumps(options, indent=4))
+options["APX XE"] = {
+    "byte_offset": 1,
+    "bit_offset": 2,
+    "bit_size": 1,
+}
+
+with open("flashlab/options.json", "w") as options_file:
+    options_file.write(json.dumps(options, indent=2))
