@@ -17,6 +17,10 @@ If you're looking to create a normal FLASHcode for your radio, you may want to u
 Install the program:
 
 ```shell
+# install from PyPI
+pip install flashlab
+
+# install from Git repository
 pip install git+https://github.com/k4yt3x/flashlab.git
 ```
 
@@ -28,4 +32,14 @@ flashlab cli
 
 # start in GUI mode
 flashlab gui
+```
+
+If the above returns command not found, you can also do:
+
+```shell
+# start in CLI mode
+python -m flashlab cli
+
+# start in GUI mode
+python -m flashlab gui
 ```
