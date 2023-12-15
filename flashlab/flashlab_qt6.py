@@ -89,6 +89,11 @@ class FlashLabWindow(QMainWindow):
         top_layout.addWidget(clear_button)
         top_layout.addWidget(show_bits_button)
 
+        # filter field
+        self.filter_field = QLineEdit(self)
+        self.filter_field.setPlaceholderText("Search for options...")
+        self.filter_field.textChanged.connect(self.filter_options)
+
         # scrollable list for options
         self.option_items_list = QListWidget(self)
 
@@ -100,6 +105,7 @@ class FlashLabWindow(QMainWindow):
 
         # add top layout and options list to main layout
         main_layout.addLayout(top_layout)
+        main_layout.addWidget(self.filter_field)
         main_layout.addWidget(self.option_items_list)
 
         # set example text to the text field
@@ -110,6 +116,12 @@ class FlashLabWindow(QMainWindow):
         message_box.setWindowTitle("About FLASHlab")
         message_box.setText("FLASHlab\nCopyright (C) 2023 K4YT3X")
         message_box.exec()
+
+    def filter_options(self):
+        filter_text = self.filter_field.text()
+        for i in range(self.option_items_list.count()):
+            item = self.option_items_list.item(i)
+            item.setHidden(filter_text.lower() not in item.text().lower())
 
     def load_options(self):
         try:
