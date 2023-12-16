@@ -98,6 +98,8 @@ class FlashLabWindow(QMainWindow):
         self.option_items_list = QListWidget(self)
 
         # add all options
+        item_font = QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont)
+        item_font.setStyleHint(QFont.StyleHint.Monospace)
         for name, offsets in self.flashcode.options.items():
             item = QListWidgetItem(
                 "D{} B{} S{} {}".format(
@@ -111,6 +113,7 @@ class FlashLabWindow(QMainWindow):
             item.setData(Qt.ItemDataRole.UserRole, name)
             item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
             item.setCheckState(Qt.CheckState.Unchecked)
+            item.setFont(item_font)
 
         # add top layout and options list to main layout
         main_layout.addLayout(top_layout)
@@ -209,9 +212,6 @@ class FlashLabWindow(QMainWindow):
 
 def start_gui():
     app = QApplication(sys.argv)
-    font = QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont)
-    font.setStyleHint(QFont.StyleHint.Monospace)
-    QApplication.setFont(font)
     main_win = FlashLabWindow()
     main_win.show()
     return app.exec()
