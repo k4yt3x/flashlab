@@ -4,42 +4,42 @@
     "bit_offset": 1,
     "bit_size": 1
   },
-  "7 800 MHz": {
+  "7/800 MHz Primary Band": {
     "byte_offset": 3,
     "bit_offset": 4,
     "bit_size": 2
   },
-  "UHF Range 2": {
+  "UHF Range 2 Primary Band": {
     "byte_offset": 3,
-    "bit_offset": 2,
-    "bit_size": 1
+    "bit_offset": 4,
+    "bit_size": 5
   },
-  "OTAR with Multikey": {
+  "OTAR And Multikey": {
     "byte_offset": 2,
     "bit_offset": 3,
     "bit_size": 1
   },
-  "GERMANFEDGOVENABLED ID": {
+  "CeoTronics-MultiPTT 3C Support": {
     "byte_offset": 15,
     "bit_offset": 1,
     "bit_size": 1
   },
-  "125 kHz FCC Mandate": {
+  "12.5Khz FCC MANDATE": {
     "byte_offset": 7,
     "bit_offset": 3,
     "bit_size": 1
   },
-  "FCC Conventional Front Panel Programming": {
+  "Non-FED Front Panel Programming": {
     "byte_offset": 10,
     "bit_offset": 0,
     "bit_size": 1
   },
-  "ASTRO Digital Operation": {
+  "IMBE Digital Operation": {
     "byte_offset": 1,
     "bit_offset": 0,
     "bit_size": 1
   },
-  "ID VIQIVOICECONTROL": {
+  "ViQi : Voice Control": {
     "byte_offset": 14,
     "bit_offset": 0,
     "bit_size": 1
@@ -49,12 +49,12 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "LTE ENABLEMENT": {
+  "LTE Hardware Enablement": {
     "byte_offset": 15,
     "bit_offset": 3,
     "bit_size": 1
   },
-  "Federal Government Front Panel Programming Enhancement": {
+  "FED Front Panel Programming": {
     "byte_offset": 2,
     "bit_offset": 1,
     "bit_size": 1
@@ -64,12 +64,12 @@
     "bit_offset": 0,
     "bit_size": 1
   },
-  "ASTRO 25 9600 Baud Trunking Systems Operation": {
+  "Digital IMBE Trunking with 9600 Control Channel Only (APCO Trunking)": {
     "byte_offset": 11,
     "bit_offset": 3,
     "bit_size": 1
   },
-  "APX Lite Option": {
+  "APXLi Radio Trigger": {
     "byte_offset": 9,
     "bit_offset": 2,
     "bit_size": 1
@@ -79,17 +79,17 @@
     "bit_offset": 1,
     "bit_size": 1
   },
-  "SMARTZONE OMNILINK Multizone Operation": {
+  "OmniLink": {
     "byte_offset": 10,
     "bit_offset": 2,
     "bit_size": 1
   },
-  "P 9600 or 3600 Single System Trigger": {
+  "3600/9600 Trunking Single System Trigger": {
     "byte_offset": 9,
     "bit_offset": 1,
     "bit_size": 1
   },
-  "ID DIGITALTONESIGNALING": {
+  "P25 Digital Tone Signaling": {
     "byte_offset": 2,
     "bit_offset": 5,
     "bit_size": 1
@@ -99,27 +99,27 @@
     "bit_offset": 3,
     "bit_size": 1
   },
-  "VHF": {
+  "VHF Primary Band": {
     "byte_offset": 3,
-    "bit_offset": 0,
-    "bit_size": 1
+    "bit_offset": 4,
+    "bit_size": 5
   },
-  "ID ATAK H": {
+  "ATAK Enablement package": {
     "byte_offset": 15,
     "bit_offset": 2,
     "bit_size": 1
   },
-  "DVRS MSU Operation": {
+  "DVRS MSU Activation": {
     "byte_offset": 8,
     "bit_offset": 3,
     "bit_size": 1
   },
-  "UHF Range 1": {
+  "UHF Range 1 Primary Band": {
     "byte_offset": 3,
-    "bit_offset": 1,
-    "bit_size": 1
+    "bit_offset": 4,
+    "bit_size": 5
   },
-  "7 800 MHz Secondary Band": {
+  "7/800 MHz Secondary Band": {
     "byte_offset": 4,
     "bit_offset": 4,
     "bit_size": 5
@@ -139,17 +139,17 @@
     "bit_offset": 4,
     "bit_size": 5
   },
-  "ETSI REGULATORY REGION ENABLED": {
+  "ETSI Regulatory Region Enabled": {
     "byte_offset": 15,
     "bit_offset": 0,
     "bit_size": 1
   },
-  "ID QA08715VOICECONTROLBASIC": {
+  "Basic Voice Control": {
     "byte_offset": 15,
     "bit_offset": 5,
     "bit_size": 1
   },
-  "SMARTNET Systems Operation": {
+  "SmartNet Operation": {
     "byte_offset": 6,
     "bit_offset": 2,
     "bit_size": 1
@@ -159,7 +159,7 @@
     "bit_offset": 0,
     "bit_size": 1
   },
-  "Personnel Accountability Software": {
+  "Personnel Accountability": {
     "byte_offset": 12,
     "bit_offset": 0,
     "bit_size": 1
@@ -174,37 +174,32 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "7 800 MHz Primary Band": {
+  "VHF Primary Band Medium Power": {
     "byte_offset": 3,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "VHF MP Primary Band": {
+  "VHF Primary Band High Power": {
     "byte_offset": 3,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "VHF HP Primary Band": {
+  "UHF Range 1 Primary Band Medium Power": {
     "byte_offset": 3,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "UHF R1 MP Primary Band": {
+  "UHF Range 1 Primary Band High Power": {
     "byte_offset": 3,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "UHF R1 HP Primary Band": {
+  "UHF Range 2 Primary Band Medium Power": {
     "byte_offset": 3,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "UHF R2 MP Primary Band": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "900MHZ ID": {
+  "900 MHz Primary Band": {
     "byte_offset": 3,
     "bit_offset": 5,
     "bit_size": 1
@@ -214,12 +209,12 @@
     "bit_offset": 4,
     "bit_size": 1
   },
-  "RF Preamp": {
+  "Pre-amp (Mobile)": {
     "byte_offset": 1,
     "bit_offset": 1,
     "bit_size": 1
   },
-  "Mission Critical Geofencing": {
+  "Mission Critical Geofence": {
     "byte_offset": 9,
     "bit_offset": 5,
     "bit_size": 1
@@ -229,17 +224,17 @@
     "bit_offset": 2,
     "bit_size": 1
   },
-  "FDNY Emergency Rx Tx Tone Set": {
+  "FDNY Emergency Rx/Tx Tone Set": {
     "byte_offset": 12,
     "bit_offset": 2,
     "bit_size": 1
   },
-  "DINC PLUS AUDIO": {
+  "Adaptive Noise Suppression": {
     "byte_offset": 4,
     "bit_offset": 2,
     "bit_size": 1
   },
-  "Bluetooth Id": {
+  "Bluetooth Operation": {
     "byte_offset": 5,
     "bit_offset": 1,
     "bit_size": 1
@@ -254,12 +249,12 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "ID QA08676ADAPTIVESPEAKERVOLUME": {
+  "Adaptive Speaker Volume": {
     "byte_offset": 15,
     "bit_offset": 4,
     "bit_size": 1
   },
-  "DVRS PSU CONVENTIONAL SCAN ENABLED": {
+  "DVRS PSU Conventional Scan Enabled": {
     "byte_offset": 14,
     "bit_offset": 5,
     "bit_size": 1
@@ -279,7 +274,7 @@
     "bit_offset": 4,
     "bit_size": 1
   },
-  "Multikey Id": {
+  "Multikey": {
     "byte_offset": 2,
     "bit_offset": 2,
     "bit_size": 1
@@ -299,7 +294,7 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "Extended Dispatch Enable": {
+  "Extended Dispatch": {
     "byte_offset": 8,
     "bit_offset": 2,
     "bit_size": 1
@@ -309,7 +304,7 @@
     "bit_offset": 3,
     "bit_size": 1
   },
-  "APX DES SOFTWARE CRYPTO": {
+  "DES Software Crypto": {
     "byte_offset": 14,
     "bit_offset": 4,
     "bit_size": 1
@@ -319,7 +314,7 @@
     "bit_offset": 4,
     "bit_size": 1
   },
-  "Trunked Radio Trace Remote Monitor": {
+  "Remote Monitor / Radio Trace": {
     "byte_offset": 1,
     "bit_offset": 4,
     "bit_size": 1
@@ -329,27 +324,12 @@
     "bit_offset": 4,
     "bit_size": 1
   },
-  "VHF Primary Band": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 1 Primary Band": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 2 Primary Band": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "Primary Band 800 900MHz": {
+  "8/900M Primary Band": {
     "byte_offset": 3,
     "bit_offset": 5,
     "bit_size": 2
   },
-  "V24 Software Enable": {
+  "V.24 Software": {
     "byte_offset": 9,
     "bit_offset": 3,
     "bit_size": 1
@@ -359,7 +339,7 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "Man Down Operation": {
+  "Man Down": {
     "byte_offset": 6,
     "bit_offset": 1,
     "bit_size": 1
@@ -369,12 +349,12 @@
     "bit_offset": 4,
     "bit_size": 1
   },
-  "Enable Dual Band Operation": {
+  "Enable Dual Band Opearation": {
     "byte_offset": 5,
     "bit_offset": 0,
     "bit_size": 1
   },
-  "Advanced Digital Privacy Software": {
+  "Advanced Digital Privacy Enabled": {
     "byte_offset": 7,
     "bit_offset": 4,
     "bit_size": 1
@@ -384,32 +364,32 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "VHF MPZ Secondary Band": {
+  "VHF Secondary Band Medium Power": {
     "byte_offset": 4,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "VHF HP Secondary Band": {
+  "VHF Secondary Band High Power": {
     "byte_offset": 4,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "UHF R1 MP Secondary Band": {
+  "UHF Range 1 Secondary Band Medium Power": {
     "byte_offset": 4,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "UHF R1 HP Secondary Band": {
+  "UHF Range 1 Secondary Band High Power": {
     "byte_offset": 4,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "UHF R2 MP Secondary Band": {
+  "UHF Range 2 Secondary Band Medium Power": {
     "byte_offset": 4,
     "bit_offset": 4,
     "bit_size": 5
   },
-  "SmartConnectOverBroadband": {
+  "SmartConnect for Broadband": {
     "byte_offset": 14,
     "bit_offset": 3,
     "bit_size": 1
@@ -439,7 +419,7 @@
     "bit_offset": 0,
     "bit_size": 1
   },
-  "Multi System OTAR": {
+  "Multi-System OTAR": {
     "byte_offset": 14,
     "bit_offset": 2,
     "bit_size": 1
@@ -449,17 +429,17 @@
     "bit_offset": 3,
     "bit_size": 1
   },
-  "Packet Data Interface": {
+  "APCO Packet Data": {
     "byte_offset": 9,
     "bit_offset": 0,
     "bit_size": 1
   },
-  "SMARTZONE Systems Operation": {
+  "SmartZone Operation": {
     "byte_offset": 6,
     "bit_offset": 3,
     "bit_size": 1
   },
-  "Site Selectable Alert For P25 Trunking": {
+  "Site Selectable Alert for P25 Trunking": {
     "byte_offset": 10,
     "bit_offset": 3,
     "bit_size": 1
@@ -469,17 +449,17 @@
     "bit_offset": 5,
     "bit_size": 1
   },
-  "ID GEOFENCEHOPTION": {
+  "APX Geofence": {
     "byte_offset": 1,
     "bit_offset": 5,
     "bit_size": 1
   },
-  "One Touch Status Message": {
+  "One Touch": {
     "byte_offset": 6,
     "bit_offset": 4,
     "bit_size": 1
   },
-  "ID TACTICALSERVICES": {
+  "Tactical Services Operation": {
     "byte_offset": 16,
     "bit_offset": 0,
     "bit_size": 1
