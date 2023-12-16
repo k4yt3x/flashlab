@@ -209,7 +209,7 @@ class FlashLabWindow(QMainWindow):
 
 def start_gui():
     app = QApplication(sys.argv)
-    font = QFont(QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont))
+    font = QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont)
     font.setStyleHint(QFont.StyleHint.Monospace)
     QApplication.setFont(font)
     main_win = FlashLabWindow()
