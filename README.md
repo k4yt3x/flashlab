@@ -10,7 +10,7 @@ If you're looking to create a normal FLASHcode for your radio, you may want to u
 - [CS Flashcode Tool](https://communications.support/flashcode/encoder.php)
 - [akardam.net Flashcode Encoder](https://www.akardam.net/r/m/tools/fencode.pl)
 
-![screenshot](https://github.com/k4yt3x/flashlab/assets/21986859/c3b31116-e862-48ed-8604-e5286a196030)
+![image](https://github.com/k4yt3x/flashlab/assets/21986859/dc1ce2d3-05e4-4a97-a61c-0d18c795b192)
 
 ## Usages
 
