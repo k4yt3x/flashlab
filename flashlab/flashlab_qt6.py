@@ -3,7 +3,7 @@
 import sys
 
 from PyQt6.QtCore import QSize, Qt
-from PyQt6.QtGui import QKeySequence, QShortcut
+from PyQt6.QtGui import QFont, QFontDatabase, QKeySequence, QShortcut
 from PyQt6.QtWidgets import (
     QApplication,
     QDialog,
@@ -98,8 +98,17 @@ class FlashLabWindow(QMainWindow):
         self.option_items_list = QListWidget(self)
 
         # add all options
-        for option in self.flashcode.options:
-            item = QListWidgetItem(f"{option}", self.option_items_list)
+        for name, offsets in self.flashcode.options.items():
+            item = QListWidgetItem(
+                "D{} B{} S{} {}".format(
+                    offsets["byte_offset"],
+                    offsets["bit_offset"],
+                    offsets["bit_size"],
+                    name,
+                ),
+                self.option_items_list,
+            )
+            item.setData(Qt.ItemDataRole.UserRole, name)
             item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
             item.setCheckState(Qt.CheckState.Unchecked)
 
@@ -121,7 +130,9 @@ class FlashLabWindow(QMainWindow):
         filter_text = self.filter_field.text()
         for i in range(self.option_items_list.count()):
             item = self.option_items_list.item(i)
-            item.setHidden(filter_text.lower() not in item.text().lower())
+            item.setHidden(
+                filter_text.lower() not in item.data(Qt.ItemDataRole.UserRole).lower()
+            )
 
     def load_options(self):
         try:
@@ -136,7 +147,7 @@ class FlashLabWindow(QMainWindow):
         for index in range(self.option_items_list.count()):
             item = self.option_items_list.item(index)
             for option in self.flashcode.get_enabled_options():
-                if item.text() in option:
+                if item.data(Qt.ItemDataRole.UserRole) in option:
                     item.setCheckState(Qt.CheckState.Checked)
                     break
             else:
@@ -151,7 +162,8 @@ class FlashLabWindow(QMainWindow):
 
     def update_options(self):
         selected_options = [
-            item.text() for item in self.get_checked_items(self.option_items_list)
+            item.data(Qt.ItemDataRole.UserRole)
+            for item in self.get_checked_items(self.option_items_list)
         ]
 
         previous_flashcode = self.flashcode
@@ -168,7 +180,8 @@ class FlashLabWindow(QMainWindow):
 
     def create_options(self):
         selected_options = [
-            item.text() for item in self.get_checked_items(self.option_items_list)
+            item.data(Qt.ItemDataRole.UserRole)
+            for item in self.get_checked_items(self.option_items_list)
         ]
         self.flashcode = Flashcode()
         for option in selected_options:
@@ -196,6 +209,9 @@ class FlashLabWindow(QMainWindow):
 
 def start_gui():
     app = QApplication(sys.argv)
+    font = QFont(QFontDatabase.systemFont(QFontDatabase.SystemFont.FixedFont))
+    font.setStyleHint(QFont.StyleHint.Monospace)
+    QApplication.setFont(font)
     main_win = FlashLabWindow()
     main_win.show()
     return app.exec()
