@@ -4,15 +4,10 @@
     "bit_offset": 1,
     "bit_size": 1
   },
-  "7/800 MHz Primary Band": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 2
-  },
   "UHF Range 2 Primary Band": {
     "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
+    "bit_offset": 2,
+    "bit_size": 1
   },
   "OTAR And Multikey": {
     "byte_offset": 2,
@@ -101,8 +96,8 @@
   },
   "VHF Primary Band": {
     "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
+    "bit_offset": 0,
+    "bit_size": 1
   },
   "ATAK Enablement package": {
     "byte_offset": 15,
@@ -116,28 +111,8 @@
   },
   "UHF Range 1 Primary Band": {
     "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "7/800 MHz Secondary Band": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "VHF Secondary Band": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 1 Secondary Band": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 2 Secondary Band": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
+    "bit_offset": 1,
+    "bit_size": 1
   },
   "ETSI Regulatory Region Enabled": {
     "byte_offset": 15,
@@ -171,36 +146,6 @@
   },
   "Group Services": {
     "byte_offset": 6,
-    "bit_offset": 5,
-    "bit_size": 1
-  },
-  "VHF Primary Band Medium Power": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "VHF Primary Band High Power": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 1 Primary Band Medium Power": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 1 Primary Band High Power": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 2 Primary Band Medium Power": {
-    "byte_offset": 3,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "900 MHz Primary Band": {
-    "byte_offset": 3,
     "bit_offset": 5,
     "bit_size": 1
   },
@@ -324,11 +269,6 @@
     "bit_offset": 4,
     "bit_size": 1
   },
-  "8/900M Primary Band": {
-    "byte_offset": 3,
-    "bit_offset": 5,
-    "bit_size": 2
-  },
   "V.24 Software": {
     "byte_offset": 9,
     "bit_offset": 3,
@@ -363,31 +303,6 @@
     "byte_offset": 10,
     "bit_offset": 5,
     "bit_size": 1
-  },
-  "VHF Secondary Band Medium Power": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "VHF Secondary Band High Power": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 1 Secondary Band Medium Power": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 1 Secondary Band High Power": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
-  },
-  "UHF Range 2 Secondary Band Medium Power": {
-    "byte_offset": 4,
-    "bit_offset": 4,
-    "bit_size": 5
   },
   "SmartConnect for Broadband": {
     "byte_offset": 14,
@@ -432,6 +347,11 @@
   "APCO Packet Data": {
     "byte_offset": 9,
     "bit_offset": 0,
+    "bit_size": 1
+  },
+  "900 MHz Primary Band": {
+    "byte_offset": 3,
+    "bit_offset": 5,
     "bit_size": 1
   },
   "SmartZone Operation": {

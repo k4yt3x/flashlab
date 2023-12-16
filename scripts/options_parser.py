@@ -6,16 +6,16 @@ import re
 
 options = {}
 
-with open("data/hoptions.json", "r") as hoptions_file:
+with open("data/local/hoptions.json", "r") as hoptions_file:
     hoptions = json.load(hoptions_file)
 
 with open("data/translation.json", "r") as translations_file:
     translations = json.load(translations_file)
 
 # SpecialFeatures.Flashport.FlashRadio.FlashcodeTable
-with open("data/FlashcodeTable.cs", "r", encoding="utf-8") as file:
+with open("data/local/FlashcodeTable.cs", "r", encoding="utf-8") as file:
     for line in file:
-        if match := re.search(r"new \w+FieldLayout\(([^)]+)\)", line):
+        if match := re.search(r"new \w+(?<!Int)FieldLayout\(([^)]+)\)", line):
             arguments = (
                 match.group(1)
                 .strip()
@@ -46,14 +46,18 @@ with open("data/FlashcodeTable.cs", "r", encoding="utf-8") as file:
                 if translations.get(arguments[0]) is None:
                     print(f"Untranslated name: '{arguments[0]}' ")
                     translated = name
-                else:
-                    translated = translations.get(arguments[0])
 
-            options[translated] = {
-                "byte_offset": int(arguments[1]),
-                "bit_offset": int(arguments[2]),
-                "bit_size": int(arguments[3] if len(arguments) >= 4 else "1"),
-            }
+            if translations.get(arguments[0]) is not None:
+                translated = translations.get(arguments[0])
+
+            if translated not in options:
+                options[translated] = {
+                    "byte_offset": int(arguments[1]),
+                    "bit_offset": int(arguments[2]),
+                    "bit_size": int(arguments[3] if len(arguments) >= 4 else "1"),
+                }
+            else:
+                print(f"Duplicate option: {translated}")
 
 options["APX XE"] = {
     "byte_offset": 1,
