@@ -388,5 +388,10 @@
     "byte_offset": 1,
     "bit_offset": 2,
     "bit_size": 1
+  },
+  "Multi-Codeplug Programming": {
+    "byte_offset": 16,
+    "bit_offset": 1,
+    "bit_size": 1
   }
 }
