@@ -1,4 +1,4 @@
-import { type Info } from "../options";
+import { type Info, type Radio, variantsFor } from "../options";
 
 /** Where on screen the row being described sits, so the card can be put beside it. */
 export interface Anchor {
@@ -42,8 +42,19 @@ export function place(anchor: Anchor, viewport: Viewport): { top: number; left: 
  *
  * Placed against the row rather than following the cursor, so it does not jitter, and it never
  * takes the pointer, since it exists only while the pointer is somewhere else.
+ *
+ * Narrowed to the radio, because the catalogue answers separately for a mobile and a portable and
+ * the two answers name different part numbers. See [`variantsFor`].
  */
-export function OptionDetail({ info, anchor }: { info: Info; anchor: Anchor }) {
+export function OptionDetail({
+  info,
+  radio,
+  anchor,
+}: {
+  info: Info;
+  radio: Radio;
+  anchor: Anchor;
+}) {
   const { top, left } = place(anchor, {
     width: window.innerWidth,
     height: window.innerHeight,
@@ -53,7 +64,7 @@ export function OptionDetail({ info, anchor }: { info: Info; anchor: Anchor }) {
     <div className="detail" style={{ top, left, width: WIDTH }}>
       <p className="title">{info.title}</p>
       <p className="what">{info.description}</p>
-      {info.variants.map((variant) => (
+      {variantsFor(info, radio).map((variant) => (
         <div className="variant" key={variant.for || "both"}>
           {variant.for ? <span className="for">{variant.for}</span> : null}
           <span className="release">Release {variant.release}</span>

@@ -11,16 +11,25 @@
  * cannot be confused with it.
  */
 
-import { type Code, empty, format, parse, same } from "./flashcode";
+import { type Code, type Parsed, empty, format, noteOn, parse, same } from "./flashcode";
 
 /** What a link can carry. */
 export interface Shared {
   /** The code, or null where the fragment named none this could read. */
   code: number[] | null;
+  /**
+   * What was wrong with the code the link carried, if anything.
+   *
+   * A link is where a wrong check digit matters most and is hardest to see: it was written by
+   * somebody else, and the address bar is rewritten with the corrected form on arrival. Reading it
+   * without saying so would quietly repair a third party's code and destroy the evidence, which is
+   * the one thing a reader following that link needs to know.
+   */
+  complaint: string | null;
   model: string;
 }
 
-const EMPTY: Shared = { code: null, model: "" };
+const EMPTY: Shared = { code: null, complaint: null, model: "" };
 
 /**
  * Percent decoding that gives up rather than throwing.
@@ -43,14 +52,14 @@ function loosely(text: string): string {
  * into `_` and lose the code. Decoding therefore has to be the fallback rather than the first move,
  * and `parse` is what tells the two apart, since it holds the text to a length and an alphabet.
  */
-function readCode(written: string): number[] | null {
+function readCode(written: string): Parsed | null {
   for (const candidate of [written, loosely(written)]) {
     const text = candidate.trim();
     if (!text) {
       continue;
     }
     try {
-      return parse(text).code;
+      return parse(text);
     } catch {
       // Not that reading; try the other.
     }
@@ -80,7 +89,12 @@ export function read(hash: string): Shared {
       }
     }
 
-    return { code: readCode(first), model: fields.get("model") ?? "" };
+    const held = readCode(first);
+    return {
+      code: held?.code ?? null,
+      complaint: held ? noteOn(held) : null,
+      model: fields.get("model") ?? "",
+    };
   } catch {
     return EMPTY;
   }

@@ -13,20 +13,21 @@ describe("rebuilding the way an OEM encoder would", () => {
     const built = rebuild(code, PORTABLE, OPTIONS);
     expect(same(built.code, code)).toBe(true);
     expect(built.dropped).toEqual([]);
-    // The mobile naming of the same bit is refused, but the bit survives under the portable one,
-    // which is why a refusal is not by itself a loss.
-    expect(built.refused.map((option) => option.part)).toEqual(["GA01202"]);
+    // The mobile naming of the same bit is not this radio's reading of it, so it is neither kept
+    // nor refused: reporting it would count one bit twice, once each way.
+    expect(built.refused).toEqual([]);
     expect(built.kept.map((option) => option.part)).toContain("QA04447");
   });
 
-  it("drops an option the model does not carry", () => {
-    // The mobile naming of the same bit, on a portable.
+  it("reads a bit set under the other kind's naming as its own", () => {
+    // Setting the mobile naming of Geofence sets the one bit both namings read, so on a portable
+    // the bit is kept under the portable name and the mobile one is not reported at all.
     const mobileOnly = OPTIONS.find((option) => option.part === "GA01202")!;
     const code = withOption(empty(), mobileOnly, true);
     const built = rebuild(code, PORTABLE, OPTIONS);
-    expect(built.refused.map((option) => option.part)).toContain("GA01202");
-    // The portable naming of that bit survives, so the bit itself stays.
+    expect(built.refused).toEqual([]);
     expect(built.kept.map((option) => option.part)).toContain("QA04447");
+    expect(built.dropped).toEqual([]);
   });
 
   it("drops every bit it cannot account for, which is what makes subtraction impossible", () => {
@@ -45,9 +46,12 @@ describe("rebuilding the way an OEM encoder would", () => {
       expect(named.has(3 * 6 + bit)).toBe(true);
       expect(built.dropped).toContainEqual({ character: 3, bit });
     }
-    // Digit 2's chooser is equally unclaimed, but its bits survive because the individual band
-    // flags cover the same ground and those are on. Losing a field is not the same as losing bits.
-    expect(built.dropped.filter((held) => held.character === 2)).toEqual([]);
+    // Digit 2 goes entirely, for both reasons at once. The band flags that are on there belong to
+    // the refreshed hardware's layout, which this radio does not use; the five-bit field it does
+    // use holds 31, which names no band. So every bit is either refused or unclaimed.
+    expect(built.dropped.filter((held) => held.character === 2)).toEqual(
+      [0, 1, 2, 3, 4, 5].map((bit) => ({ character: 2, bit })),
+    );
   });
 
   it("cannot reproduce a code built by subtracting from a full one", () => {
@@ -62,14 +66,31 @@ describe("rebuilding the way an OEM encoder would", () => {
   /**
    * The panel claims this reproduces what a conventional encoder would emit, so the claim is held
    * to something: a code whose whole option set is known comes back byte for byte.
+   *
+   * Known has to mean known *for this radio*. `Y00080-000000-1-001000-000000` holds the ETSI
+   * regulatory region, which the APX 6000 below does not carry, so the code that survives an
+   * APX 8000H does not survive it.
    */
-  it("reproduces a code that holds nothing but options it can name", () => {
+  it("reproduces a code that holds nothing but options the model carries", () => {
     for (const written of ["000080-000000-3-000000-000000", "Y00080-000000-1-001000-000000"]) {
       const code = parse(written).code;
-      const built = rebuild(code, PORTABLE, OPTIONS);
+      const built = rebuild(code, radioOf("H91TGD9PW9AN"), OPTIONS);
       expect(same(built.code, code), written).toBe(true);
       expect(built.dropped, written).toEqual([]);
     }
+  });
+
+  /**
+   * The same code against a radio that does not carry one of its options. This is what the model
+   * buys: `QA08157` carries no guard at all, so the guard alone would offer it to every radio.
+   */
+  it("drops an option the model's family does not list, guard or no guard", () => {
+    const etsi = OPTIONS.find((option) => option.part === "QA08157")!;
+    expect(etsi.guard).toEqual([]);
+    const code = parse("Y00080-000000-1-001000-000000").code;
+    const built = rebuild(code, PORTABLE, OPTIONS);
+    expect(built.refused.map((option) => option.part)).toContain("QA08157");
+    expect(built.dropped).toContainEqual({ character: etsi.character, bit: etsi.lsb });
   });
 
   it("counts an option as carried when no model was given", () => {

@@ -17,9 +17,56 @@ export interface Model {
    * Empty where a product was sold in one configuration only. */
   tier: string;
   band: string;
+  /**
+   * Whether this is the refreshed hardware generation.
+   *
+   * Nothing in the model number says so, and it decides which of two band layouts digits 2 and 3
+   * carry, so it has to be shipped rather than derived.
+   */
+  refresh: boolean;
+  /** Which of the option sets below this model's radio family takes. */
+  carries: number;
 }
 
 export const MODELS: readonly Model[] = table.models;
+
+/**
+ * The Motorola release this table and the option table were taken from.
+ *
+ * Worth showing rather than burying. Almost everything here moves between releases: which options
+ * exist at all, which bits they occupy, and which radio families are sold with them. A code read
+ * against one release and a radio built to another can disagree, and someone who cannot see which
+ * release they are looking at has no way to tell that is what happened.
+ */
+export const RELEASE: string = table.release;
+
+/**
+ * The option sets, indexed by a model's `carries`.
+ *
+ * Motorola states these per radio family rather than per model: each family has a plain list of the
+ * part numbers it may be sold with. Families with identical lists share a set here, which is why
+ * there are fewer sets than families.
+ *
+ * Narrowed on the way in to the part numbers the option table names, since an option with no
+ * FLASHcode bit is nothing a bit editor can act on.
+ */
+const CARRIED: readonly ReadonlySet<string>[] = table.carried.map((parts) => new Set(parts));
+
+/**
+ * Every option a model may carry, or `null` for a model this does not know.
+ *
+ * `null` is the answer for a half typed model number, and it means the question is open rather than
+ * closed: see [`carriedBy`](./options.ts).
+ */
+export function carriedByModel(model: string): ReadonlySet<string> | null {
+  const found = lookup(model);
+  return found ? (CARRIED[found.carries] ?? null) : null;
+}
+
+/** Whether a model is the refreshed hardware, or `null` for a model this does not know. */
+export function refreshedModel(model: string): boolean | null {
+  return lookup(model)?.refresh ?? null;
+}
 
 /** The axes a picker walks, in the order it walks them. */
 export const AXES = ["type", "family", "tier", "band"] as const;

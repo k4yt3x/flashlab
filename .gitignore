@@ -6,6 +6,5 @@ dist/
 .vite/
 .env
 .env.*
-data/local/
 coverage/
 *.log

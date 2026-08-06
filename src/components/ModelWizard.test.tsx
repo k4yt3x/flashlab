@@ -252,4 +252,63 @@ describe("the wizard", () => {
     expect(container.querySelector(".wizard")).toBeNull();
     expect(chosen).toBe("");
   });
+
+  /**
+   * `aria-modal` tells a screen reader the rest of the page is not there. Leaving the page behind
+   * the sheet in the tab order makes that a lie, and the lie is the dangerous direction: a reader
+   * announcing a dialog while the keyboard is typing into the code box behind it.
+   */
+  describe("keeping focus inside, which is what aria-modal claims", () => {
+    function tab(shiftKey = false): KeyboardEvent {
+      const event = new KeyboardEvent("keydown", { key: "Tab", shiftKey, cancelable: true });
+      act(() => void document.dispatchEvent(event));
+      return event;
+    }
+
+    function stops(): HTMLElement[] {
+      return [...container.querySelectorAll<HTMLElement>(".wizard .sheet button")];
+    }
+
+    it("takes focus on open and says it is modal", () => {
+      open();
+      const sheet = container.querySelector<HTMLElement>(".wizard .sheet")!;
+      expect(container.querySelector(".wizard")!.getAttribute("aria-modal")).toBe("true");
+      expect(document.activeElement).toBe(sheet);
+    });
+
+    it("wraps forward off the last control rather than leaving the sheet", () => {
+      open();
+      const held = stops();
+      expect(held.length).toBeGreaterThan(1);
+      held.at(-1)!.focus();
+      expect(tab().defaultPrevented).toBe(true);
+      expect(document.activeElement).toBe(held[0]);
+    });
+
+    it("wraps backward off the first", () => {
+      open();
+      const held = stops();
+      held[0]!.focus();
+      expect(tab(true).defaultPrevented).toBe(true);
+      expect(document.activeElement).toBe(held.at(-1));
+    });
+
+    /** The case that matters: the page behind is still focusable, so Tab has to take it back. */
+    it("takes focus back from anything behind the sheet", () => {
+      open();
+      const behind = container.querySelector<HTMLInputElement>("input.number")!;
+      behind.focus();
+      expect(document.activeElement).toBe(behind);
+      expect(tab().defaultPrevented).toBe(true);
+      expect(container.querySelector(".wizard .sheet")!.contains(document.activeElement)).toBe(
+        true,
+      );
+    });
+
+    it("leaves an ordinary step to the browser", () => {
+      open();
+      stops()[0]!.focus();
+      expect(tab().defaultPrevented).toBe(false);
+    });
+  });
 });

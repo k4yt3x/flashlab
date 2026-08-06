@@ -12,6 +12,7 @@
  */
 
 import { type Code, fieldValue, withField } from "./flashcode";
+import { carriedByModel, refreshedModel } from "./models";
 import table from "./data/options.json";
 
 /** What the option catalogue says, for the radios one entry of it covers. */
@@ -65,6 +66,20 @@ export interface Radio {
   mobile: boolean | null;
   is8500hp: boolean;
   singleBand8900: boolean;
+  /**
+   * Whether this is the refreshed hardware generation, or `null` for a model that names no radio.
+   *
+   * The one thing about a radio that no part of the model number gives away, so unlike the rest it
+   * is shipped per model rather than read. It decides which of two band layouts digits 2 and 3
+   * carry, which are different bits meaning different things, so guessing it is not an option.
+   */
+  refresh: boolean | null;
+  /**
+   * Every option this radio's family carries, or `null` for a model number that names no radio.
+   *
+   * This is what decides whether an option is offered. See [`carriedBy`].
+   */
+  carries: ReadonlySet<string> | null;
 }
 
 /** The two models with their own high power band part numbers. */
@@ -77,6 +92,9 @@ const HIGH_POWER_8500 = ["M37TXS9PW1AN", "M37TXS9PW1CN"];
  * That holds without exception across every model in `data/models.json`, which is why no kind is
  * shipped alongside them. A model number that says neither leaves `mobile` unknown, and every
  * option is then shown under both its names.
+ *
+ * The option set comes from the model itself rather than from anything read out of the number, so
+ * it is there only for a number naming a radio the table knows.
  */
 export function radioOf(model: string): Radio {
   const written = model.trim().toUpperCase();
@@ -86,11 +104,28 @@ export function radioOf(model: string): Radio {
     mobile: first === "H" ? false : "LMT".includes(first) && first !== "" ? true : null,
     is8500hp: HIGH_POWER_8500.includes(written),
     singleBand8900: written[3] === "V",
+    refresh: refreshedModel(written),
+    carries: carriedByModel(written),
   };
 }
 
 /** A radio nothing is known about, which is what an empty model box means. */
-export const UNKNOWN: Radio = { model: "", mobile: null, is8500hp: false, singleBand8900: false };
+export const UNKNOWN: Radio = {
+  model: "",
+  mobile: null,
+  is8500hp: false,
+  singleBand8900: false,
+  refresh: null,
+  carries: null,
+};
+
+/**
+ * Every atom `atom` knows how to read.
+ *
+ * A guard naming anything else would be read as no constraint at all, so the vocabulary is closed
+ * and a name outside it is a fault rather than a permission.
+ */
+export const ATOMS = ["mobile", "portable", "is8500hp", "singleband8900", "refresh"] as const;
 
 function atom(name: string, radio: Radio): boolean | null {
   switch (name) {
@@ -102,18 +137,15 @@ function atom(name: string, radio: Radio): boolean | null {
       return radio.mobile === null ? null : radio.is8500hp;
     case "singleband8900":
       return radio.mobile === null ? null : radio.singleBand8900;
+    case "refresh":
+      return radio.refresh;
     default:
       return null;
   }
 }
 
-/**
- * Whether a radio carries an option, or `null` when the model does not say.
- *
- * An unknown model leaves every model-dependent option unresolved rather than guessing, so the UI
- * can show it under both its mobile and portable names instead of picking one.
- */
-export function carriedBy(option: Option, radio: Radio): boolean | null {
+/** Whether the guard admits this radio, or `null` where the model settles none of its atoms. */
+function admits(option: Option, radio: Radio): boolean | null {
   let unknown = false;
   for (const written of option.guard) {
     const negated = written.startsWith("!");
@@ -129,9 +161,65 @@ export function carriedBy(option: Option, radio: Radio): boolean | null {
   return unknown ? null : true;
 }
 
+/**
+ * Whether an option is a reading of this radio's bits at all.
+ *
+ * Not the same question as whether the radio carries it. An option the guard excludes is a
+ * different radio's naming of the bits, or a layout this one does not use, so its checkbox does not
+ * describe anything here even when the bits happen to read as its value.
+ */
+export function readableOn(option: Option, radio: Radio): boolean {
+  return admits(option, radio) !== false;
+}
+
+/**
+ * Whether a radio carries an option, or `null` when the model does not say.
+ *
+ * Both sources have to hold. The family list is Motorola's own per-model statement of what a radio
+ * is sold with, and it is what narrows a radio to its own options: a sixth of the table carries no
+ * guard at all and would otherwise read as carried by everything. The guard is what the family
+ * cannot see, since it is stated per family and cannot separate what a model number decides on its
+ * own: which of two part numbers names a shared bit, and which of the two band layouts the radio
+ * uses at all.
+ *
+ * An unknown model leaves every model-dependent option unresolved rather than guessing, so the UI
+ * can show it under both its mobile and portable names instead of picking one.
+ */
+export function carriedBy(option: Option, radio: Radio): boolean | null {
+  const allowed = admits(option, radio);
+  if (allowed === false) {
+    return false;
+  }
+  return radio.carries ? radio.carries.has(option.part) : allowed;
+}
+
+/**
+ * The catalogue entries that describe this radio.
+ *
+ * An option sold for both kinds is listed twice, and the two entries can differ on more than the
+ * release: `G996` requires `W947` and `G806` on a mobile and `Q947` and `Q806` on a portable. Those
+ * are part numbers the other kind of radio cannot carry, so showing both entries at once states a
+ * requirement in parts that do not exist for the radio being looked at.
+ *
+ * The option's own guard cannot narrow this, since every option listed both ways carries no guard
+ * at all: whether a bit is readable is a different question from which of two order lines describes
+ * the radio reading it. So the narrowing happens here, where the model is known.
+ *
+ * Nothing is dropped where the kind is unknown, or where it would leave nothing: an entry written
+ * for the other kind is still the only thing the catalogue has to say.
+ */
+export function variantsFor(info: Info, radio: Radio): readonly Variant[] {
+  if (radio.mobile === null) {
+    return info.variants;
+  }
+  const wanted = radio.mobile ? "Mobile" : "Portable";
+  const kept = info.variants.filter((variant) => !variant.for || variant.for === wanted);
+  return kept.length > 0 ? kept : info.variants;
+}
+
 /** How to say a guard in the interface. */
 export function describeGuard(guard: readonly string[]): string {
-  const words: Record<string, string> = {
+  const words = new Map<string, string>(Object.entries({
     mobile: "mobiles",
     "!mobile": "portables",
     portable: "portables",
@@ -140,8 +228,10 @@ export function describeGuard(guard: readonly string[]): string {
     "!is8500hp": "not APX 8500 high power",
     singleband8900: "single band 8/900",
     "!singleband8900": "not single band 8/900",
-  };
-  return guard.map((written) => words[written] ?? written).join(", ");
+    refresh: "refreshed hardware",
+    "!refresh": "original hardware",
+  }));
+  return guard.map((written) => words.get(written) ?? written).join(", ");
 }
 
 /**
@@ -223,6 +313,16 @@ export function withOption(code: Code, option: Option, on: boolean): number[] {
 /** Every option a code currently has on, whether or not the radio is supposed to carry it. */
 export function optionsOn(code: Code, options: readonly Option[] = OPTIONS): Option[] {
   return options.filter((option) => isOn(code, option));
+}
+
+/**
+ * The bits that name something *for this radio*.
+ *
+ * A bit only the other band layout reads is not a bit this radio has, and showing it as named would
+ * promise a row the list is right not to hold.
+ */
+export function namedFor(radio: Radio, options: readonly Option[] = OPTIONS): Set<number> {
+  return namedBits(options.filter((option) => readableOn(option, radio)));
 }
 
 /** The bits any option in the table names, as `character * 6 + bit`. */

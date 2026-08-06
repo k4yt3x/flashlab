@@ -7,7 +7,7 @@
  */
 
 import { type Code, empty } from "./flashcode";
-import { type Option, type Radio, carriedBy, isOn, withOption } from "./options";
+import { type Option, type Radio, carriedBy, isOn, readableOn, withOption } from "./options";
 
 export interface Rebuilt {
   code: number[];
@@ -39,6 +39,12 @@ export function rebuild(code: Code, radio: Radio, options: readonly Option[]): R
 
   for (const option of options) {
     if (!isOn(code, option)) {
+      continue;
+    }
+    // A reading belonging to the other band layout is not something this radio was refused, it is
+    // not a description of these bits at all. Counting it as refused reported far more than the
+    // list shows, and an encoder for this radio would never have considered it.
+    if (radio.carries && !readableOn(option, radio)) {
       continue;
     }
     if (carriedBy(option, radio) === false) {

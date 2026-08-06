@@ -18,6 +18,9 @@ interface Props {
   onChange: (model: string) => void;
 }
 
+/** What Tab can land on, so the sheet knows where its own ends are. */
+const FOCUSABLE = "a[href], button, input, select, textarea, [tabindex]:not([tabindex='-1'])";
+
 /** A model number box, with a wizard behind it for anyone who does not have the number to hand. */
 export function ModelWizard({ value, onChange }: Props) {
   const [open, setOpen] = useState(false);
@@ -82,13 +85,33 @@ function Wizard({ onPick, onCancel }: { onPick: (model: string) => void; onCance
   const [picks, setPicks] = useState<Picks>({});
   const sheet = useRef<HTMLDivElement>(null);
 
-  // `aria-modal` tells a screen reader the rest of the page is unreachable, so it has to be true:
-  // focus moves in on open and Escape gets back out.
+  // `aria-modal` tells a screen reader the rest of the page is not there, so it has to be true for
+  // everyone: focus moves in on open, Escape gets back out, and Tab cannot leave. Without the last
+  // of those the claim is simply false, since the page behind the sheet stays in the tab order and
+  // typing into a code box that a screen reader has been told does not exist is the worst of both.
   useEffect(() => {
     sheet.current?.focus();
     function key(event: KeyboardEvent) {
       if (event.key === "Escape") {
         onCancel();
+        return;
+      }
+      if (event.key !== "Tab" || !sheet.current) {
+        return;
+      }
+      // Read at each keystroke rather than on open, because answering a question replaces every
+      // button in the sheet.
+      const stops = [...sheet.current.querySelectorAll<HTMLElement>(FOCUSABLE)];
+      if (stops.length === 0) {
+        return;
+      }
+      const at = stops.indexOf(document.activeElement as HTMLElement);
+      const last = stops.length - 1;
+      // Off the ends, or on the sheet itself, or somewhere behind it: put focus back inside. Every
+      // other case is an ordinary step the browser can take on its own.
+      if (at < 0 || (event.shiftKey ? at === 0 : at === last)) {
+        event.preventDefault();
+        stops[event.shiftKey ? last : 0]?.focus();
       }
     }
     document.addEventListener("keydown", key);

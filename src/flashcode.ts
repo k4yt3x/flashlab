@@ -136,6 +136,21 @@ export function parse(text: string): Parsed {
 }
 
 /**
+ * What is worth saying about a code that was read, but not cleanly.
+ *
+ * Here rather than at the place a code is typed, because a code also arrives in a link, and a link
+ * is the harder case: `format` recomputes the check digit, so by the time the code is on screen the
+ * one it was written with is gone. A reader handed a code that does not validate is told so however
+ * it reached them.
+ */
+export function noteOn(read: Parsed): string | null {
+  if (read.stated !== null && read.stated !== read.expected) {
+    return `Check digit is ${read.stated}, should be ${read.expected}. The code was read anyway.`;
+  }
+  return read.width === LEGACY_LENGTH ? "Read as a legacy 12-digit code, zero padded." : null;
+}
+
+/**
  * Read twenty-four values written as numbers, which is the shape a code takes when it is dumped as
  * raw bytes rather than printed as a string. Hex may be `0x`-prefixed or bare.
  */

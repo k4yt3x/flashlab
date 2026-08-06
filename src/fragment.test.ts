@@ -95,4 +95,28 @@ describe("reading a fragment", () => {
     const back = read(`#${CODE};zoom=3;model=H98UCF9PW6AN`);
     expect(back.model).toBe("H98UCF9PW6AN");
   });
+
+  /**
+   * A wrong check digit is not a reason to refuse a code, which is the whole point of accepting one
+   * at all. It is a reason to say so, and a link is where saying so matters most: the code came
+   * from somebody else, and the address bar is rewritten with the corrected form on arrival, so
+   * nothing else survives to be noticed.
+   */
+  it("reports a check digit the link got wrong", () => {
+    const back = read("#000001-000000-3-000000-000000");
+    expect(back.code).toEqual(parse("000001-000000-9-000000-000000").code);
+    expect(back.complaint).toBe("Check digit is 3, should be 9. The code was read anyway.");
+  });
+
+  it("says nothing about a code that reads cleanly", () => {
+    for (const hash of ["", `#${CODE}`, `#${CODE};model=H98UCF9PW6AN`, "#nonsense"]) {
+      expect(read(hash).complaint, hash).toBeNull();
+    }
+  });
+
+  it("reports a legacy code as one", () => {
+    expect(read(`#${CODE.slice(0, 15)}`).complaint).toBe(
+      "Read as a legacy 12-digit code, zero padded.",
+    );
+  });
 });

@@ -1,7 +1,18 @@
 import { ALPHABET, BITS, LENGTH, type Code, bitSet, withBit } from "../flashcode";
-import { type Option, optionsAt } from "../options";
+import { type Option, namedBits, optionsAt } from "../options";
+
+/**
+ * Every bit any option in the table names, for any radio.
+ *
+ * `named` is narrower: it holds what *this* radio reads. A bit in this set and not in that one is
+ * named by the band layout the radio does not use, and saying no option names it would be a flat
+ * statement that the table is silent about a bit it has plenty to say about.
+ */
+const ANYWHERE = namedBits();
 
 interface Props {
+  /** The options this radio reads, so a cell names and jumps to what the list would show. */
+  options: readonly Option[];
   code: Code;
   named: Set<number>;
   /** Bits to pick out, as `character * 6 + bit`, from whatever the pointer is over. */
@@ -19,7 +30,7 @@ interface Props {
  * offering them would let someone set a bit that cannot be written. Bit 0 is the least significant
  * and the columns run 5 to 0 so that a row reads the way the binary is written.
  */
-export function BitGrid({ code, named, highlight, onChange, onHover, onJump }: Props) {
+export function BitGrid({ code, options, named, highlight, onChange, onHover, onJump }: Props) {
   const bits = [...Array(BITS).keys()].reverse();
 
   return (
@@ -53,7 +64,7 @@ export function BitGrid({ code, named, highlight, onChange, onHover, onJump }: P
                 ]
                   .filter(Boolean)
                   .join(" ");
-                const reading = optionsAt(character, bit);
+                const reading = optionsAt(character, bit, options);
                 return (
                   <td key={bit}>
                     <button
@@ -68,7 +79,9 @@ export function BitGrid({ code, named, highlight, onChange, onHover, onJump }: P
                               .join(", ")}. Right click to show ${
                               reading.length === 1 ? "it" : "them"
                             } in the list.`
-                          : `Digit ${character}, bit ${bit}: no option names it.`
+                          : ANYWHERE.has(at)
+                            ? `Digit ${character}, bit ${bit}: no option this radio reads names it.`
+                            : `Digit ${character}, bit ${bit}: no option names it.`
                       }
                       onClick={() => onChange(withBit(code, character, bit, !set))}
                       onContextMenu={(event) => {

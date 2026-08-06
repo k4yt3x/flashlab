@@ -5,6 +5,8 @@ import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import App from "./App";
+import { RELEASE } from "./models";
+import models from "./data/models.json";
 
 /**
  * That the page mounts and that its two editors really are two views of one state.
@@ -97,6 +99,21 @@ describe("the page", () => {
       expect(link.textContent).toMatch(/^[0-9a-f]{7,40}$/);
       expect(link.href).toBe(`https://github.com/k4yt3x/flashlab/commit/${link.textContent}`);
     }
+  });
+
+  /**
+   * The tables are a snapshot of one Motorola release, and almost everything in them moves between
+   * releases: which options exist, which bits they sit on, which radios are sold with them. Someone
+   * comparing this against a radio has to be able to see which release they are looking at, so it
+   * is shown rather than left in a data file, and shown even in a build that knows neither its own
+   * version nor its commit.
+   */
+  it("says which release the option and model data describes", () => {
+    expect(container.querySelector(".banner .release")?.textContent).toBe(`data ${RELEASE}`);
+    expect(RELEASE).toMatch(/^R\d+\.\d+\.\d+$/);
+    // It is the release both shipped tables were taken from, so it has to come from the data
+    // rather than be typed into the page.
+    expect(RELEASE).toBe(models.release);
   });
 
   it("states the licence and disclaims the marks it has to use to name things", () => {
@@ -261,6 +278,37 @@ describe("the page", () => {
     expect(container.querySelector(".detail")?.textContent).toContain("geofencing");
   });
 
+  /**
+   * The two entries do not merely differ in wording. `G996` asks a mobile order for `W947` and
+   * `G806` and a portable one for `Q947` and `Q806`, so showing both to one radio prints a
+   * requirement in part numbers that radio cannot take. The option carries no guard, so nothing in
+   * the table narrows this and only the model can.
+   */
+  it("shows the catalogue entry for the radio in the box, not both", () => {
+    function card(part: string): string {
+      act(() => row(part).dispatchEvent(new MouseEvent("mouseover", { bubbles: true })));
+      act(() => void vi.advanceTimersByTime(1000));
+      const held = container.querySelector(".detail")?.textContent ?? "";
+      act(() => row(part).dispatchEvent(new MouseEvent("mouseout", { bubbles: true })));
+      return held;
+    }
+
+    // With no model, both, since nothing here should invent an answer.
+    const both = card("G996");
+    expect(both).toContain("G806");
+    expect(both).toContain("Q806");
+
+    typeModel("M37TXS9PW1AN");
+    const mobile = card("G996");
+    expect(mobile).toContain("G806");
+    expect(mobile, "a mobile cannot take the portable's requirements").not.toContain("Q806");
+
+    typeModel("H98UCF9PW6AN");
+    const portable = card("G996");
+    expect(portable).toContain("Q806");
+    expect(portable, "nor the other way round").not.toContain("G806");
+  });
+
   function typeModel(text: string) {
     const input = container.querySelector<HTMLInputElement>("input.number")!;
     act(() => {
@@ -292,6 +340,39 @@ describe("the page", () => {
     expect(refused()).toBe(0);
   });
 
+  /**
+   * Two band layouts lie over digits 2 and 3 and a radio uses one of them, so a bit only the other
+   * one names has no row and is dimmed. That is right: it means nothing on this radio. Saying that
+   * *no option* names it is a different claim, and a false one, since the table has plenty to say
+   * about that bit for the radios that do read it.
+   */
+  it("distinguishes a bit nothing names from one this radio does not read", () => {
+    const narrowed = "no option this radio reads names it";
+    function titles(): string[] {
+      return [...container.querySelectorAll<HTMLButtonElement>(".grid .bit")].map((c) => c.title);
+    }
+
+    // With no model every option is a possible reading, so nothing is narrowed away.
+    expect(titles().some((title) => title.includes(narrowed))).toBe(false);
+
+    typeModel("M25KTS9PW1AN");
+    expect(titles().filter((title) => title.includes(narrowed)).length).toBeGreaterThan(0);
+    // And a bit no option names for any radio still says so plainly.
+    expect(bit(12, 0).title).toBe("Digit 12, bit 0: no option names it.");
+  });
+
+  /** An empty box reads as a list that failed to load rather than as a search with no results. */
+  it("says why the list is empty rather than showing an empty box", () => {
+    const search = container.querySelector<HTMLInputElement>("input.filter")!;
+    act(() => {
+      const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!.set!;
+      setter.call(search, "zzzz");
+      search.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    expect(container.querySelectorAll(".option")).toHaveLength(0);
+    expect(container.querySelector(".options .note")?.textContent).toBe("No option matches zzzz.");
+  });
+
   function toggle(): HTMLInputElement {
     return container.querySelector<HTMLInputElement>(".offered input")!;
   }
@@ -317,6 +398,153 @@ describe("the page", () => {
     expect(shownRows()).toBe(all);
   });
 
+  /**
+   * Hiding an option that is *on* would hide a set bit, and a code holding an option its model's
+   * family does not list is exactly the case worth being able to read.
+   */
+  it("never hides an option the code holds, whatever the model says", () => {
+    function rowFor(part: string): Element | undefined {
+      return [...container.querySelectorAll(".option")].find(
+        (row) => row.querySelector(".part")?.textContent === part,
+      );
+    }
+
+    typeModel("H98UCF9PW6AN");
+    // Digit 14 bit 0 is the ETSI regulatory region, which this radio's family does not list.
+    act(() => bit(14, 0).click());
+    expect(rowFor("QA08157")?.querySelector(".refused")).not.toBeNull();
+
+    act(() => toggle().click());
+    expect(rowFor("QA08157"), "a set bit must keep its row").toBeDefined();
+    expect(rowFor("QA08157")?.querySelector(".refused")).not.toBeNull();
+
+    // Turn it back off and the row goes, since now nothing is being hidden from view.
+    act(() => bit(14, 0).click());
+    expect(rowFor("QA08157")).toBeUndefined();
+  });
+
+  /**
+   * The same rule as the row above, for a field rather than a row. A chooser holding a value no
+   * option names has no row to keep, so hiding the group took its bits out of view along with it.
+   */
+  it("never hides a chooser whose field holds a value no option names", () => {
+    function header(): Element | undefined {
+      return [...container.querySelectorAll(".group header .where")].find(
+        (span) => span.textContent === "D3 B0-4",
+      );
+    }
+
+    typeModel("H98UCF9PW6AN");
+    // Digit 3 holding 7 names no secondary band, and this radio carries none of the options there.
+    act(() => bit(3, 0).click());
+    act(() => bit(3, 1).click());
+    act(() => bit(3, 2).click());
+    expect(header()).toBeDefined();
+
+    act(() => toggle().click());
+    expect(header(), "a field with bits set must keep its group").toBeDefined();
+    expect(header()!.parentElement!.textContent).toContain("names no option");
+  });
+
+  /**
+   * The group rule keeps a chooser whose bits are set, but a search is a request to see less, and a
+   * header with nothing under it is not a search result. `shows` does not exempt a set option from
+   * the filter either, so the two rules have to agree about it.
+   */
+  it("keeps nothing a search excluded, header or row", () => {
+    typeModel("H98UCF9PW6AN");
+    act(() => bit(3, 0).click());
+    act(() => bit(3, 1).click());
+    act(() => bit(3, 2).click());
+    expect(container.querySelectorAll(".group header").length).toBeGreaterThan(0);
+
+    const search = container.querySelector<HTMLInputElement>(".filter")!;
+    act(() => {
+      const setter = Object.getOwnPropertyDescriptor(
+        window.HTMLInputElement.prototype,
+        "value",
+      )!.set!;
+      setter.call(search, "zzzzz");
+      search.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    expect(container.querySelectorAll(".option")).toHaveLength(0);
+    expect(container.querySelectorAll(".group")).toHaveLength(0);
+  });
+
+  /** Nothing can be on when the bits are clear, so the row of clear checkboxes is not misreporting. */
+  it("does not call an empty field an unrecognised value", () => {
+    expect(container.querySelectorAll(".held.unrecognised")).toHaveLength(0);
+    // Digit 3 holding 7 is a value no secondary band names, which is the state the flag is for.
+    act(() => bit(3, 0).click());
+    act(() => bit(3, 1).click());
+    act(() => bit(3, 2).click());
+    expect(container.querySelectorAll(".held.unrecognised").length).toBeGreaterThan(0);
+  });
+
+  /**
+   * Digits 2 and 3 carry two band layouts over the same bits, so a row from the layout a radio does
+   * not use can read as on by coincidence. It describes nothing here, and its checkbox would clear
+   * the whole field, so being on is not a reason to keep it.
+   */
+  it("does not keep a row from the layout the radio does not use", () => {
+    function rowFor(part: string, where: string): Element | undefined {
+      return [...container.querySelectorAll(".option")].find(
+        (row) =>
+          row.querySelector(".part")?.textContent === part &&
+          row.querySelector(".where")?.textContent === where,
+      );
+    }
+
+    // With no model, both layouts are shown: nothing says which one applies.
+    act(() => bit(2, 0).click());
+    act(() => bit(2, 1).click());
+    expect(rowFor("GA00307", "D2 B0-4 = 3")).toBeDefined();
+
+    // A refreshed radio, whose bands are one bit each at digit 2. Digit 2 now reads 3, which is
+    // what the other layout's five-bit field calls GA00307, so that row would show as ticked for a
+    // value it does not hold and clearing it would take both band bits with it.
+    typeModel("H15KDF9PW6AN");
+    expect(rowFor("GA00307", "D2 B0-4 = 3"), "not this radio's reading").toBeUndefined();
+    expect(rowFor("QA00570", "D2 B0"), "its own layout stays").toBeDefined();
+
+    // And it is gone whatever the toggle says, since it is not a matter of what Motorola sells.
+    act(() => toggle().click());
+    expect(rowFor("GA00307", "D2 B0-4 = 3")).toBeUndefined();
+
+    // Nor does the field those rows belonged to get to keep a header of its own: a group this
+    // radio can read nothing in is not an account of its bits either.
+    const headers = [...container.querySelectorAll(".group header .where")].map(
+      (span) => span.textContent,
+    );
+    expect(headers).not.toContain("D2 B0-4");
+  });
+
+  /**
+   * A two-bit band field holding one of its bits names no option, and being a flag group rather
+   * than a chooser it had no header to fall back on, so the group vanished with its bits set. The
+   * VX-P949 portables are where it shows: they read digit 2 bits 3 and 4 as one 7/800 field.
+   */
+  it("accounts for a multi-bit flag field holding a value it does not name", () => {
+    typeModel("H93KDF9PW6AN");
+    act(() => bit(2, 3).click());
+    act(() => toggle().click());
+
+    const headers = [...container.querySelectorAll(".group header .where")].map(
+      (span) => span.textContent,
+    );
+    expect(headers).toContain("D2 B3-4");
+  });
+
+  /** The grid must not offer a jump the list will not honour, nor name a bit it will not show. */
+  it("names and jumps by the same options the list shows", () => {
+    typeModel("H15KDF9PW6AN");
+    // W12 is a mobile option, so on this portable digit 0 bit 1 reads nothing at all.
+    expect(bit(0, 1).className).toContain("unnamed");
+    expect(bit(0, 1).getAttribute("title") ?? "").not.toContain("W12");
+    rightClick(0, 1);
+    expect(pinnedRows()).toEqual([]);
+  });
+
   it("offers nothing to hide until a model says what is carried", () => {
     // With no model every guarded option is unresolved, so the toggle would do nothing at all.
     expect(toggle().disabled).toBe(true);
@@ -331,10 +559,13 @@ describe("the page", () => {
     act(() => toggle().click());
     expect(toggle().checked).toBe(true);
 
-    // Digit 0 bit 5 is Geofence, whose mobile naming this portable does not carry.
+    // Digit 0 bit 5 is Geofence. On a portable only the portable naming is this radio's row; the
+    // mobile one is not a reading of its bits at all, so the jump lands on one row rather than two.
     rightClick(0, 5);
     expect(toggle().checked).toBe(false);
-    expect(pinnedRows()).toHaveLength(2);
+    const rows = pinnedRows();
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toContain("QA04447");
   });
 
   it("copies the OEM encoder's code, not the one being edited", async () => {
@@ -446,5 +677,23 @@ describe("the page", () => {
       const first = remounted(`#${start}`);
       expect(remounted(window.location.hash)).toBe(first);
     }
+  });
+
+  /**
+   * A shared code is the one nobody here typed, so it is the one whose check digit is worth
+   * doubting, and the one where the evidence does not survive being looked at: the code is
+   * reprinted with the digit recomputed and the address bar is rewritten to match. Typing the same
+   * string complains, so opening it has to complain too.
+   */
+  it("says so when a link's check digit is wrong, rather than quietly correcting it", () => {
+    expect(remounted("#000001-000000-3-000000-000000")).toBe("000001-000000-9-000000-000000");
+    expect(container.querySelector(".complaint")?.textContent).toBe(
+      "Check digit is 3, should be 9. The code was read anyway.",
+    );
+  });
+
+  it("says nothing about a link that reads cleanly", () => {
+    remounted("#000080-000000-3-000000-000000");
+    expect(container.querySelector(".complaint")).toBeNull();
   });
 });

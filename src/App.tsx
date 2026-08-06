@@ -9,19 +9,21 @@ import {
   empty,
   format,
   full,
+  noteOn,
   parse,
   parseValues,
   same,
 } from "./flashcode";
 import * as fragment from "./fragment";
 import { rebuild } from "./oem";
-import { isKnown } from "./models";
+import { RELEASE, isKnown } from "./models";
 import {
   OPTIONS,
   type Option,
   UNKNOWN,
   groups as groupsOf,
-  namedBits,
+  namedFor,
+  readableOn,
   radioOf,
 } from "./options";
 
@@ -29,7 +31,7 @@ export default function App() {
   const opened = useMemo(() => fragment.read(window.location.hash), []);
   const [code, setCode] = useState<number[]>(() => opened.code ?? empty());
   const [written, setWritten] = useState(() => format(opened.code ?? empty()));
-  const [complaint, setComplaint] = useState<string | null>(null);
+  const [complaint, setComplaint] = useState<string | null>(() => opened.complaint);
   const [model, setModel] = useState(opened.model);
   const [filter, setFilter] = useState("");
   const [offeredOnly, setOfferedOnly] = useState(false);
@@ -41,9 +43,14 @@ export default function App() {
   // string that names nothing.
   const radio = useMemo(() => (isKnown(model) ? radioOf(model) : UNKNOWN), [model]);
   // Nothing can be judged against a model that did not resolve, so nothing can be hidden either.
-  const resolved = radio.mobile !== null;
+  const resolved = radio.carries !== null;
   const groups = useMemo(() => groupsOf(OPTIONS), []);
-  const named = useMemo(() => namedBits(), []);
+  // What this radio reads, which is what the grid names and jumps to and what the list shows.
+  const readable = useMemo(
+    () => OPTIONS.filter((option) => readableOn(option, radio)),
+    [radio],
+  );
+  const named = useMemo(() => namedFor(radio), [radio]);
 
   // The grid and the list point at each other: whichever the pointer is over lights up the bits or
   // the options the other one holds.
@@ -90,7 +97,12 @@ export default function App() {
   useEffect(() => {
     const written = fragment.write(code, model);
     const { pathname, search } = window.location;
-    window.history.replaceState(null, "", written ? `#${written}` : `${pathname}${search}`);
+    try {
+      window.history.replaceState(null, "", written ? `#${written}` : `${pathname}${search}`);
+    } catch {
+      // Safari refuses more than a hundred of these in thirty seconds, which two codes typed one
+      // after the other reaches. A link that cannot be updated is worth less than the page.
+    }
   }, [code, model]);
 
   function read(text: string) {
@@ -100,15 +112,9 @@ export default function App() {
       return;
     }
     try {
-      const { code: next, stated, expected, width } = parse(text);
-      setCode(next);
-      setComplaint(
-        stated !== null && stated !== expected
-          ? `Check digit is ${stated}, should be ${expected}. The code was read anyway.`
-          : width === 12
-            ? "Read as a legacy 12-digit code, zero padded."
-            : null,
-      );
+      const held = parse(text);
+      setCode(held.code);
+      setComplaint(noteOn(held));
     } catch (error) {
       // A run of numbers is the other form a code turns up in, so try that before complaining.
       for (const radix of [16, 10]) {
@@ -130,19 +136,24 @@ export default function App() {
     <div className="app">
       <header className="banner">
         <h1>FLASHlab</h1>
+        {/*
+          Each piece carries its own trailing separator, so the release is always last and always
+          shown even in a dev build where neither the version nor the commit is defined.
+        */}
         <span className="build">
-          {import.meta.env.VITE_VERSION ? `v${import.meta.env.VITE_VERSION}` : null}
+          {import.meta.env.VITE_VERSION ? `v${import.meta.env.VITE_VERSION} · ` : null}
           {import.meta.env.VITE_COMMIT ? (
             <>
-              {" · "}
               <a
                 href={`https://github.com/k4yt3x/flashlab/commit/${import.meta.env.VITE_COMMIT}`}
                 aria-label={`Source at commit ${import.meta.env.VITE_COMMIT}`}
               >
                 {import.meta.env.VITE_COMMIT}
               </a>
+              {" · "}
             </>
           ) : null}
+          <span className="release">data {RELEASE}</span>
         </span>
       </header>
 
@@ -191,6 +202,7 @@ export default function App() {
             </p>
             <BitGrid
               code={code}
+              options={readable}
               named={named}
               highlight={litBits}
               onChange={adopt}
@@ -216,7 +228,7 @@ export default function App() {
               className="offered"
               title={
                 resolved
-                  ? `Leave out the options ${radio.model} does not carry`
+                  ? `Leave out the options ${radio.model} does not carry, unless the code holds them`
                   : "Enter a model, and the options it does not carry can be hidden"
               }
             >

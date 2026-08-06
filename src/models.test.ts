@@ -1,7 +1,17 @@
 import { describe, expect, it } from "vitest";
 
-import { AXES, MODELS, axisOf, candidates, choices, lookup, remainingAxes, settled } from "./models";
-import { radioOf } from "./options";
+import {
+  AXES,
+  MODELS,
+  axisOf,
+  candidates,
+  carriedByModel,
+  choices,
+  lookup,
+  remainingAxes,
+  settled,
+} from "./models";
+import { OPTIONS, radioOf } from "./options";
 
 describe("the model list", () => {
   it("holds only real model numbers, every one of which the rules can read", () => {
@@ -29,6 +39,34 @@ describe("the model list", () => {
     for (const held of MODELS) {
       expect(held.family, held.model).toMatch(/^(APX|SRX|ATS|TXM|VX-P)[A-Za-z0-9. ]*$/);
     }
+  });
+
+  it("gives every model an option set holding options the table names", () => {
+    const parts = new Set(OPTIONS.map((option) => option.part));
+    for (const held of MODELS) {
+      const carried = carriedByModel(held.model);
+      expect(carried, held.model).not.toBeNull();
+      expect(carried!.size, held.model).toBeGreaterThan(0);
+      for (const part of carried!) {
+        expect(parts.has(part), `${held.model} carries ${part}`).toBe(true);
+      }
+    }
+  });
+
+  /**
+   * Motorola states the sets per radio family, so radios of one family share one. Two models with
+   * the same set are the ordinary case and two with different sets are what the whole thing is for,
+   * so both are worth knowing still happen.
+   */
+  it("shares an option set between radios of a family and not across all of them", () => {
+    const sets = new Set(MODELS.map((held) => carriedByModel(held.model)));
+    expect(sets.size).toBeGreaterThan(1);
+    expect(sets.size).toBeLessThan(MODELS.length);
+  });
+
+  it("knows nothing about a model number that names no radio", () => {
+    expect(carriedByModel("H98UCF9PW")).toBeNull();
+    expect(carriedByModel("")).toBeNull();
   });
 
   it("still recognises the models the option guards single out", () => {
