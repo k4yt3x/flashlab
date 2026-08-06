@@ -57,6 +57,16 @@ function bit(character: number, at: number): HTMLButtonElement {
   return found;
 }
 
+/** Click the button a given label names. */
+function press(label: string) {
+  const buttons = [...container.querySelectorAll<HTMLButtonElement>("button")];
+  const found = buttons.find((button) => button.textContent === label);
+  if (!found) {
+    throw new Error(`the page should hold a ${label} button`);
+  }
+  found.click();
+}
+
 describe("the page", () => {
   it("mounts and starts on an empty code", () => {
     expect(container.querySelector("h1")?.textContent).toBe("FLASHlab");
@@ -362,6 +372,21 @@ describe("the page", () => {
   it("keeps the code in the address bar, where it is never sent anywhere", () => {
     act(() => bit(0, 5).click());
     expect(decodeURIComponent(window.location.hash)).toBe("#Y00000-000000-0-000000-000000");
+  });
+
+  /**
+   * Opening the site used to write a link to its own default state into the address bar, which is
+   * what anyone bookmarking it would then keep. Nothing is written until there is something to
+   * share, and clearing the page takes it back off.
+   */
+  it("leaves the address bar alone while the page holds nothing", () => {
+    expect(window.location.hash).toBe("");
+
+    act(() => bit(0, 5).click());
+    expect(window.location.hash).not.toBe("");
+
+    act(() => press("Empty"));
+    expect(window.location.hash).toBe("");
   });
 
   it("carries the model in the link too, so a page can be shared whole", () => {

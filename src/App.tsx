@@ -84,8 +84,13 @@ export default function App() {
   // What a second person needs to see the same page, and nothing that would leave the browser: a
   // fragment is not sent with the request. The filter stays out of it, being a search rather than
   // a state worth carrying.
+  //
+  // A page holding nothing gets no fragment rather than one naming the empty code, so the address
+  // stays bookmarkable until there is something in it worth sharing.
   useEffect(() => {
-    window.history.replaceState(null, "", `#${fragment.write(code, model)}`);
+    const written = fragment.write(code, model);
+    const { pathname, search } = window.location;
+    window.history.replaceState(null, "", written ? `#${written}` : `${pathname}${search}`);
   }, [code, model]);
 
   function read(text: string) {

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="FLASHlab">
+  <title>FLASHlab</title>
+  <defs>
+    <!--
+      The digits are drawn rather than typed, so the icon does not depend on which fonts the
+      machine rendering it happens to have. Each sits in a 6 by 9 box with its origin top left.
+    -->
+    <rect id="zero" x="0.75" y="0.75" width="4.5" height="7.5" rx="2.25" fill="none" stroke-width="1.5" />
+    <path id="one" d="M2 2.3 L3.9 0.75 L3.9 8.25" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <linearGradient id="bolt" x1="20" y1="4" x2="46" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd15c" />
+      <stop offset="1" stop-color="#e09a1c" />
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="13" fill="#0f1115" />
+  <rect x="0.75" y="0.75" width="62.5" height="62.5" rx="12.25" fill="none" stroke="#2b3442" stroke-width="1.5" />
+
+  <!-- Seven columns by five rows, which is five characters of seven bit ASCII: F, L, A, S, H. -->
+  <g stroke="#6ea8fe" opacity="0.5">
+    <g transform="translate(0 3.5)">
+      <use href="#one" x="3.5" /><use href="#zero" x="12" /><use href="#zero" x="20.5" /><use href="#zero" x="29" /><use href="#one" x="37.5" /><use href="#one" x="46" /><use href="#zero" x="54.5" />
+    </g>
+    <g transform="translate(0 15.5)">
+      <use href="#one" x="3.5" /><use href="#zero" x="12" /><use href="#zero" x="20.5" /><use href="#one" x="29" /><use href="#one" x="37.5" /><use href="#zero" x="46" /><use href="#zero" x="54.5" />
+    </g>
+    <g transform="translate(0 27.5)">
+      <use href="#one" x="3.5" /><use href="#zero" x="12" /><use href="#zero" x="20.5" /><use href="#zero" x="29" /><use href="#zero" x="37.5" /><use href="#zero" x="46" /><use href="#one" x="54.5" />
+    </g>
+    <g transform="translate(0 39.5)">
+      <use href="#one" x="3.5" /><use href="#zero" x="12" /><use href="#one" x="20.5" /><use href="#zero" x="29" /><use href="#zero" x="37.5" /><use href="#one" x="46" /><use href="#one" x="54.5" />
+    </g>
+    <g transform="translate(0 51.5)">
+      <use href="#one" x="3.5" /><use href="#zero" x="12" /><use href="#zero" x="20.5" /><use href="#one" x="29" /><use href="#zero" x="37.5" /><use href="#zero" x="46" /><use href="#zero" x="54.5" />
+    </g>
+  </g>
+
+  <!--
+    The bolt carries a rim of the background colour, painted under its own fill so the shape keeps
+    its full size. That rim is what holds it apart from the digits it crosses at favicon sizes.
+  -->
+  <path d="M38 4 L14 36 H26 L25 60 L50 27 H37 Z" fill="url(#bolt)" stroke="#0f1115" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke" />
+</svg>

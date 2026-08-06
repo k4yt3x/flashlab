@@ -10,6 +10,18 @@ describe("writing a fragment", () => {
     expect(write(parse(CODE).code, "")).toBe(CODE);
   });
 
+  /** Otherwise opening the site would put a link to its own default state in the address bar. */
+  it("writes nothing at all for a page holding nothing", () => {
+    expect(write(empty(), "")).toBe("");
+    expect(write(empty(), "  ")).toBe("");
+  });
+
+  it("still writes the empty code once a model names something", () => {
+    expect(write(empty(), "H98UCF9PW6AN")).toBe(
+      "000000-000000-0-000000-000000;model=H98UCF9PW6AN",
+    );
+  });
+
   it("adds the model only when there is one", () => {
     expect(write(parse(CODE).code, "H98UCF9PW6AN")).toBe(`${CODE};model=H98UCF9PW6AN`);
   });
@@ -28,11 +40,15 @@ describe("writing a fragment", () => {
 });
 
 describe("reading a fragment", () => {
+  /**
+   * `null` is not a lost code but an unnamed one, which the page reads as the empty code it starts
+   * from. That is what lets the empty code be written as no fragment at all.
+   */
   it("reads back everything it writes, for codes across the alphabet", () => {
     for (const code of [empty(), full(), parse("1ALWgt-$%5FRb-4-2CNYjv-&7HTdq").code]) {
       for (const model of ["", "H98UCF9PW6AN"]) {
         const back = read(`#${write(code, model)}`);
-        expect(back.code, format(code)).toEqual(code);
+        expect(back.code ?? empty(), format(code)).toEqual(code);
         expect(back.model).toBe(model);
       }
     }

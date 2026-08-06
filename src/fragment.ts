@@ -11,7 +11,7 @@
  * cannot be confused with it.
  */
 
-import { type Code, format, parse } from "./flashcode";
+import { type Code, empty, format, parse, same } from "./flashcode";
 
 /** What a link can carry. */
 export interface Shared {
@@ -87,15 +87,24 @@ export function read(hash: string): Shared {
 }
 
 /**
- * Write a fragment.
+ * Write a fragment, or nothing where there is nothing to carry.
  *
  * A field it has nothing to say about is left out, so a page with no model produces the bare code
- * it always did.
+ * it always did. A page holding nothing at all produces no fragment, since someone who has only
+ * opened the site should be able to bookmark it without a link to the default state having been
+ * written into the address bar on their behalf.
+ *
+ * That state is not worth a link in any case: a fragment naming the empty code sends a reader
+ * exactly where the bare address does.
  */
 export function write(code: Code, model: string): string {
+  const named = model.trim();
+  if (!named && same(code, empty())) {
+    return "";
+  }
   const fields = [format(code)];
-  if (model.trim()) {
-    fields.push(`model=${encodeURIComponent(model.trim())}`);
+  if (named) {
+    fields.push(`model=${encodeURIComponent(named)}`);
   }
   return fields.join(";");
 }
