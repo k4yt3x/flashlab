@@ -1,0 +1,597 @@
+:root {
+  --bg: #0f1115;
+  --panel: #161a21;
+  --edge: #252c37;
+  --ink: #d6dbe4;
+  --dim: #7b8697;
+  --accent: #6ea8fe;
+  --on: #3fb950;
+  --warn: #d29922;
+  --bad: #f85149;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.written,
+.grid,
+.part,
+.where,
+.held {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+}
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px clamp(10px, 2vw, 20px) 60px;
+}
+
+.banner {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.02em;
+}
+
+.banner .build {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+/* Every panel is titled the same way, whether or not its title also labels an input. */
+h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+h2 label {
+  cursor: pointer;
+}
+
+/* A qualifier on a panel title, not part of the title itself. */
+h2 .aside {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+h3 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  color: var(--dim);
+  font-weight: 600;
+}
+
+section {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.note {
+  margin: 0 0 12px;
+  color: var(--dim);
+  font-size: 13px;
+  max-width: 80ch;
+}
+
+input {
+  background: #0b0d11;
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  color: var(--ink);
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* A code is 29 characters, so the box is sized to hold one rather than to fill what is there. */
+.code .written {
+  font-size: clamp(13px, 3.6vw, 20px);
+  letter-spacing: 0.06em;
+  min-width: 0;
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+button {
+  background: #1e242e;
+  border: 1px solid var(--edge);
+  border-radius: 6px;
+  color: var(--ink);
+  padding: 6px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.complaint {
+  margin: 10px 0 0;
+  color: var(--warn);
+  font-size: 13px;
+}
+
+.summary {
+  margin: 8px 0 0;
+  color: var(--dim);
+  font-size: 13px;
+}
+
+/* Stacked by default, two columns when there is room. Written that way round because the narrow
+   case is the one that breaks silently: a wrapped flex line sizes to its content, so an option list
+   told to fill its parent's height fills nothing and the box renders empty. */
+
+.panes {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.column > section,
+.pane.wide {
+  margin-top: 0;
+}
+
+.pane.wide {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.options {
+  max-height: 60vh;
+}
+
+@media (min-width: 900px) {
+  .panes {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .column {
+    flex: 0 0 auto;
+  }
+
+  .pane.wide {
+    flex: 1 1 420px;
+  }
+
+  /* Only here can the list take its height from the column beside it. */
+  .options {
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+  }
+}
+
+/* Sits straight on top of the list it narrows, so it needs no label of its own. */
+.filter {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* The model box and the wizard behind it. Its own panel, titled like the others. */
+
+.model .row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* The box takes the room, the buttons take what they need. */
+.model .number {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+  flex: 1 1 12ch;
+  min-width: 12ch;
+  letter-spacing: 0.04em;
+}
+
+.model .row button {
+  flex: 0 0 auto;
+}
+
+.model .chosen {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.wizard {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 60%);
+}
+
+.wizard .sheet:focus {
+  outline: none;
+}
+
+.wizard .sheet {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  padding: 16px;
+  width: min(560px, 100%);
+  max-height: min(640px, 90vh);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 16px 48px rgb(0 0 0 / 60%);
+}
+
+.wizard header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.wizard h3 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.wizard .trail {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+}
+
+.wizard .trail button {
+  font-size: 12px;
+  padding: 3px 8px;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.wizard .ask {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.wizard .options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.wizard .options-grid button {
+  padding: 9px 10px;
+  text-align: left;
+}
+
+.wizard .count {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+/* The bit grid. Its width is fixed by 24 rows of six buttons, so on a phone it scrolls sideways
+   rather than pushing the panel out past the screen. */
+
+.pane.bits {
+  overflow-x: auto;
+}
+
+.grid {
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.grid th {
+  color: var(--dim);
+  font-weight: 500;
+  padding: 2px 4px;
+  text-align: center;
+}
+
+.grid td {
+  padding: 1px;
+}
+
+.grid .index {
+  width: 40px;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.grid .value {
+  color: var(--dim);
+  text-align: right;
+  padding-left: 8px;
+  width: 44px;
+}
+
+.grid .glyph {
+  color: var(--dim);
+  text-align: right;
+  padding-left: 8px;
+  width: 28px;
+}
+
+.grid tr.quiet .index {
+  opacity: 0.4;
+}
+
+.bit {
+  width: 26px;
+  height: 22px;
+  padding: 0;
+  border-radius: 3px;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.bit.off {
+  background: #12161c;
+  color: #3d4652;
+}
+
+.bit.on {
+  background: #16341f;
+  border-color: #1f6f34;
+  color: var(--on);
+}
+
+.bit.unnamed {
+  border-style: dashed;
+  opacity: 0.62;
+}
+
+.bit.lit {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+/* The option list. */
+
+.options {
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.group {
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--edge);
+  border-radius: 0;
+  padding: 6px 0;
+  margin: 0;
+}
+
+.group header {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--dim);
+  padding: 2px 0 4px;
+}
+
+.held.unrecognised {
+  color: var(--warn);
+}
+
+.options ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.option {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 4px;
+  border-radius: 4px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.option:hover,
+.option.lit {
+  background: #1b2129;
+}
+
+/* Where a jump from the grid landed. Stays put, unlike the hover highlight. */
+.option.pinned {
+  background: #1b2129;
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.option label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.option .part {
+  color: var(--accent);
+  min-width: 8ch;
+}
+
+.option .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.option.on .name {
+  color: #fff;
+}
+
+.option .where {
+  color: var(--dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.option .refused {
+  color: var(--bad);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.option .guarded {
+  color: var(--dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+/* What the catalogue says about the option under the pointer. */
+
+.detail {
+  position: fixed;
+  z-index: 30;
+  background: #0b0d11;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 60%);
+  /* It exists only while the pointer is on a row, so it must never become the thing under it. */
+  pointer-events: none;
+}
+
+.detail .title {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.detail .what {
+  margin: 0;
+  font-size: 13px;
+}
+
+.detail .variant {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--edge);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.detail .for {
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+}
+
+.detail .conflicts {
+  color: var(--warn);
+}
+
+/* The OEM view. */
+
+.losses {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  color: var(--dim);
+}
+
+.oem .written {
+  font-size: clamp(13px, 3.4vw, 18px);
+  letter-spacing: 0.06em;
+  margin: 4px 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.losses {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+footer {
+  margin-top: 24px;
+  color: var(--dim);
+  font-size: 13px;
+}
+
+footer p {
+  margin: 0 0 6px;
+}
+
+/* No measure of its own: it wraps where the page does, rather than to a column narrower than
+   everything above it. */
+footer .marks {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+a {
+  color: var(--accent);
+}

@@ -1,0 +1,1175 @@
+{
+  "version": 2,
+  "models": [
+    {
+      "model": "H15KDF9PW6AN",
+      "family": "APX N30",
+      "tier": "",
+      "band": "VHF"
+    },
+    {
+      "model": "H15UCF9PW6AN",
+      "family": "APX N30",
+      "tier": "",
+      "band": "7/800"
+    },
+    {
+      "model": "H15XDF9PW6AN",
+      "family": "APX N30",
+      "tier": "",
+      "band": "UHF"
+    },
+    {
+      "model": "H24KDF9PW6AN",
+      "family": "APX N40",
+      "tier": "",
+      "band": "VHF"
+    },
+    {
+      "model": "H24XDF9PW6AN",
+      "family": "APX N40",
+      "tier": "",
+      "band": "UHF"
+    },
+    {
+      "model": "H25KDF9PW6AN",
+      "family": "APX N50",
+      "tier": "",
+      "band": "VHF"
+    },
+    {
+      "model": "H25UCF9PW6AN",
+      "family": "APX N50",
+      "tier": "",
+      "band": "7/800"
+    },
+    {
+      "model": "H25XDF9PW6AN",
+      "family": "APX N50",
+      "tier": "",
+      "band": "UHF"
+    },
+    {
+      "model": "H35KET9PW8AN",
+      "family": "APX NEXT",
+      "tier": "",
+      "band": "Multiple"
+    },
+    {
+      "model": "H35UCT9PW8AN",
+      "family": "APX NEXT",
+      "tier": "",
+      "band": "Multiple"
+    },
+    {
+      "model": "H35XDT9PW8AN",
+      "family": "APX NEXT",
+      "tier": "",
+      "band": "UHF"
+    },
+    {
+      "model": "H45TGT9PW8AN",
+      "family": "APX NEXT",
+      "tier": "Model 4.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H45TGU9PW8AN",
+      "family": "APX NEXT XN",
+      "tier": "Model 4.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H49TGD9PW1AN",
+      "family": "APX 7000XE",
+      "tier": "",
+      "band": "Multiple"
+    },
+    {
+      "model": "H51KDD9PW5AN",
+      "family": "APX 4000",
+      "tier": "Model 1.5",
+      "band": "VHF"
+    },
+    {
+      "model": "H51KDF9PW6AN",
+      "family": "APX 4000",
+      "tier": "Model 2",
+      "band": "VHF"
+    },
+    {
+      "model": "H51KDH9PW7AN",
+      "family": "APX 4000",
+      "tier": "Model 3",
+      "band": "VHF"
+    },
+    {
+      "model": "H51QDD9PW5AN",
+      "family": "APX 4000",
+      "tier": "Model 1.5",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H51QDF9PW6AN",
+      "family": "APX 4000",
+      "tier": "Model 2",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H51QDH9PW7AN",
+      "family": "APX 4000",
+      "tier": "Model 3",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H51SDD9PW5AN",
+      "family": "APX 4000",
+      "tier": "Model 1.5",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H51SDF9PW6AN",
+      "family": "APX 4000",
+      "tier": "Model 2",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H51SDH9PW7AN",
+      "family": "APX 4000",
+      "tier": "Model 3",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H51UCD9PW5AN",
+      "family": "APX 4000",
+      "tier": "Model 1.5",
+      "band": "7/800"
+    },
+    {
+      "model": "H51UCF9PW6AN",
+      "family": "APX 4000",
+      "tier": "Model 2",
+      "band": "7/800"
+    },
+    {
+      "model": "H51UCH9PW7AN",
+      "family": "APX 4000",
+      "tier": "Model 3",
+      "band": "7/800"
+    },
+    {
+      "model": "H51VCH9PW7AN",
+      "family": "APX 4000XH",
+      "tier": "Model 3",
+      "band": "8/900"
+    },
+    {
+      "model": "H51WCF9PW6AN",
+      "family": "APX 4000",
+      "tier": "Model 2",
+      "band": "900"
+    },
+    {
+      "model": "H51WCH9PW7AN",
+      "family": "APX 4000",
+      "tier": "Model 3",
+      "band": "900"
+    },
+    {
+      "model": "H52KDD9PW5AN",
+      "family": "APX 2000",
+      "tier": "Model 1.5",
+      "band": "VHF"
+    },
+    {
+      "model": "H52KDF9PW6AN",
+      "family": "APX 2000",
+      "tier": "Model 2",
+      "band": "VHF"
+    },
+    {
+      "model": "H52KDH9PW7AN",
+      "family": "APX 2000",
+      "tier": "Model 3",
+      "band": "VHF"
+    },
+    {
+      "model": "H52QDD9PW5AN",
+      "family": "APX 2000",
+      "tier": "Model 1.5",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H52QDF9PW6AN",
+      "family": "APX 2000",
+      "tier": "Model 2",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H52QDH9PW7AN",
+      "family": "APX 2000",
+      "tier": "Model 3",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H52SDD9PW5AN",
+      "family": "APX 2000",
+      "tier": "Model 1.5",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H52SDF9PW6AN",
+      "family": "APX 2000",
+      "tier": "Model 2",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H52SDH9PW7AN",
+      "family": "APX 2000",
+      "tier": "Model 3",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H52UCD9PW5AN",
+      "family": "APX 2000",
+      "tier": "Model 1.5",
+      "band": "7/800"
+    },
+    {
+      "model": "H52UCF9PW6AN",
+      "family": "APX 2000",
+      "tier": "Model 2",
+      "band": "7/800"
+    },
+    {
+      "model": "H52UCH9PW7AN",
+      "family": "APX 2000",
+      "tier": "Model 3",
+      "band": "7/800"
+    },
+    {
+      "model": "H55TGT9PW8AN",
+      "family": "APX NEXT",
+      "tier": "Model 4.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H55TGT9PW8BN",
+      "family": "APX NEXT",
+      "tier": "Model 4.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H55TGT9RW8AN",
+      "family": "APX NEXT",
+      "tier": "International",
+      "band": "Multiple"
+    },
+    {
+      "model": "H55TGU9PW8AN",
+      "family": "APX NEXT XN",
+      "tier": "Model 4.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H55TGU9PW8BN",
+      "family": "APX NEXT XN",
+      "tier": "Model 4.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H59KGD9PW4AN",
+      "family": "APX 3000",
+      "tier": "",
+      "band": "VHF"
+    },
+    {
+      "model": "H59QDD9PW4AN",
+      "family": "APX 3000",
+      "tier": "",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H59SDD9PW4AN",
+      "family": "APX 3000",
+      "tier": "",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H59UCD9PW4AN",
+      "family": "APX 3000",
+      "tier": "",
+      "band": "7/800"
+    },
+    {
+      "model": "H84KDD9PW5AN",
+      "family": "APX 1000",
+      "tier": "Model 1.5",
+      "band": "VHF"
+    },
+    {
+      "model": "H84KDF9PW6AN",
+      "family": "APX 1000",
+      "tier": "Model 2",
+      "band": "VHF"
+    },
+    {
+      "model": "H84KDH9PW7AN",
+      "family": "APX 1000",
+      "tier": "Model 3",
+      "band": "VHF"
+    },
+    {
+      "model": "H84QDD9PW5AN",
+      "family": "APX 1000",
+      "tier": "Model 1.5",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H84QDF9PW6AN",
+      "family": "APX 1000",
+      "tier": "Model 2",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H84QDH9PW7AN",
+      "family": "APX 1000",
+      "tier": "Model 3",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H84SDD9PW5AN",
+      "family": "APX 1000",
+      "tier": "Model 1.5",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H84SDF9PW6AN",
+      "family": "APX 1000",
+      "tier": "Model 2",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H84SDH9PW7AN",
+      "family": "APX 1000",
+      "tier": "Model 3",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H84UCD9PW5AN",
+      "family": "APX 1000",
+      "tier": "Model 1.5",
+      "band": "7/800"
+    },
+    {
+      "model": "H84UCF9PW6AN",
+      "family": "APX 1000",
+      "tier": "Model 2",
+      "band": "7/800"
+    },
+    {
+      "model": "H84UCH9PW7AN",
+      "family": "APX 1000",
+      "tier": "Model 3",
+      "band": "7/800"
+    },
+    {
+      "model": "H84WCD9PW5AN",
+      "family": "APX 1000",
+      "tier": "Model 1.5",
+      "band": "900"
+    },
+    {
+      "model": "H84WCF9PW6AN",
+      "family": "APX 1000",
+      "tier": "Model 2",
+      "band": "900"
+    },
+    {
+      "model": "H91TGD9PW4AN",
+      "family": "APX 8000H",
+      "tier": "Model 1.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H91TGD9PW5AN",
+      "family": "APX 8000",
+      "tier": "Model 1.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H91TGD9PW6AN",
+      "family": "APX 8000",
+      "tier": "Model 2.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H91TGD9PW7AN",
+      "family": "APX 8000",
+      "tier": "Model 3.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H91TGD9PW8AN",
+      "family": "APX 8000H",
+      "tier": "Model 2.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H91TGD9PW9AN",
+      "family": "APX 8000H",
+      "tier": "Model 3.5",
+      "band": "Multiple"
+    },
+    {
+      "model": "H92KDF9PW6AN",
+      "family": "APX 900",
+      "tier": "Model 2",
+      "band": "VHF"
+    },
+    {
+      "model": "H92KDH9PW7AN",
+      "family": "APX 900",
+      "tier": "Model 3",
+      "band": "VHF"
+    },
+    {
+      "model": "H92QDF9PW6AN",
+      "family": "APX 900",
+      "tier": "Model 2",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H92QDH9PW7AN",
+      "family": "APX 900",
+      "tier": "Model 3",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H92SDF9PW6AN",
+      "family": "APX 900",
+      "tier": "Model 2",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H92SDH9PW7AN",
+      "family": "APX 900",
+      "tier": "Model 3",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H92UCF9PW6AN",
+      "family": "APX 900",
+      "tier": "Model 2",
+      "band": "7/800"
+    },
+    {
+      "model": "H92UCH9PW7AN",
+      "family": "APX 900",
+      "tier": "Model 3",
+      "band": "7/800"
+    },
+    {
+      "model": "H92WCF9PW6AN",
+      "family": "APX 900",
+      "tier": "Model 2",
+      "band": "900"
+    },
+    {
+      "model": "H92WCH9PW7AN",
+      "family": "APX 900",
+      "tier": "Model 3",
+      "band": "900"
+    },
+    {
+      "model": "H93KDF9PW6AN",
+      "family": "VX-P949",
+      "tier": "Model 2",
+      "band": "VHF"
+    },
+    {
+      "model": "H93KDH9PW7AN",
+      "family": "VX-P949",
+      "tier": "Model 3",
+      "band": "VHF"
+    },
+    {
+      "model": "H93QDF9PW6AN",
+      "family": "VX-P949",
+      "tier": "Model 2",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H93QDH9PW7AN",
+      "family": "VX-P949",
+      "tier": "Model 3",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H93SDF9PW6AN",
+      "family": "VX-P949",
+      "tier": "Model 2",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H93SDH9PW7AN",
+      "family": "VX-P949",
+      "tier": "Model 3",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H94QDH9PW7AN",
+      "family": "ATS 2500p",
+      "tier": "Model 3",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H94UCH9PW7AN",
+      "family": "ATS 2500p",
+      "tier": "Model 3",
+      "band": "7/800"
+    },
+    {
+      "model": "H97TGD9PW1AN",
+      "family": "APX 7000",
+      "tier": "",
+      "band": "Multiple"
+    },
+    {
+      "model": "H98KGD9PW5AN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 A",
+      "band": "VHF"
+    },
+    {
+      "model": "H98KGD9PW5BN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 B",
+      "band": "VHF"
+    },
+    {
+      "model": "H98KGF9PW6AN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 A",
+      "band": "VHF"
+    },
+    {
+      "model": "H98KGF9PW6BN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 B",
+      "band": "VHF"
+    },
+    {
+      "model": "H98KGH9PW7AN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 A",
+      "band": "VHF"
+    },
+    {
+      "model": "H98KGH9PW7BN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 B",
+      "band": "VHF"
+    },
+    {
+      "model": "H98QDD9PW5AN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 A",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H98QDD9PW5BN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 B",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H98QDF9PW6AN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 A",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H98QDF9PW6BN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 B",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H98QDH9PW7AN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 A",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H98QDH9PW7BN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 B",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H98SDD9PW5AN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 A",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H98SDD9PW5BN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 B",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H98SDF9PW6AN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 A",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H98SDF9PW6BN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 B",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H98SDH9PW7AN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 A",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H98SDH9PW7BN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 B",
+      "band": "UHF 2"
+    },
+    {
+      "model": "H98UCD9PW5AN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 A",
+      "band": "7/800"
+    },
+    {
+      "model": "H98UCD9PW5BN",
+      "family": "APX 6000",
+      "tier": "Model 1.5 B",
+      "band": "7/800"
+    },
+    {
+      "model": "H98UCF9PW6AN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 A",
+      "band": "7/800"
+    },
+    {
+      "model": "H98UCF9PW6BN",
+      "family": "APX 6000",
+      "tier": "Model 2.5 B",
+      "band": "7/800"
+    },
+    {
+      "model": "H98UCH9PW7AN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 A",
+      "band": "7/800"
+    },
+    {
+      "model": "H98UCH9PW7BN",
+      "family": "APX 6000",
+      "tier": "Model 3.5 B",
+      "band": "7/800"
+    },
+    {
+      "model": "H99KGD9PW5AN",
+      "family": "SRX 2200",
+      "tier": "Model 1.5 A",
+      "band": "VHF"
+    },
+    {
+      "model": "H99KGD9PW5BN",
+      "family": "SRX 2200",
+      "tier": "Model 1.5 B",
+      "band": "VHF"
+    },
+    {
+      "model": "H99KGH9PW7AN",
+      "family": "SRX 2200",
+      "tier": "Model 3.5 A",
+      "band": "VHF"
+    },
+    {
+      "model": "H99KGH9PW7BN",
+      "family": "SRX 2200",
+      "tier": "Model 3.5 B",
+      "band": "VHF"
+    },
+    {
+      "model": "H99QDD9PW5AN",
+      "family": "SRX 2200",
+      "tier": "Model 1.5 A",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H99QDD9PW5BN",
+      "family": "SRX 2200",
+      "tier": "Model 1.5 B",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H99QDH9PW7AN",
+      "family": "SRX 2200",
+      "tier": "Model 3.5 A",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H99QDH9PW7BN",
+      "family": "SRX 2200",
+      "tier": "Model 3.5 B",
+      "band": "UHF 1"
+    },
+    {
+      "model": "H99UCD9PW5AN",
+      "family": "SRX 2200",
+      "tier": "Model 1.5 A",
+      "band": "7/800"
+    },
+    {
+      "model": "H99UCD9PW5BN",
+      "family": "SRX 2200",
+      "tier": "Model 1.5 B",
+      "band": "7/800"
+    },
+    {
+      "model": "H99UCH9PW7AN",
+      "family": "SRX 2200",
+      "tier": "Model 3.5 A",
+      "band": "7/800"
+    },
+    {
+      "model": "H99UCH9PW7BN",
+      "family": "SRX 2200",
+      "tier": "Model 3.5 B",
+      "band": "7/800"
+    },
+    {
+      "model": "L22WRS9PW1AN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "900"
+    },
+    {
+      "model": "L30KSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Consolette",
+      "band": "VHF"
+    },
+    {
+      "model": "L30KSS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "L30QSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Consolette",
+      "band": "UHF 1"
+    },
+    {
+      "model": "L30QSS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "L30SSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Consolette",
+      "band": "UHF 2"
+    },
+    {
+      "model": "L30SSS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "L30TSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Consolette",
+      "band": "Multiple"
+    },
+    {
+      "model": "L30URS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Consolette",
+      "band": "7/800"
+    },
+    {
+      "model": "L30URS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "L30WRS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Consolette",
+      "band": "900"
+    },
+    {
+      "model": "L37TSS9PW1AN",
+      "family": "APX 8500",
+      "tier": "Consolette",
+      "band": "Multiple"
+    },
+    {
+      "model": "L37TSS9PW1CN",
+      "family": "APX 8500",
+      "tier": "Consolette",
+      "band": "Multiple"
+    },
+    {
+      "model": "M22KSS9PW1AN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M22KSS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M22QSS9PW1AN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M22QSS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M22SSS9PW1AN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M22SSS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M22URS9PW1AN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M22URS9PW1BN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M22URS9PW1CN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M22VRS9PW1CN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "8/900"
+    },
+    {
+      "model": "M22WRS9PW1AN",
+      "family": "APX 4500",
+      "tier": "Mid Power",
+      "band": "900"
+    },
+    {
+      "model": "M24KSS9PW1AN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M24KSS9PW1BN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M24QSS9PW1AN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M24QSS9PW1BN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M24SSS9PW1AN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M24SSS9PW1BN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M24URS9PW1AN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M24URS9PW1BN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M24URS9PW1CN",
+      "family": "APX 2500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M25KSS9PW1AN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M25KSS9PW1BN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M25KTS9PW1AN",
+      "family": "APX 6500",
+      "tier": "High Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M25QSS9PW1AN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M25QSS9PW1BN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M25QTS9PW1AN",
+      "family": "APX 6500",
+      "tier": "High Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M25SSS9PW1AN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M25SSS9PW1BN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M25URS9PW1AN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M25URS9PW1BN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M25URS9PW1CN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M25VRS9PW1CN",
+      "family": "APX 6500",
+      "tier": "Mid Power",
+      "band": "8/900"
+    },
+    {
+      "model": "M30KSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M30KTS9PW1AN",
+      "family": "APX 7500",
+      "tier": "High Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M30QSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M30QTS9PW1AN",
+      "family": "APX 7500",
+      "tier": "High Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M30SSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M30TSS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Mid Power",
+      "band": "Multiple"
+    },
+    {
+      "model": "M30TXS9PW1AN",
+      "family": "APX 7500",
+      "tier": "High Power",
+      "band": "Multiple"
+    },
+    {
+      "model": "M30URS9PW1AN",
+      "family": "APX 7500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M36KSS9PW1AN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M36KSS9PW1BN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "VHF"
+    },
+    {
+      "model": "M36QSS9PW1AN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M36QSS9PW1BN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "UHF 1"
+    },
+    {
+      "model": "M36SSS9PW1AN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M36SSS9PW1BN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "UHF 2"
+    },
+    {
+      "model": "M36URS9PW1AN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M36URS9PW1BN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M36URS9PW1CN",
+      "family": "APX 1500",
+      "tier": "Mid Power",
+      "band": "7/800"
+    },
+    {
+      "model": "M37TSS9PW1AN",
+      "family": "APX 8500",
+      "tier": "Mid Power",
+      "band": "Multiple"
+    },
+    {
+      "model": "M37TSS9PW1CN",
+      "family": "APX 8500",
+      "tier": "Mid Power",
+      "band": "Multiple"
+    },
+    {
+      "model": "M37TXS9PW1AN",
+      "family": "APX 8500",
+      "tier": "High Power",
+      "band": "Multiple"
+    },
+    {
+      "model": "M37TXS9PW1CN",
+      "family": "APX 8500",
+      "tier": "High Power",
+      "band": "Multiple"
+    },
+    {
+      "model": "T05KSS9PW1AN",
+      "family": "TXM 2000",
+      "tier": "",
+      "band": "VHF"
+    },
+    {
+      "model": "T05QSS9PW1AN",
+      "family": "TXM 2000",
+      "tier": "",
+      "band": "UHF"
+    },
+    {
+      "model": "T05TSS9PW1AN",
+      "family": "TXM 3000",
+      "tier": "",
+      "band": "Multiple"
+    },
+    {
+      "model": "T05TSS9PW1CN",
+      "family": "TXM 3000",
+      "tier": "",
+      "band": "Multiple"
+    }
+  ]
+}

@@ -1,0 +1,4281 @@
+{
+  "version": 2,
+  "options": [
+    {
+      "id": 0,
+      "part": "GA01202",
+      "name": "APX Geofence",
+      "character": 0,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "APX Geofence",
+        "description": "Allows the radio to perform geofencing, triggering operations based on location data",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15",
+            "requires": [
+              "G361",
+              "GA00229"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "part": "QA04447",
+      "name": "APX Geofence",
+      "character": 0,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "APX Geofence",
+        "description": "Allows the radio to perform geofencing, triggering operations based on location data",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15",
+            "requires": [
+              "Q361",
+              "QA00782"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "part": "G170",
+      "name": "Trunked Radio Trace / Remote Monitor",
+      "character": 0,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Remote Monitor / Radio Trace",
+        "description": "Allows the radio's location to be traced, and the audio to be monitored remotely",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "part": "H43",
+      "name": "Trunked Radio Trace / Remote Monitor",
+      "character": 0,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Remote Monitor / Radio Trace",
+        "description": "Allows the radio's location to be traced, and the audio to be monitored remotely",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "part": "G996",
+      "name": "Over the Air Provisioning",
+      "character": 0,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Over the Air Provisioning",
+        "description": "Allows the radio to be programmed over the air",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.7",
+            "requires": [
+              "W947",
+              "G806"
+            ],
+            "conflicts": [
+              "G50"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.6",
+            "requires": [
+              "Q947",
+              "Q806"
+            ],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "part": "QA02006",
+      "name": "APX XE",
+      "character": 0,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "APX XE",
+        "description": "Designates the radio as equipped with the XE housing and larger top display",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9 MOL",
+            "requires": [
+              "QA01833"
+            ],
+            "conflicts": [
+              "QA00577",
+              "QA01770",
+              "QA00579",
+              "QA03344",
+              "QA03986",
+              "QA06985",
+              "QA07516"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "part": "W12",
+      "name": "RF Preamp",
+      "character": 0,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Pre-amp (Mobile)",
+        "description": "Allows the radio to utilize the pre-amplifier on hardware capable radios",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00969",
+              "G138"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "part": "G806",
+      "name": "ASTRO Digital Operation",
+      "character": 0,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "IMBE Digital Operation",
+        "description": "Allows the radio to perform IMBE Digital operations, which is a co-requisite for many other purchasable radio features",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "part": "Q806",
+      "name": "ASTRO Digital Operation",
+      "character": 0,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "IMBE Digital Operation",
+        "description": "Allows the radio to perform IMBE Digital operations, which is a co-requisite for many other purchasable radio features",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "part": "GA09000",
+      "name": "Tone Signaling",
+      "character": 1,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "P25 Digital Tone Signaling",
+        "description": "Allows the radio to use tone signaling in P25 Conventional and P25 Trunking",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "part": "QA09000",
+      "name": "Tone Signaling",
+      "character": 1,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "P25 Digital Tone Signaling",
+        "description": "Allows the radio to use tone signaling in P25 Conventional and P25 Trunking",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "part": "GA01767",
+      "name": "P25 Radio Authentication",
+      "character": 1,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "P25 Radio Authentication",
+        "description": "Allows the radio to perform authentication protocols",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [
+              "G361",
+              "G806",
+              "G173",
+              "G51"
+            ],
+            "conflicts": [
+              "G50"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "part": "QA01767",
+      "name": "P25 Radio Authentication",
+      "character": 1,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "P25 Radio Authentication",
+        "description": "Allows the radio to perform authentication protocols",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [
+              "Q361",
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": [
+              "H37",
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "part": "G298",
+      "name": "OTAR with Multikey",
+      "character": 1,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "OTAR with Multikey",
+        "description": "Allows the radio to have more than one encryption key and be rekeyed over the air",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "W969"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "part": "Q498",
+      "name": "OTAR with Multikey",
+      "character": 1,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "OTAR with Multikey",
+        "description": "Allows the radio to have more than one encryption key and be rekeyed over the air",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "H869"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "part": "W969",
+      "name": "Multikey",
+      "character": 1,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Multikey",
+        "description": "Allows the radio to have more than one encryption key",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "G298"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "part": "H869",
+      "name": "Multikey",
+      "character": 1,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Multikey",
+        "description": "Allows the radio to have more than one encryption key",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "Q498"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "part": "GA00243",
+      "name": "Federal Government Front Panel Programming Enhancement",
+      "character": 1,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "FED Front Panel Programming",
+        "description": "Allows limited programming of the radio through the keypad",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "G53"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "part": "Q52",
+      "name": "Federal Government Front Panel Programming Enhancement",
+      "character": 1,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "FED Front Panel Programming",
+        "description": "Allows limited programming of the radio through the keypad",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "Q53",
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "part": "G138",
+      "name": "Motorcycle Radio",
+      "character": 1,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Motorcycle Radio",
+        "description": "Designates the radio as intended for installation into motorcycle configuration",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "W12",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA00309",
+              "GA00469",
+              "GA00631",
+              "GA00898",
+              "GA01267"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "part": "GA04892",
+      "name": "8/900MHz Primary Band",
+      "character": 2,
+      "lsb": 4,
+      "width": 2,
+      "value": 3,
+      "guard": [
+        "mobile",
+        "singleband8900"
+      ],
+      "info": {
+        "title": "8/900 MHz Primary Band",
+        "description": "Allows for 900 MHz frequency programming in V band devices",
+        "variants": [
+          {
+            "for": "",
+            "release": "2022.2",
+            "requires": [],
+            "conflicts": [
+              "GA00244",
+              "GA00969",
+              "GA00341",
+              "GA00345",
+              "GA00306",
+              "GA00342",
+              "GA00307"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "part": "GA00244",
+      "name": "7/800 MHz",
+      "character": 2,
+      "lsb": 3,
+      "width": 2,
+      "value": 3,
+      "guard": [
+        "mobile",
+        "!singleband8900"
+      ],
+      "info": {
+        "title": "7/800 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 700 MHz and 800 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "GA00225",
+              "GA00969",
+              "GA00342",
+              "GA00307",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "part": "GA00345",
+      "name": "UHF Range 2",
+      "character": 2,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 2 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 2 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA00346",
+              "GA00342",
+              "GA00307",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "part": "GA00341",
+      "name": "UHF Range 1",
+      "character": 2,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile",
+        "!is8500hp"
+      ],
+      "info": {
+        "title": "UHF Range 1 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 1 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA00343",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "part": "GA00342",
+      "name": "UHF Range 1",
+      "character": 2,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile",
+        "is8500hp"
+      ],
+      "info": {
+        "title": "UHF Range 1 Primary Band High Power",
+        "description": "Allows the radio to transmit high power signals and receive signals in the UHF range 1 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00244",
+              "GA00969",
+              "GA00341",
+              "GA00343",
+              "GA00345",
+              "GA00306",
+              "G138",
+              "GA00344",
+              "GA00469",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "part": "GA00306",
+      "name": "VHF",
+      "character": 2,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile",
+        "!is8500hp"
+      ],
+      "info": {
+        "title": "VHF Primary Band",
+        "description": "Allows the radio to transmit signals and receive signals in the VHF range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA00308",
+              "GA00342",
+              "GA00307",
+              "GA00309",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "part": "GA00307",
+      "name": "VHF",
+      "character": 2,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile",
+        "is8500hp"
+      ],
+      "info": {
+        "title": "VHF Primary Band High Power",
+        "description": "Allows the radio to transmit high power signals and receive signals in the VHF range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00244",
+              "GA00969",
+              "GA00341",
+              "GA00345",
+              "GA00306",
+              "GA00308",
+              "G138",
+              "GA00309",
+              "GA00469",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 27,
+      "part": "QA00569",
+      "name": "7/800 MHz",
+      "character": 2,
+      "lsb": 3,
+      "width": 2,
+      "value": 3,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "7/800 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 700 MHz and 800 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA00573",
+              "QA03056",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "part": "QA00570",
+      "name": "VHF",
+      "character": 2,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "VHF Primary Band",
+        "description": "Allows the radio to transmit signals and receive signals in the VHF range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "QA00574",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 29,
+      "part": "QA00571",
+      "name": "UHF Range 1",
+      "character": 2,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 1 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "QA00575",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 30,
+      "part": "QA00572",
+      "name": "UHF Range 2",
+      "character": 2,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "UHF Range 2 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 2 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "QA00576",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 31,
+      "part": "QA03056",
+      "name": "900 MHz Primary Band",
+      "character": 2,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "900 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 900 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13",
+            "requires": [],
+            "conflicts": [
+              "QA00569",
+              "QA00573",
+              "QA00571",
+              "QA00575",
+              "QA00572",
+              "QA00576",
+              "QA00570",
+              "QA00574",
+              "QA00631",
+              "QA02751",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 32,
+      "part": "GA00244",
+      "name": "7/800 MHz Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "7/800 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 700 MHz and 800 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "GA00225",
+              "GA00969",
+              "GA00342",
+              "GA00307",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 33,
+      "part": "GA00306",
+      "name": "VHF MP Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 2,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "VHF Primary Band",
+        "description": "Allows the radio to transmit signals and receive signals in the VHF range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA00308",
+              "GA00342",
+              "GA00307",
+              "GA00309",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 34,
+      "part": "GA00307",
+      "name": "VHF HP Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 3,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "VHF Primary Band High Power",
+        "description": "Allows the radio to transmit high power signals and receive signals in the VHF range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00244",
+              "GA00969",
+              "GA00341",
+              "GA00345",
+              "GA00306",
+              "GA00308",
+              "G138",
+              "GA00309",
+              "GA00469",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 35,
+      "part": "GA00341",
+      "name": "UHF R1 MP Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 4,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 1 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA00343",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 36,
+      "part": "GA00342",
+      "name": "UHF R1 HP Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 5,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Primary Band High Power",
+        "description": "Allows the radio to transmit high power signals and receive signals in the UHF range 1 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00244",
+              "GA00969",
+              "GA00341",
+              "GA00343",
+              "GA00345",
+              "GA00306",
+              "G138",
+              "GA00344",
+              "GA00469",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 37,
+      "part": "GA00345",
+      "name": "UHF R2 MP Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 8,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 2 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 2 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA00346",
+              "GA00342",
+              "GA00307",
+              "GA04892"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 38,
+      "part": "GA00969",
+      "name": "900 MHz Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 6,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "900 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 900 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.14",
+            "requires": [],
+            "conflicts": [
+              "GA00244",
+              "GA00225",
+              "GA00341",
+              "GA00343",
+              "GA00345",
+              "GA00346",
+              "GA00306",
+              "GA00308",
+              "W12",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA00309",
+              "GA00469",
+              "QA00631",
+              "QA02751",
+              "GA04892",
+              "HA00677"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 39,
+      "part": "QA00569",
+      "name": "7/800 MHz Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "7/800 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 700 MHz and 800 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA00573",
+              "QA03056",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 40,
+      "part": "QA00570",
+      "name": "VHF Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 2,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "VHF Primary Band",
+        "description": "Allows the radio to transmit signals and receive signals in the VHF range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "QA00574",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 41,
+      "part": "QA00571",
+      "name": "UHF Range 1 Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 4,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 1 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "QA00575",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 42,
+      "part": "QA00572",
+      "name": "UHF Range 2 Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 8,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "UHF Range 2 Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 2 range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "QA00576",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 43,
+      "part": "QA04832",
+      "name": "8/900MHz Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 7,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "8/900 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 800 MHz and 900 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15.5",
+            "requires": [],
+            "conflicts": [
+              "QA00569",
+              "QA03056",
+              "QA00571",
+              "QA00572",
+              "QA00570"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 44,
+      "part": "QA03056",
+      "name": "900 MHz Primary Band",
+      "character": 2,
+      "lsb": 0,
+      "width": 5,
+      "value": 6,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "900 MHz Primary Band",
+        "description": "Allows the radio to transmit and receive signals in the 900 MHz range of frequencies",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13",
+            "requires": [],
+            "conflicts": [
+              "QA00569",
+              "QA00573",
+              "QA00571",
+              "QA00575",
+              "QA00572",
+              "QA00576",
+              "QA00570",
+              "QA00574",
+              "QA00631",
+              "QA02751",
+              "QA04832"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 45,
+      "part": "GA09001",
+      "name": "Wi-Fi Capability",
+      "character": 3,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "WiFi Capability",
+        "description": "Allows the radio to communicate over Wi-Fi for hardware equipped radios",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 46,
+      "part": "QA09001",
+      "name": "Wi-Fi Capability",
+      "character": 3,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "WiFi Capability",
+        "description": "Allows the radio to communicate over Wi-Fi for hardware equipped radios",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15.5",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 47,
+      "part": "QA06985",
+      "name": "Night Vision Goggle",
+      "character": 10,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "Night Vision Goggle",
+        "description": "Allows the radio to set the brightness of the front and top displays for use with night vision goggles",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.18.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 48,
+      "part": "GA01574",
+      "name": "SW-AES",
+      "character": 3,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Advanced Encryption Standard",
+        "description": "Allows the radio to encrypt and decrypt communications using software encryption techniques compatible with the Advanced Encryption Standard (AES)",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17.5",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": [
+              "H04"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 49,
+      "part": "QA06653",
+      "name": "SW-AES",
+      "character": 3,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Advanced Encryption Standard",
+        "description": "Allows the radio to encrypt and decrypt communications using software encryption techniques compatible with the Advanced Encryption Standard (AES)",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17.5",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": [
+              "H04"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 50,
+      "part": "QA09006",
+      "name": "Adaptive Noise Suppression",
+      "character": 3,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Adaptive Noise Suppression",
+        "description": "Allows the radio to apply adaptive noise suppression to transmitted audio",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15.5",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 51,
+      "part": "QA07516",
+      "name": "NYPD VX-P944 Vertex Splash Screen",
+      "character": 3,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "NYPD Trigger",
+        "description": "Allows the radio to perform NYPD Trigger functions",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.18.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 52,
+      "part": "GA00225",
+      "name": "7/800 MHz Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "7/800 MHz Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the 700 MHz and 800 MHz range of frequencies - requires GA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "GA00244",
+              "GA00969",
+              "GA00343",
+              "GA00346",
+              "GA00308",
+              "GA00344",
+              "GA00309"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 53,
+      "part": "GA00308",
+      "name": "VHF MP Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 2,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "VHF Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the VHF range of frequencies - requires GA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "GA00225",
+              "GA00969",
+              "GA00343",
+              "GA00346",
+              "GA00306",
+              "GA00344",
+              "GA00307",
+              "GA00309"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "part": "GA00309",
+      "name": "VHF HP Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 3,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "VHF Secondary Band High Power",
+        "description": "Allows the radio to transmit high power signaling and receive signals in the VHF range of frequencies - requires GA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00225",
+              "GA00969",
+              "GA00343",
+              "GA00346",
+              "GA00306",
+              "GA00308",
+              "G138",
+              "GA00344",
+              "GA00307",
+              "GA00469"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "part": "GA00343",
+      "name": "UHF R1 MP Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 4,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 1 frequencies - requires GA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "GA00225",
+              "GA00969",
+              "GA00341",
+              "GA00346",
+              "GA00308",
+              "GA00342",
+              "GA00344",
+              "GA00309"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "part": "GA00344",
+      "name": "UHF R1 HP Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 5,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Secondary Band High Power",
+        "description": "Allows the radio to transmit high power signaling and receive signals in the UHF range 1 frequencies - requires GA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00225",
+              "GA00969",
+              "GA00341",
+              "GA00343",
+              "GA00346",
+              "GA00308",
+              "G138",
+              "GA00342",
+              "GA00309",
+              "GA00469"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "part": "GA00346",
+      "name": "UHF R2 MP Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 8,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "UHF Range 2 Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 2 frequencies - requires GA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "GA00225",
+              "GA00969",
+              "GA00343",
+              "GA00345",
+              "GA00308",
+              "GA00344",
+              "GA00309"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 58,
+      "part": "QA00573",
+      "name": "7/800 MHz Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "7/800 MHz Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the 700 MHz and 800 MHz range of frequencies, requires QA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA00569",
+              "QA03056",
+              "QA00575",
+              "QA00576",
+              "QA00574"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 59,
+      "part": "QA00574",
+      "name": "VHF Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 2,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "VHF Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the VHF range of frequencies - requires QA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA00573",
+              "QA03056",
+              "QA00575",
+              "QA00576",
+              "QA00570"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 60,
+      "part": "QA00575",
+      "name": "UHF Range 1 Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 4,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "UHF Range 1 Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 1 frequencies - requires QA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA00573",
+              "QA03056",
+              "QA00571",
+              "QA00576",
+              "QA00574"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 61,
+      "part": "QA00576",
+      "name": "UHF Range 2 Secondary Band",
+      "character": 3,
+      "lsb": 0,
+      "width": 5,
+      "value": 8,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "UHF Range 2 Secondary Band",
+        "description": "Allows the radio to transmit and receive signals in the UHF range 2 frequencies - requires QA00579 to enable the secondary band",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5",
+            "requires": [],
+            "conflicts": [
+              "QA00573",
+              "QA03056",
+              "QA00575",
+              "QA00572",
+              "QA00574"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 62,
+      "part": "GA01267",
+      "name": "RSI Data",
+      "character": 4,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "RSI Data",
+        "description": "Allows the radio to act as a modem for the purposes of RSI Data",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15.5",
+            "requires": [
+              "W947",
+              "G806",
+              "GA00898"
+            ],
+            "conflicts": [
+              "QA02006",
+              "QA00583",
+              "G857",
+              "QA01843",
+              "H04",
+              "G138",
+              "GA00469",
+              "QA00631",
+              "GA01058",
+              "GA09011",
+              "GA01545",
+              "HA00677"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 63,
+      "part": "QA01768",
+      "name": "Enhanced Zone Bank",
+      "character": 4,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "Enhanced Zone Bank",
+        "description": "Allows the radio to access additional zones through the use of a bank button",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 64,
+      "part": "QA01648",
+      "name": "ASK Enable",
+      "character": 4,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "ASK Enable",
+        "description": "Enforces the use of Advanced System Keys for the purposes of programming the radio",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5 ER 1",
+            "requires": [],
+            "conflicts": [
+              "QA01749"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 65,
+      "part": "QA01749",
+      "name": "Legacy SW System Key Enable",
+      "character": 4,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Legacy SW System Key Enable",
+        "description": "Allows the use of legacy software system keys for the purposes of programming the radio",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.8.5 ER 1",
+            "requires": [],
+            "conflicts": [
+              "QA01648"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 66,
+      "part": "QA00583",
+      "name": "Bluetooth",
+      "character": 4,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Bluetooth Operation",
+        "description": "Allows the radio to communicate over Bluetooth for hardware equipped radios",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "2021.2",
+            "requires": [],
+            "conflicts": [
+              "GA00898",
+              "GA01267",
+              "GA01058"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 67,
+      "part": "GA00579",
+      "name": "Enable Dual Band Operation",
+      "character": 4,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Enable Dual Band Operation",
+        "description": "Enables APX7500 radios equipped with secondary frequency hardware boards to transmit and receive signals over the frequencies enabled by those boards",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "QA02006"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "part": "QA00579",
+      "name": "Enable Dual Band Operation",
+      "character": 4,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Enable Dual Band Operation",
+        "description": "Enables APX7000 radios equipped with secondary frequency hardware boards to transmit and receive signals over the frequencies enabled by those boards",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA02006"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 69,
+      "part": "GA09008",
+      "name": "Group Services",
+      "character": 5,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Group Services",
+        "description": "Allows the radio to access Group Services",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15.5",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 70,
+      "part": "QA09008",
+      "name": "Group Services",
+      "character": 5,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Group Services",
+        "description": "Allows the radio to access Group Services",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.15.5",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 71,
+      "part": "G683",
+      "name": "One Touch Status Message",
+      "character": 5,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "One Touch",
+        "description": "Allows the radio to access functions via a one touch operation",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 72,
+      "part": "H46",
+      "name": "One Touch Status Message",
+      "character": 5,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "One Touch",
+        "description": "Allows the radio to access functions via a one touch operation",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 73,
+      "part": "G51",
+      "name": "SMARTZONE Systems Operation",
+      "character": 5,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "SmartZone Operation",
+        "description": "Allows the radio to perform SmartZone operations",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "G50"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 74,
+      "part": "H38",
+      "name": "SMARTZONE Systems Operation",
+      "character": 5,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "SmartZone Operation",
+        "description": "Allows the radio to perform SmartZone operations",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 75,
+      "part": "G50",
+      "name": "SMARTNET Systems Operation",
+      "character": 5,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "SmartNet Operation",
+        "description": "Allows the radio to perform SmartNet operations",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": [
+              "H04",
+              "GA01767",
+              "G361",
+              "G173",
+              "G996",
+              "G51",
+              "GA00580",
+              "QA03399"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 76,
+      "part": "H37",
+      "name": "SMARTNET Systems Operation",
+      "character": 5,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "SmartNet Operation",
+        "description": "Allows the radio to perform SmartNet operations",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "H04",
+              "QA01767",
+              "Q361",
+              "Q173",
+              "G996",
+              "H38",
+              "QA00580",
+              "QA03399"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 77,
+      "part": "QA01843",
+      "name": "Fall Alert/Impact Detection Operation",
+      "character": 5,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Impact Detection",
+        "description": "Allows the radio to generate an alert tone and send an emergency signal under fall alert conditions",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.18",
+            "requires": [],
+            "conflicts": [
+              "G138",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA00309",
+              "GA00898",
+              "GA01267"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 78,
+      "part": "QA01843",
+      "name": "Fall Alert/Impact Detection Operation",
+      "character": 5,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Fall Alert",
+        "description": "Allows the radio to generate an alert tone and send an emergency signal under fall alert conditions",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.11",
+            "requires": [],
+            "conflicts": [
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 79,
+      "part": "GA01771",
+      "name": "Enhancement Level 2",
+      "character": 5,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Enhancement Level 2",
+        "description": "Designates the radio as equipped with upgraded limits for channel and system capacities",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "GA01770"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 80,
+      "part": "QA01771",
+      "name": "Enhancement Level 2",
+      "character": 5,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Enhancement Level 2",
+        "description": "Designates the radio as equipped with upgraded limits for channel and system capacities",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": [
+              "QA01770",
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 81,
+      "part": "GA01545",
+      "name": "Motorola VML Data Modem Tethering",
+      "character": 6,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Motorola VML Data Modem Tethering",
+        "description": "Allows the radio to tether to an external modem for data applications",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.17",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": [
+              "GA00469",
+              "QA02751",
+              "GA00898",
+              "GA01267"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.18",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": [
+              "QA02751",
+              "QA03176",
+              "QA03344"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 82,
+      "part": "G193",
+      "name": "Advanced Digital Privacy Software",
+      "character": 6,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Advanced Digital Privacy Enabled",
+        "description": "Allows the radio to protect communications using Advanced Digital Privacy (ADP)",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 83,
+      "part": "Q667",
+      "name": "Advanced Digital Privacy Software",
+      "character": 6,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Advanced Digital Privacy Enabled",
+        "description": "Allows the radio to protect communications using Advanced Digital Privacy (ADP)",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.11.5",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 84,
+      "part": "G507",
+      "name": "12.5 kHz FCC Mandate",
+      "character": 6,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "12.5kHz FCC MANDATE",
+        "description": "Enforces the FCC Rule Part 90, limiting use to 12.5kHz channel bandwidth",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 85,
+      "part": "Q507",
+      "name": "12.5 kHz FCC Mandate",
+      "character": 6,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "12.5kHz FCC MANDATE",
+        "description": "Enforces the FCC Rule Part 90, limiting use to 12.5kHz channel bandwidth",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 86,
+      "part": "H04",
+      "name": "Conventional Tactical Rekey",
+      "character": 6,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Conventional Tactical Rekey",
+        "description": "Allows the radio to be rekeyed over a conventional signal sent from other subscriber units",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.9",
+            "requires": [
+              "W947",
+              "G806"
+            ],
+            "conflicts": [
+              "G50",
+              "G138",
+              "W12",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA00309",
+              "GA00469",
+              "GA01058"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.9",
+            "requires": [
+              "Q947",
+              "Q806"
+            ],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 87,
+      "part": "GA01833",
+      "name": "Extreme Noise Reduction",
+      "character": 6,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Extreme Noise Reduction",
+        "description": "Allows the radio to apply noise reduction techniques specifically tailored to certain extremely noisy environments",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 88,
+      "part": "QA01833",
+      "name": "Extreme Noise Reduction",
+      "character": 6,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Extreme Noise Reduction",
+        "description": "Allows the radio to apply noise reduction techniques specifically tailored to certain extremely noisy environments",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.9",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 89,
+      "part": "QA00631",
+      "name": "DVRS PSU Activation",
+      "character": 6,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "DVRS PSU Activation",
+        "description": "Allows the radio to act as a portable subscriber on a DVRS",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.11.5",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": [
+              "GA00969",
+              "GA00631",
+              "GA00898",
+              "GA01267",
+              "GA01058"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.11.5",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": [
+              "QA03056",
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 90,
+      "part": "QA03344",
+      "name": "LTE Operation",
+      "character": 7,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "LTE Operation",
+        "description": "Allows the radio to communicate over LTE for hardware equipped radios",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.14.5",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": [
+              "QA02006",
+              "GA09011",
+              "GA01545"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 91,
+      "part": "GA00631",
+      "name": "DVRS MSU Operation",
+      "character": 7,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "DVRS MSU Activation",
+        "description": "Allows the radio to act as a mobile subscriber unit in conjunction with a DVRS",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "G857",
+              "QA01843",
+              "G138",
+              "GA00469",
+              "QA00631",
+              "QA02811",
+              "GA00898",
+              "GA01267",
+              "GA01058",
+              "HA00677",
+              "QA09772"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 92,
+      "part": "GA00469",
+      "name": "Extended Dispatch Enable",
+      "character": 7,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Extended Dispatch",
+        "description": "Allows the mobile radio to operate some limited console functionality",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.11",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "QA00583",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00969",
+              "G138",
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA00309",
+              "GA00631",
+              "GA00898",
+              "GA01267",
+              "GA01058",
+              "GA09011",
+              "GA01545"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 93,
+      "part": "GA01770",
+      "name": "Enhancement Level 1",
+      "character": 7,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Enhancement Level 1",
+        "description": "Designates the radio as equipped with upgraded limits for channel and system capacities",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "GA01771"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 94,
+      "part": "QA01770",
+      "name": "Enhancement Level 1",
+      "character": 7,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Enhancement Level 1",
+        "description": "Designates the radio as equipped with upgraded limits for channel and system capacities",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.11.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "QA01771"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 95,
+      "part": "GA00229",
+      "name": "GPS Activation",
+      "character": 7,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "GPS Activation",
+        "description": "Allows the radio to use the GPS hardware for equipped radios",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 96,
+      "part": "QA00782",
+      "name": "GPS Activation",
+      "character": 7,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "GPS Activation",
+        "description": "Allows the radio to use the GPS hardware for equipped radios",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 97,
+      "part": "GA09012",
+      "name": "Mission Critical Geofence",
+      "character": 8,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Mission Critical Geofence",
+        "description": "Allows the radio to perform mission critical geofencing, triggering operations based on location data",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17",
+            "requires": [
+              "GA00229",
+              "G806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 98,
+      "part": "QA09012",
+      "name": "Mission Critical Geofence",
+      "character": 8,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Mission Critical Geofence",
+        "description": "Allows the radio to perform mission critical geofencing, triggering operations based on location data",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17",
+            "requires": [
+              "QA00782",
+              "Q806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 99,
+      "part": "QA03399",
+      "name": "Enhanced Data Operation",
+      "character": 8,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Enhanced Data Operation",
+        "description": "Allows the radio to access enhanced data channels",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.14",
+            "requires": [
+              "W947",
+              "G361",
+              "G806",
+              "G173",
+              "G51"
+            ],
+            "conflicts": [
+              "G50"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.14",
+            "requires": [
+              "Q947",
+              "Q361",
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 100,
+      "part": "GA00898",
+      "name": "V.24 Software",
+      "character": 8,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "V.24 Software",
+        "description": "Allows the radio to operate V.24 software functionality",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13.5",
+            "requires": [
+              "W947",
+              "G806"
+            ],
+            "conflicts": [
+              "QA02006",
+              "QA00583",
+              "G857",
+              "QA01843",
+              "H04",
+              "G138",
+              "GA00469",
+              "QA00631",
+              "GA01058",
+              "GA09011",
+              "GA01545",
+              "HA00677"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 101,
+      "part": "QA02751",
+      "name": "APX Lite Option",
+      "character": 8,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "APXLi Radio Trigger",
+        "description": "Designates the radio as APX Li",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.11.5",
+            "requires": [],
+            "conflicts": [
+              "GA00969",
+              "GA09011",
+              "GA01545"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.11.5",
+            "requires": [],
+            "conflicts": [
+              "QA03056",
+              "GA09011",
+              "GA01545"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 102,
+      "part": "QA02811",
+      "name": "9600 or 3600 Single System Trigger",
+      "character": 8,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "3600/9600 Trunking Single System Trigger",
+        "description": "Allows the radio to operate on either 3600 baud or 9600 baud Trunking",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.11.5",
+            "requires": [
+              "G361",
+              "G806",
+              "G173",
+              "G51"
+            ],
+            "conflicts": [
+              "GA00631"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.11.5",
+            "requires": [
+              "Q361",
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 103,
+      "part": "W947",
+      "name": "Packet Data Interface",
+      "character": 8,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "APCO Packet Data",
+        "description": "Allows the radio to enter APCO Packet Data mode",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 104,
+      "part": "Q947",
+      "name": "Packet Data Interface",
+      "character": 8,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "APCO Packet Data",
+        "description": "Allows the radio to enter APCO Packet Data mode",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 105,
+      "part": "GA09011",
+      "name": "Third Party Data Modem Tethering",
+      "character": 9,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Third Party Data Modem Tethering",
+        "description": "Allows the radio to tether to an external third party modem for data applications",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.17",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": [
+              "GA00469",
+              "QA02751",
+              "GA00898",
+              "GA01267"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.18",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": [
+              "QA02751",
+              "QA03176",
+              "QA03344"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 106,
+      "part": "GA00982",
+      "name": "Site Selectable Alert for P25 Trunking",
+      "character": 9,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Site Selectable Alert for P25 Trunking",
+        "description": "Allows the radio to receive site specific alerts sent by Trunking dispatch",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.14",
+            "requires": [
+              "G361",
+              "G806",
+              "G173",
+              "G51"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 107,
+      "part": "QA00982",
+      "name": "Site Selectable Alert for P25 Trunking",
+      "character": 9,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Site Selectable Alert for P25 Trunking",
+        "description": "Allows the radio to receive site specific alerts sent by Trunking dispatch",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.14",
+            "requires": [
+              "Q361",
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 108,
+      "part": "G173",
+      "name": "SMARTZONE OMNILINK Multizone Operation",
+      "character": 9,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "OmniLink",
+        "description": "Allows the radio to roam across zones in a SmartZone system",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [
+              "G51"
+            ],
+            "conflicts": [
+              "G50"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 109,
+      "part": "Q173",
+      "name": "SMARTZONE OMNILINK Multizone Operation",
+      "character": 9,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "OmniLink",
+        "description": "Allows the radio to roam across zones in a SmartZone system",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [
+              "H38"
+            ],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 110,
+      "part": "G387",
+      "name": "Conventional Voting Scan",
+      "character": 9,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Conventional Voting Scan",
+        "description": "Allows the radio to scan for stronger signal strength sites",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 111,
+      "part": "Q387",
+      "name": "Conventional Voting Scan",
+      "character": 9,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Conventional Voting Scan",
+        "description": "Allows the radio to scan for stronger signal strength sites",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 112,
+      "part": "G53",
+      "name": "FCC Conventional Front Panel Programming",
+      "character": 9,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Non-FED Front Panel Programming",
+        "description": "Allows limited programming of the radio through the keypad",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17.5",
+            "requires": [],
+            "conflicts": [
+              "GA00243"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 113,
+      "part": "Q53",
+      "name": "FCC Conventional Front Panel Programming",
+      "character": 9,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Non-FED Front Panel Programming",
+        "description": "Allows limited programming of the radio through the keypad",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "Q52"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 114,
+      "part": "GA01058",
+      "name": "Dual Radio Operation",
+      "character": 10,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Dual Radio Operation",
+        "description": "Allows the radio to operate in dual radio configuration",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.14.5",
+            "requires": [],
+            "conflicts": [
+              "QA02006",
+              "QA00583",
+              "G857",
+              "QA01843",
+              "H04",
+              "GA00469",
+              "QA00631",
+              "GA00631",
+              "GA00898",
+              "GA01267",
+              "HA00677",
+              "QA09772"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 115,
+      "part": "G361",
+      "name": "ASTRO 25 9600 Baud Trunking Systems Operation",
+      "character": 10,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Digital IMBE Trunking with 9600 Control Channel Only (APCO Trunking)",
+        "description": "Allows the radio to operate Trunking according to the APCO standards",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [
+              "G806",
+              "G173",
+              "G51"
+            ],
+            "conflicts": [
+              "G50"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 116,
+      "part": "Q361",
+      "name": "ASTRO 25 9600 Baud Trunking Systems Operation",
+      "character": 10,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Digital IMBE Trunking with 9600 Control Channel Only (APCO Trunking)",
+        "description": "Allows the radio to operate Trunking according to the APCO standards",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 117,
+      "part": "QA03176",
+      "name": "Collaborative Phase 1",
+      "character": 10,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "Collaborative Phase 1",
+        "description": "Allows the radio to collaborate with specific cellular devices",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13",
+            "requires": [],
+            "conflicts": [
+              "GA09011",
+              "GA01545"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 118,
+      "part": "H02",
+      "name": "Encrypted Tactical Inhibit",
+      "character": 10,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Encrypted Tactical Inhibit",
+        "description": "Allows the radio to inhibit radios over a secure conventional communication",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "7.18",
+            "requires": [],
+            "conflicts": []
+          },
+          {
+            "for": "Portable",
+            "release": "7.13",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 119,
+      "part": "GA00580",
+      "name": "TDMA Operation",
+      "character": 10,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "TDMA Operation",
+        "description": "Allows the radio to operate in TDMA mode",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.7",
+            "requires": [
+              "G361",
+              "G806",
+              "G173",
+              "G51"
+            ],
+            "conflicts": [
+              "G50"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 120,
+      "part": "QA00580",
+      "name": "TDMA Operation",
+      "character": 10,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "TDMA Operation",
+        "description": "Allows the radio to operate in TDMA mode",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [
+              "Q361",
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": [
+              "H37"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 121,
+      "part": "GA01630",
+      "name": "SmartConnect",
+      "character": 11,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "SmartConnect",
+        "description": "Allows the radio to operate SmartConnect, switching to available broadband networks when out of range of the P25 system",
+        "variants": [
+          {
+            "for": "",
+            "release": "2019.2",
+            "requires": [
+              "W947",
+              "G361",
+              "G806",
+              "G50",
+              "G51"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 122,
+      "part": "QA07682",
+      "name": "SmartConnect",
+      "character": 11,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "SmartConnect",
+        "description": "Allows the radio to operate SmartConnect, switching to available broadband networks when out of range of the P25 system",
+        "variants": [
+          {
+            "for": "",
+            "release": "2019.2",
+            "requires": [
+              "Q947",
+              "Q361",
+              "Q806",
+              "H37",
+              "H38"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 123,
+      "part": "QA03986",
+      "name": "Encrypted VPN Gateway",
+      "character": 11,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "Encrypted VPN Gateway",
+        "description": "Allows the radio to connect to the virtual private network gateway in the CEN",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.14.5",
+            "requires": [
+              "Q806",
+              "QA03344"
+            ],
+            "conflicts": [
+              "QA02006"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 124,
+      "part": "QA03768",
+      "name": "P25 Common Air Interface",
+      "character": 11,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "P25 Common Air Interface",
+        "description": "Allows the radio to perform data over the P25 Common Air Interface",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13.5",
+            "requires": [
+              "Q361",
+              "Q806",
+              "Q173",
+              "H38"
+            ],
+            "conflicts": [
+              "QA01768",
+              "QA01843",
+              "H04",
+              "QA01767",
+              "QA01771",
+              "H43",
+              "Q52",
+              "QA00631",
+              "HA00677"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 125,
+      "part": "G857",
+      "name": "FDNY Emergency Rx/Tx Tone Set",
+      "character": 11,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "FDNY Emergency Rx/Tx Tone Set",
+        "description": "Allows the radio to generate a specific set of emergency tones",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "",
+            "requires": [],
+            "conflicts": [
+              "GA00898",
+              "GA01267"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "7.13",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 126,
+      "part": "QA00577",
+      "name": "Front Display and Full Keypad",
+      "character": 11,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "Front Display and Full Keypad",
+        "description": "Designates the radio as equipped with a front keypad and display",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.6",
+            "requires": [],
+            "conflicts": [
+              "QA02006"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 127,
+      "part": "G445",
+      "name": "Personnel Accountability Software",
+      "character": 11,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Personnel Accountability",
+        "description": "Allows the radio to participate in personnel accountability activities",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.17",
+            "requires": [
+              "G806"
+            ],
+            "conflicts": [
+              "GA00342",
+              "GA00344",
+              "GA00307",
+              "GA00309",
+              "GA00469",
+              "GA00631",
+              "GA00898",
+              "GA01267"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 128,
+      "part": "Q445",
+      "name": "Personnel Accountability Software",
+      "character": 11,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Personnel Accountability",
+        "description": "Allows the radio to participate in personnel accountability activities",
+        "variants": [
+          {
+            "for": "",
+            "release": "7.13",
+            "requires": [
+              "Q806"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 129,
+      "part": "HA00677",
+      "name": "DVRS PSU Conventional Scan Enabled",
+      "character": 13,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "DVRS PSU Conventional Scan Enabled",
+        "description": "Allows the radio to scan using DVRS Conventional Systems",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "2020.2",
+            "requires": [
+              "QA00631"
+            ],
+            "conflicts": [
+              "GA00969",
+              "GA00631",
+              "GA00898",
+              "GA01267",
+              "GA01058"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "2020.2",
+            "requires": [
+              "QA00631"
+            ],
+            "conflicts": [
+              "QA03056",
+              "QA03768"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": 130,
+      "part": "GA01731",
+      "name": "SW-DES",
+      "character": 13,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "DES Software Crypto",
+        "description": "APX-DES SOFTWARE CRYPTO for Mobiles",
+        "variants": [
+          {
+            "for": "",
+            "release": "2020.1",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 131,
+      "part": "QA07949",
+      "name": "SW-DES",
+      "character": 13,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "DES Software Crypto",
+        "description": "APX-DES SOFTWARE CRYPTO for Portables",
+        "variants": [
+          {
+            "for": "",
+            "release": "2020.1",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 132,
+      "part": "QA09022",
+      "name": "SmartConnect Over Broadband",
+      "character": 13,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "portable"
+      ],
+      "info": {
+        "title": "SmartConnect for Broadband",
+        "description": "SmartConnect for Broadband",
+        "variants": [
+          {
+            "for": "",
+            "release": "2019.2",
+            "requires": [
+              "Q947",
+              "Q361",
+              "Q806",
+              "H38",
+              "QA03344"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 133,
+      "part": "GA01620",
+      "name": "Multi-System OTAR",
+      "character": 13,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "mobile"
+      ],
+      "info": {
+        "title": "Multi-System OTAR",
+        "description": "Allows the radio to operate Multi-System OTAR",
+        "variants": [
+          {
+            "for": "",
+            "release": "2019.2",
+            "requires": [
+              "G298"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 134,
+      "part": "QA07680",
+      "name": "Multi-System OTAR",
+      "character": 13,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [
+        "!mobile"
+      ],
+      "info": {
+        "title": "Multi-System OTAR",
+        "description": "Allows the radio to operate Multi-System OTAR",
+        "variants": [
+          {
+            "for": "",
+            "release": "2019.2",
+            "requires": [
+              "Q498"
+            ],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 135,
+      "part": "QA08157",
+      "name": "ETSI Regulatory Region Enabled",
+      "character": 14,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "ETSI Regulatory Region Enabled",
+        "description": "ETSI Regulatory Region Enabled",
+        "variants": [
+          {
+            "for": "",
+            "release": "2020.2",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 136,
+      "part": "HA00679",
+      "name": "CeoTronics-MultiPTT 3C Support",
+      "character": 14,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "CeoTronics-MultiPTT 3C Support",
+        "description": "CeoTronics-MultiPTT 3C Support",
+        "variants": [
+          {
+            "for": "",
+            "release": "2020.4",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 137,
+      "part": "QA09028",
+      "name": "ViQi: Voice Control",
+      "character": 13,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "ViQi: Voice Control",
+        "description": "Allows the radio to perform ViQi: Voice Control",
+        "variants": [
+          {
+            "for": "",
+            "release": "2019.2",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 138,
+      "part": "HA00680",
+      "name": "ATAK Enablement package",
+      "character": 14,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "ATAK Enablement package",
+        "description": "The Android Team Awareness Kit (ATAK) is an open source geospatial infrastructure and military situation awareness app used as an industry standard by Federal customers. It allows for precision targeting, surrounding land formation intelligence, situational awareness, navigation, and data sharing. This option enables the ATAK app on APX Next.",
+        "variants": [
+          {
+            "for": "",
+            "release": "2022.1",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 139,
+      "part": "QA08676",
+      "name": "Adaptive Speaker Volume",
+      "character": 14,
+      "lsb": 4,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Adaptive Speaker Volume",
+        "description": "Adaptive Speaker Volume",
+        "variants": [
+          {
+            "for": "",
+            "release": "2021.4",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 140,
+      "part": "QA08715",
+      "name": "Voice Control Basic",
+      "character": 14,
+      "lsb": 5,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Basic Voice Control",
+        "description": "Basic Voice Control",
+        "variants": [
+          {
+            "for": "",
+            "release": "2022.2",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 141,
+      "part": "QA08887",
+      "name": "LTE HW Enablement",
+      "character": 14,
+      "lsb": 3,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "LTE Hardware Enablement",
+        "description": "LTE Hardware Enablement",
+        "variants": [
+          {
+            "for": "",
+            "release": "2022.2",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 142,
+      "part": "QA09092",
+      "name": "Tactical Services",
+      "character": 15,
+      "lsb": 0,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Tactical Services Operation",
+        "description": "Allows the radio to enable Tactical Services features",
+        "variants": [
+          {
+            "for": "",
+            "release": "2022.3",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 143,
+      "part": "QA09772",
+      "name": "Multi-Codeplug Programming",
+      "character": 15,
+      "lsb": 1,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Multi-Codeplug Programming",
+        "description": "Allows the radio to perform Multi-Codeplug Programming functions",
+        "variants": [
+          {
+            "for": "Mobile",
+            "release": "2024.3",
+            "requires": [],
+            "conflicts": [
+              "GA00631",
+              "GA01058"
+            ]
+          },
+          {
+            "for": "Portable",
+            "release": "2024.3",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    },
+    {
+      "id": 144,
+      "part": "QA09776",
+      "name": "Web Browser",
+      "character": 15,
+      "lsb": 2,
+      "width": 1,
+      "value": 1,
+      "guard": [],
+      "info": {
+        "title": "Web Browser Enablement",
+        "description": "Allows the radio to perform Web Browser functions",
+        "variants": [
+          {
+            "for": "",
+            "release": "2024.3",
+            "requires": [],
+            "conflicts": []
+          }
+        ]
+      }
+    }
+  ]
+}

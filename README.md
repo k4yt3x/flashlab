@@ -1,45 +1,24 @@
 # FLASHlab
 
-A simple tool to help creating and editing Motorola APX FLASHcodes.
+A laboratory for Motorola APX FLASHcodes, at **[flashlab.k4yt3x.com](https://flashlab.k4yt3x.com)**.
 
-The reason for the creation of this tool is to allow unlimited editing of FLASHcodes for experimental reasons. Most existing FLASHcode encoders will only allow you to first select a radio model, then edit options supported by that model. This tool allows you to add/remove any option to/from the FLASHcode. It also allows you to remove options from the FLASHcode without affecting any other unrelated bits.
+![FLASHlab Screenshot](https://github.com/user-attachments/assets/97fb3d50-ce13-429f-9334-cd82558d39a6)
 
-If you're looking to create a normal FLASHcode for your radio, you may want to use one of these FLASHcode encoders instead:
-
-- [FLASHcode Portal](https://flashcode.radiocentral.motorolasolutions.com/) (requires MSI account)
-- [CS Flashcode Tool](https://communications.support/flashcode/encoder.php)
-- [akardam.net Flashcode Encoder](https://www.akardam.net/r/m/tools/fencode.pl)
-
-![image](https://github.com/k4yt3x/flashlab/assets/21986859/dc1ce2d3-05e4-4a97-a61c-0d18c795b192)
-
-## Usages
-
-Install the program:
+## Running it locally
 
 ```shell
-# install from PyPI
-pip install flashlab
+npm install
+npm run dev      # local server
 
-# install from Git repository
-pip install git+https://github.com/k4yt3x/flashlab.git
+npm run build    # static site in dist/, served from a domain root
+npm run preview  # serve that build
 ```
 
-This program can be launched in two modes: CLI and GUI:
+## Licence
 
-```shell
-# start in CLI mode
-flashlab cli
+MIT. Copyright (c) 2023-2026 K4YT3X.
 
-# start in GUI mode
-flashlab gui
-```
-
-If the above returns command not found, you can also do:
-
-```shell
-# start in CLI mode
-python -m flashlab cli
-
-# start in GUI mode
-python -m flashlab gui
-```
+Motorola, Motorola Solutions, APX, SRX and FLASHcode are trademarks or registered trademarks of
+Motorola Solutions, Inc. Other product names used here are trademarks of their respective owners.
+All are used for identification only. FLASHlab is an independent project for educational purposes
+only, not affiliated with or endorsed by Motorola Solutions, Inc.
