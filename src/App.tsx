@@ -13,6 +13,7 @@ import {
   parseValues,
   same,
 } from "./flashcode";
+import * as fragment from "./fragment";
 import { rebuild } from "./oem";
 import { isKnown } from "./models";
 import {
@@ -24,36 +25,14 @@ import {
   radioOf,
 } from "./options";
 
-/**
- * The code the address bar names, if it names one. A fragment never leaves the browser.
- *
- * The alphabet holds `%`, which is also what a percent escape starts with, so a code written into
- * a fragment as it reads is not valid encoding and `decodeURIComponent` throws on it. Both forms
- * turn up: what this writes, and what a browser hands back after encoding it. So decoding is
- * attempted and the raw text is used when it fails, and the whole thing refuses to throw, because
- * a bad fragment must not be able to stop the page rendering.
- */
-function fromFragment(): number[] | null {
-  try {
-    const raw = window.location.hash.replace(/^#/, "");
-    let written: string;
-    try {
-      written = decodeURIComponent(raw);
-    } catch {
-      written = raw;
-    }
-    return written.trim() ? parse(written.trim()).code : null;
-  } catch {
-    return null;
-  }
-}
-
 export default function App() {
-  const [code, setCode] = useState<number[]>(() => fromFragment() ?? empty());
-  const [written, setWritten] = useState(() => format(fromFragment() ?? empty()));
+  const opened = useMemo(() => fragment.read(window.location.hash), []);
+  const [code, setCode] = useState<number[]>(() => opened.code ?? empty());
+  const [written, setWritten] = useState(() => format(opened.code ?? empty()));
   const [complaint, setComplaint] = useState<string | null>(null);
-  const [model, setModel] = useState("");
+  const [model, setModel] = useState(opened.model);
   const [filter, setFilter] = useState("");
+  const [offeredOnly, setOfferedOnly] = useState(false);
   const [hovered, setHovered] = useState<Option[]>([]);
   const [pinned, setPinned] = useState<Option[]>([]);
 
@@ -61,6 +40,8 @@ export default function App() {
   // character the rules read, so trusting it would mark options as not offered on the strength of a
   // string that names nothing.
   const radio = useMemo(() => (isKnown(model) ? radioOf(model) : UNKNOWN), [model]);
+  // Nothing can be judged against a model that did not resolve, so nothing can be hidden either.
+  const resolved = radio.mobile !== null;
   const groups = useMemo(() => groupsOf(OPTIONS), []);
   const named = useMemo(() => namedBits(), []);
 
@@ -81,14 +62,16 @@ export default function App() {
   /**
    * Show the options a bit belongs to, from a right click on the grid.
    *
-   * The filter is cleared, since jumping to a row the filter is hiding would look like nothing
-   * happening at all. A bit no option names does nothing, which its dashed outline already says.
+   * Anything hiding the target is undone first, since jumping to a row that is not shown would
+   * look like nothing happening at all. A bit no option names does nothing, which its dimmed cell
+   * already says.
    */
   const jump = useCallback((options: Option[]) => {
     if (options.length === 0) {
       return;
     }
     setFilter("");
+    setOfferedOnly(false);
     setPinned(options);
   }, []);
 
@@ -98,9 +81,12 @@ export default function App() {
     setComplaint(null);
   }, []);
 
+  // What a second person needs to see the same page, and nothing that would leave the browser: a
+  // fragment is not sent with the request. The filter stays out of it, being a search rather than
+  // a state worth carrying.
   useEffect(() => {
-    window.history.replaceState(null, "", `#${format(code)}`);
-  }, [code]);
+    window.history.replaceState(null, "", `#${fragment.write(code, model)}`);
+  }, [code, model]);
 
   function read(text: string) {
     setWritten(text);
@@ -196,7 +182,7 @@ export default function App() {
           <section className="pane bits">
             <h2>Bits</h2>
             <p className="note">
-              Dashed cells are unknown. Right click to jump to option.
+              Dimmed cells are unknown. Right click to jump to option.
             </p>
             <BitGrid
               code={code}
@@ -211,15 +197,33 @@ export default function App() {
 
         <section className="pane wide">
           <h2>Options</h2>
-          <input
-            className="filter"
-            value={filter}
-            spellCheck={false}
-            autoComplete="off"
-            aria-label="Filter options"
-            placeholder="Filter by part number or name"
-            onChange={(event) => setFilter(event.target.value)}
-          />
+          <div className="narrowing">
+            <input
+              className="filter"
+              value={filter}
+              spellCheck={false}
+              autoComplete="off"
+              aria-label="Filter options"
+              placeholder="Filter by part number or name"
+              onChange={(event) => setFilter(event.target.value)}
+            />
+            <label
+              className="offered"
+              title={
+                resolved
+                  ? `Leave out the options ${radio.model} does not carry`
+                  : "Enter a model, and the options it does not carry can be hidden"
+              }
+            >
+              <input
+                type="checkbox"
+                checked={offeredOnly}
+                disabled={!resolved}
+                onChange={(event) => setOfferedOnly(event.target.checked)}
+              />
+              Hide not offered
+            </label>
+          </div>
           <OptionList
             code={code}
             groups={groups}
@@ -227,6 +231,7 @@ export default function App() {
             filter={filter}
             highlight={litOptions}
             pinned={pinnedIds}
+            offeredOnly={offeredOnly}
             onChange={adopt}
             onHover={setHovered}
           />
@@ -254,7 +259,7 @@ export default function App() {
             Copy
           </button>
           <button type="button" disabled={same(oem.code, code)} onClick={() => adopt(oem.code)}>
-            Adopt it
+            Apply
           </button>
         </div>
       </section>

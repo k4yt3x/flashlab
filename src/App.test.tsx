@@ -2,7 +2,7 @@
 
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import App from "./App";
 
@@ -20,6 +20,7 @@ let root: Root;
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;
 
 beforeEach(() => {
+  vi.useFakeTimers({ shouldAdvanceTime: true });
   window.location.hash = "";
   container = document.createElement("div");
   document.body.append(container);
@@ -30,6 +31,7 @@ beforeEach(() => {
 afterEach(() => {
   act(() => root.unmount());
   container.remove();
+  vi.useRealTimers();
 });
 
 function written(): string {
@@ -106,6 +108,21 @@ describe("the page", () => {
     // A multi-bit option names its span and the value those bits have to hold.
     expect(row("QA04832").querySelector(".where")?.textContent).toBe("D2 B0-4 = 7");
     expect(container.querySelector(".grid th.index")?.textContent).toBe("digit");
+  });
+
+  /**
+   * The check digit is a 25th character sitting between digit 11 and digit 12, not a digit of the
+   * payload. Digit 12 is ordinary and settable, and named by no option, which is a different thing.
+   */
+  it("keeps digit 12 settable, since it is payload and not the check digit", () => {
+    act(() => bit(12, 3).click());
+    expect(bit(12, 3).getAttribute("aria-pressed")).toBe("true");
+
+    const flat = written().replaceAll("-", "");
+    expect(flat).toHaveLength(25);
+    // The check digit holds position 12; digit 12 of the payload lands one place past it.
+    expect(flat[12]).toBe("3");
+    expect(flat[13]).toBe("8");
   });
 
   it("shows an option the newly set bit turns on", () => {
@@ -192,10 +209,14 @@ describe("the page", () => {
     return found;
   }
 
-  it("describes an option from the catalogue while the pointer is on it", () => {
+  it("describes an option from the catalogue once the pointer rests on it", () => {
     expect(container.querySelector(".detail")).toBeNull();
 
     act(() => row("QA02006").dispatchEvent(new MouseEvent("mouseover", { bubbles: true })));
+    // The card sits over the bit grid, so it waits long enough to read the bits it lit up.
+    expect(container.querySelector(".detail")).toBeNull();
+    act(() => void vi.advanceTimersByTime(1000));
+
     const card = container.querySelector(".detail");
     expect(card).not.toBeNull();
     expect(card?.textContent).toContain("APX XE");
@@ -209,14 +230,23 @@ describe("the page", () => {
     expect(container.querySelector(".detail")).toBeNull();
   });
 
+  it("raises no card at all when the pointer only sweeps past", () => {
+    act(() => row("QA02006").dispatchEvent(new MouseEvent("mouseover", { bubbles: true })));
+    act(() => row("QA02006").dispatchEvent(new MouseEvent("mouseout", { bubbles: true })));
+    act(() => void vi.advanceTimersByTime(1000));
+    expect(container.querySelector(".detail")).toBeNull();
+  });
+
   it("names the radio kind only where the catalogue says different things about each", () => {
     // Bluetooth is listed for both, and the two entries differ, so both are shown and labelled.
     act(() => row("QA00583").dispatchEvent(new MouseEvent("mouseover", { bubbles: true })));
+    act(() => void vi.advanceTimersByTime(1000));
     const labels = [...container.querySelectorAll(".detail .for")].map((held) => held.textContent);
     expect(labels).toEqual(["Mobile", "Portable"]);
 
     // Geofence on a portable is one entry, so there is nothing to distinguish.
     act(() => row("QA04447").dispatchEvent(new MouseEvent("mouseover", { bubbles: true })));
+    act(() => void vi.advanceTimersByTime(1000));
     expect(container.querySelectorAll(".detail .for")).toHaveLength(0);
     expect(container.querySelector(".detail")?.textContent).toContain("geofencing");
   });
@@ -250,6 +280,51 @@ describe("the page", () => {
 
     typeModel("");
     expect(refused()).toBe(0);
+  });
+
+  function toggle(): HTMLInputElement {
+    return container.querySelector<HTMLInputElement>(".offered input")!;
+  }
+
+  function shownRows(): number {
+    return container.querySelectorAll(".option").length;
+  }
+
+  it("can leave out the options the model does not carry", () => {
+    expect(toggle().disabled).toBe(true);
+
+    typeModel("H98UCF9PW6AN");
+    expect(toggle().disabled).toBe(false);
+    const all = shownRows();
+    const refused = container.querySelectorAll(".option .refused").length;
+    expect(refused).toBeGreaterThan(0);
+
+    act(() => toggle().click());
+    expect(shownRows()).toBe(all - refused);
+    expect(container.querySelectorAll(".option .refused")).toHaveLength(0);
+
+    act(() => toggle().click());
+    expect(shownRows()).toBe(all);
+  });
+
+  it("offers nothing to hide until a model says what is carried", () => {
+    // With no model every guarded option is unresolved, so the toggle would do nothing at all.
+    expect(toggle().disabled).toBe(true);
+    typeModel("H91TGD9PW9A");
+    expect(toggle().disabled).toBe(true);
+    typeModel("H91TGD9PW9AN");
+    expect(toggle().disabled).toBe(false);
+  });
+
+  it("stops hiding when a jump would otherwise land on a hidden row", () => {
+    typeModel("H98UCF9PW6AN");
+    act(() => toggle().click());
+    expect(toggle().checked).toBe(true);
+
+    // Digit 0 bit 5 is Geofence, whose mobile naming this portable does not carry.
+    rightClick(0, 5);
+    expect(toggle().checked).toBe(false);
+    expect(pinnedRows()).toHaveLength(2);
   });
 
   it("copies the OEM encoder's code, not the one being edited", async () => {
@@ -287,6 +362,32 @@ describe("the page", () => {
   it("keeps the code in the address bar, where it is never sent anywhere", () => {
     act(() => bit(0, 5).click());
     expect(decodeURIComponent(window.location.hash)).toBe("#Y00000-000000-0-000000-000000");
+  });
+
+  it("carries the model in the link too, so a page can be shared whole", () => {
+    typeModel("M37TXS9PW1AN");
+    expect(window.location.hash).toContain("model=M37TXS9PW1AN");
+
+    // Opening that link puts the page back where it was, marks and all.
+    const shared = window.location.hash;
+    act(() => root.unmount());
+    window.location.hash = shared;
+    root = createRoot(container);
+    act(() => root.render(<App />));
+    expect(container.querySelector<HTMLInputElement>("input.number")!.value).toBe("M37TXS9PW1AN");
+    expect(container.querySelector(".model .chosen")?.textContent).toContain("APX 8500");
+    expect(container.querySelectorAll(".option .refused").length).toBeGreaterThan(0);
+  });
+
+  it("leaves the filter out of the link, being a search rather than a state", () => {
+    const filter = container.querySelector<HTMLInputElement>("input.filter")!;
+    act(() => {
+      const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value")!.set!;
+      setter.call(filter, "otar");
+      filter.dispatchEvent(new Event("input", { bubbles: true }));
+    });
+    expect(window.location.hash).not.toContain("otar");
+    expect(window.location.hash).not.toContain("filter");
   });
 
   it("starts from a code the address bar already names", () => {

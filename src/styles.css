@@ -213,10 +213,35 @@ button:disabled {
   }
 }
 
-/* Sits straight on top of the list it narrows, so it needs no label of its own. */
-.filter {
-  width: 100%;
+/* Sits straight on top of the list it narrows, so the box needs no label of its own. */
+
+.narrowing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.filter {
+  flex: 1 1 12ch;
+  min-width: 0;
+}
+
+.offered {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--dim);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.offered:has(input:disabled) {
+  opacity: 0.45;
+  cursor: default;
 }
 
 /* The model box and the wizard behind it. Its own panel, titled like the others. */

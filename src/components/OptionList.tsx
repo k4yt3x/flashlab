@@ -22,9 +22,14 @@ interface Props {
   highlight: Set<number>;
   /** Options jumped to from the grid, which stay marked and get scrolled to. */
   pinned: Set<number>;
+  /** Leave out the options the model does not carry. */
+  offeredOnly: boolean;
   onChange: (code: number[]) => void;
   onHover: (options: Option[]) => void;
 }
+
+/** How long the pointer has to rest on a row before the card covers the bits it lit up. */
+const DELAY = 450;
 
 function matches(option: Option, filter: string): boolean {
   if (!filter) {
@@ -34,6 +39,17 @@ function matches(option: Option, filter: string): boolean {
   return (
     option.part.toLowerCase().includes(wanted) || option.name.toLowerCase().includes(wanted)
   );
+}
+
+/**
+ * Whether a row is shown at all.
+ *
+ * An option a model does not carry is only hidden where the model settles the question. With no
+ * model, `carriedBy` answers `null` for every guarded option and nothing is hidden, which is why
+ * the toggle is disabled there rather than quietly doing nothing.
+ */
+function shows(option: Option, filter: string, radio: Radio, offeredOnly: boolean): boolean {
+  return matches(option, filter) && !(offeredOnly && carriedBy(option, radio) === false);
 }
 
 function Row({
@@ -86,7 +102,7 @@ function Row({
       onMouseEnter={(event) => {
         onHover([option]);
         const box = event.currentTarget.getBoundingClientRect();
-        onDescribe(option, { top: box.top, bottom: box.bottom, left: box.left });
+        onDescribe(option, { top: box.top, left: box.left, right: box.right });
       }}
       onMouseLeave={() => {
         onHover([]);
@@ -139,6 +155,7 @@ export function OptionList({
   filter,
   highlight,
   pinned,
+  offeredOnly,
   onChange,
   onHover,
 }: Props) {
@@ -146,17 +163,40 @@ export function OptionList({
   // place rather than fighting over where to land.
   const target = groups
     .flatMap((group) => group.options)
-    .find((option) => pinned.has(option.id) && matches(option, filter));
+    .find((option) => pinned.has(option.id) && shows(option, filter, radio, offeredOnly));
 
   const [described, setDescribed] = useState<{ option: Option; anchor: Anchor } | null>(null);
+  const waiting = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /**
+   * Raise the card only once the pointer has settled.
+   *
+   * It is placed over the bit grid, where the hovered option's bits are lit, so it has to hold off
+   * long enough to read them. It also means sweeping the list never flashes a card per row.
+   */
   function describe(option: Option | null, anchor: Anchor | null) {
-    setDescribed(option && anchor ? { option, anchor } : null);
+    if (waiting.current) {
+      clearTimeout(waiting.current);
+      waiting.current = null;
+    }
+    if (!option || !anchor) {
+      setDescribed(null);
+      return;
+    }
+    waiting.current = setTimeout(() => setDescribed({ option, anchor }), DELAY);
   }
 
+  // A card outliving the list it belongs to would be a card nothing can dismiss.
+  useEffect(() => () => {
+    if (waiting.current) {
+      clearTimeout(waiting.current);
+    }
+  }, []);
+
   return (
-    <div className="options" onMouseLeave={() => setDescribed(null)}>
+    <div className="options" onMouseLeave={() => describe(null, null)}>
       {groups.map((group) => {
-        const shown = group.options.filter((option) => matches(option, filter));
+        const shown = group.options.filter((option) => shows(option, filter, radio, offeredOnly));
         if (shown.length === 0) {
           return null;
         }

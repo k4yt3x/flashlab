@@ -3,25 +3,51 @@ import { type Info } from "../options";
 /** Where on screen the row being described sits, so the card can be put beside it. */
 export interface Anchor {
   top: number;
-  bottom: number;
   left: number;
+  right: number;
 }
 
-const WIDTH = 340;
+/** How large a window the card is being placed in. */
+interface Viewport {
+  width: number;
+  height: number;
+}
+
+export const WIDTH = 340;
 const GAP = 10;
+/** Roughly what the tallest card comes to, used only to keep one off the bottom edge. */
+const TALL = 220;
+
+/**
+ * Where to put the card.
+ *
+ * Left of the row where the window allows, which is over the bit grid. That is deliberate and is
+ * what the delay pays for: hovering an option lights up the bits it occupies, and the card holds
+ * off long enough to read them before covering them. Sweeping down the list never raises it at all.
+ *
+ * Where there is no room to the left, it goes right rather than off screen.
+ */
+export function place(anchor: Anchor, viewport: Viewport): { top: number; left: number } {
+  const beside = anchor.left - WIDTH - GAP;
+  const left =
+    beside >= GAP ? beside : Math.min(anchor.right + GAP, viewport.width - WIDTH - GAP);
+  return {
+    top: Math.max(GAP, Math.min(anchor.top, viewport.height - TALL)),
+    left: Math.max(GAP, left),
+  };
+}
 
 /**
  * What the option catalogue says about the option under the pointer.
  *
- * Placed against the row rather than following the cursor, and clamped to the viewport, so that a
- * row near an edge does not push the card off screen. It never takes the pointer, since it exists
- * only while the pointer is somewhere else.
+ * Placed against the row rather than following the cursor, so it does not jitter, and it never
+ * takes the pointer, since it exists only while the pointer is somewhere else.
  */
 export function OptionDetail({ info, anchor }: { info: Info; anchor: Anchor }) {
-  // Beside the list where there is room, otherwise flipped to the other side of it.
-  const room = anchor.left - WIDTH - GAP;
-  const left = room > GAP ? room : Math.min(anchor.left + GAP, window.innerWidth - WIDTH - GAP);
-  const top = Math.max(GAP, Math.min(anchor.top, window.innerHeight - 220));
+  const { top, left } = place(anchor, {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
   return (
     <div className="detail" style={{ top, left, width: WIDTH }}>

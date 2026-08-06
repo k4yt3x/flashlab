@@ -26,7 +26,7 @@ export function ModelWizard({ value, onChange }: Props) {
   return (
     <section className="model">
       <h2>
-        <label htmlFor="model-number">Model</label>
+        <label htmlFor="model-number">Model</label>{" "}
         <span className="aside">optional</span>
       </h2>
       <div className="row">
