@@ -6,10 +6,10 @@ import { OPTIONS, fieldValueOf, groups, namedBits, radioOf } from "./options";
 /**
  * That no set bit can end up with nothing in the list accounting for it.
  *
- * The rule has three parts that pull against each other: an option the model does not carry is
- * hidden, an option the code holds is kept anyway, and an option that is not a reading of this
- * radio's bits is dropped whatever the code says. Swept rather than argued about, since the whole
- * reachable space is 24 characters by 64 values: every group lives inside one character.
+ * The two halves of the rule pull against each other: the toggle takes every row the model does not
+ * carry, the code holding it or not, and the group left with no rows reports the value its bits
+ * hold in its place. Swept rather than argued about, since the whole reachable space is 24
+ * characters by 64 values: every group lives inside one character.
  */
 
 describe("no set bit goes unaccounted for", () => {
@@ -28,7 +28,7 @@ describe("no set bit goes unaccounted for", () => {
               if (!named.has(character * 6 + bit)) continue;
               const rows = OPTIONS.filter(
                 (o) => o.character === character && bit >= o.lsb && bit < o.lsb + o.width
-                  && shows(o, "", radio, offeredOnly, code),
+                  && shows(o, "", radio, offeredOnly),
               );
               // A group that renders with no rows reports the value its bits hold in its header.
               // Only a group this radio can read counts: one belonging to the other layout is not
@@ -38,7 +38,7 @@ describe("no set bit goes unaccounted for", () => {
                 if (g.character !== character || bit < g.lsb || bit >= g.lsb + g.width) {
                   return false;
                 }
-                const surviving = g.options.filter((o) => shows(o, "", radio, offeredOnly, code));
+                const surviving = g.options.filter((o) => shows(o, "", radio, offeredOnly));
                 return showsGroup(surviving.length, fieldValueOf(code, g), "");
               });
               if (rows.length === 0 && !header) {

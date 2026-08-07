@@ -30,8 +30,9 @@ export interface Variant {
 /**
  * An option as Motorola sells it rather than as the radio reads it.
  *
- * None of it is enforced here. A requirement or a conflict is what an order would have been held
- * to, and this is a tool for setting bits, so it is shown and left alone.
+ * None of it is enforced. A requirement or a conflict is what an order would have been held to,
+ * and this is a tool for setting bits, so a code that breaks one is reported and then left exactly
+ * as it was typed. See [`troubleWith`].
  */
 export interface Info {
   title: string;
@@ -61,20 +62,36 @@ export interface Option {
 export const OPTIONS: readonly Option[] = table.options;
 
 /**
+ * The options a part number names, which is more than one for eleven of them.
+ *
+ * A part number is not an identity: the original and refreshed layouts both use the same eleven
+ * numbers for a band, over different bits and under slightly different names.
+ */
+const BY_PART: ReadonlyMap<string, readonly Option[]> = (() => {
+  const held = new Map<string, Option[]>();
+  for (const option of OPTIONS) {
+    const named = held.get(option.part);
+    if (named) {
+      named.push(option);
+    } else {
+      held.set(option.part, [option]);
+    }
+  }
+  return held;
+})();
+
+/**
  * What to call a part number a requirement or a conflict cites.
  *
  * The name the list shows rather than the catalogue's own title. The two differ for 36 of the 88
  * cited numbers, and the point of naming a conflict is to go and find it, so the card has to agree
- * with the row it sends you to.
+ * with the row it sends you to. Where a number names two rows they are one band under the two
+ * layouts, so either name finds it.
  *
  * `undefined` for a number this table does not place in a bit, which the catalogue does cite.
  */
-const NAMES: ReadonlyMap<string, string> = new Map(
-  OPTIONS.map((option) => [option.part, option.name]),
-);
-
 export function nameOf(part: string): string | undefined {
-  return NAMES.get(part);
+  return BY_PART.get(part)?.[0]?.name;
 }
 
 /** What a model number says about a radio. `null` for a model that has not been given. */
@@ -232,6 +249,70 @@ export function variantsFor(info: Info, radio: Radio): readonly Variant[] {
   const wanted = radio.mobile ? "Mobile" : "Portable";
   const kept = info.variants.filter((variant) => !variant.for || variant.for === wanted);
   return kept.length > 0 ? kept : info.variants;
+}
+
+/** What one catalogue entry says is wrong with a code, in the part numbers it names. */
+export interface Trouble {
+  /** Part numbers the entry asks for alongside this option, which the code does not hold. */
+  unmet: readonly string[];
+  /** Part numbers the entry refuses alongside this option, which the code holds. */
+  clashing: readonly string[];
+}
+
+/**
+ * Whether the code holds a part number.
+ *
+ * Which of a number's rows to read it from is the whole question. A radio reads its own, and where
+ * it reads none of them the rest are read anyway: a mobile is a radio that cannot read `Q806`, but
+ * an entry citing `Q806` on a mobile is citing the bit `G806` names, since a mobile and a portable
+ * name one bit two ways. Refusing to look would report a requirement unmet that the radio meets.
+ *
+ * Preferring the readable ones is what the band numbers need. One of those names a row in each
+ * layout, which is two different bits, and the layout this radio does not use can read as set by
+ * coincidence.
+ */
+function holds(part: string, code: Code, radio: Radio): boolean {
+  const named = BY_PART.get(part) ?? [];
+  const readable = named.filter((option) => readableOn(option, radio));
+  return (readable.length > 0 ? readable : named).some((option) => isOn(code, option));
+}
+
+/** What one catalogue entry finds wrong with a code. Empty lists mean an order it would allow. */
+export function troubleIn(variant: Variant, code: Code, radio: Radio): Trouble {
+  return {
+    unmet: variant.requires.filter((part) => !holds(part, code, radio)),
+    clashing: variant.conflicts.filter((part) => holds(part, code, radio)),
+  };
+}
+
+/**
+ * What the catalogue says is wrong with holding this option, or `null` for nothing.
+ *
+ * Only asked of an option the code holds. A requirement nobody has ordered against is not unmet,
+ * and two options do not conflict while one of them is off, so an option that is off is in no
+ * trouble however the rest of the code reads.
+ *
+ * An option the catalogue lists twice is judged against each entry that describes the radio, and it
+ * is only in trouble when there is no entry it satisfies: the two differ in which part numbers they
+ * name, and meeting either one is an order Motorola would have taken. The nearest to being met is
+ * the one reported, that being the shortest way out.
+ */
+export function troubleWith(option: Option, code: Code, radio: Radio): Trouble | null {
+  if (!option.info || !isOn(code, option)) {
+    return null;
+  }
+  let nearest: Trouble | null = null;
+  for (const variant of variantsFor(option.info, radio)) {
+    const trouble = troubleIn(variant, code, radio);
+    const count = trouble.unmet.length + trouble.clashing.length;
+    if (count === 0) {
+      return null;
+    }
+    if (nearest === null || count < nearest.unmet.length + nearest.clashing.length) {
+      nearest = trouble;
+    }
+  }
+  return nearest;
 }
 
 /** How to say a guard in the interface. */

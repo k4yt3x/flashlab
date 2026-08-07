@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { type Info, type Radio, nameOf, variantsFor } from "../options";
+import { type Code } from "../flashcode";
+import { type Option, type Radio, nameOf, troubleIn, troubleWith, variantsFor } from "../options";
 
 /** Where on screen the row being described sits, so the card can be put beside it. */
 export interface Anchor {
@@ -56,15 +57,22 @@ export function place(
  * One per line rather than a comma-separated run: with the name attached an entry reaches sixty
  * characters, and several of those joined by commas is a paragraph to be parsed rather than a list
  * to be scanned.
+ *
+ * The ones the code is in trouble over are picked out, and nothing is added to say how: what a
+ * requirement is short of is the option being off, and what a conflict is about is it being on.
+ * Which list an entry is under says which of those it is, so the mark is the whole message.
  */
 function Cited({
   what,
   parts,
   className,
+  wrong,
 }: {
   what: string;
   parts: readonly string[];
   className: string;
+  /** Which of these part numbers the code is in trouble over, of the ones cited here. */
+  wrong: readonly string[];
 }) {
   return (
     <span className={className}>
@@ -72,7 +80,7 @@ function Cited({
       {parts.map((part) => {
         const name = nameOf(part);
         return (
-          <span className="cited" key={part}>
+          <span className={wrong.includes(part) ? "cited wrong" : "cited"} key={part}>
             <span className="part">{part}</span>
             {name ? ` ${name}` : ""}
           </span>
@@ -92,14 +100,17 @@ function Cited({
  * the two answers name different part numbers. See [`variantsFor`].
  */
 export function OptionDetail({
-  info,
+  option,
+  code,
   radio,
   anchor,
 }: {
-  info: Info;
+  option: Option;
+  code: Code;
   radio: Radio;
   anchor: Anchor;
 }) {
+  const info = option.info;
   // Measured rather than assumed, because how tall a card comes to depends on how much the
   // catalogue has to say about the option, and that ranges from three lines to fifteen. A layout
   // effect runs before the browser paints, so the corrected position is the first one seen.
@@ -109,28 +120,49 @@ export function OptionDetail({
     setHeight(card.current?.offsetHeight || undefined);
   }, [info, radio]);
 
+  if (!info) {
+    return null;
+  }
+
   const { top, left } = place(
     anchor,
     { width: window.innerWidth, height: window.innerHeight },
     height,
   );
+  // Marked only where the list marks the row. Each entry is read on its own, so an option listed
+  // twice shows what each of the two would need, but an option satisfying either of them is in no
+  // trouble at all and a card pointing at part numbers would be inventing a fault.
+  const troubled = troubleWith(option, code, radio) !== null;
 
   return (
     <div className="detail" ref={card} style={{ top, left, width: WIDTH }}>
       <p className="title">{info.title}</p>
       <p className="what">{info.description}</p>
-      {variantsFor(info, radio).map((variant) => (
-        <div className="variant" key={variant.for || "both"}>
-          {variant.for ? <span className="for">{variant.for}</span> : null}
-          <span className="release">Release {variant.release}</span>
-          {variant.requires.length > 0 ? (
-            <Cited what="Requires" parts={variant.requires} className="requires" />
-          ) : null}
-          {variant.conflicts.length > 0 ? (
-            <Cited what="Conflicts with" parts={variant.conflicts} className="conflicts" />
-          ) : null}
-        </div>
-      ))}
+      {variantsFor(info, radio).map((variant) => {
+        const trouble = troubled ? troubleIn(variant, code, radio) : null;
+        return (
+          <div className="variant" key={variant.for || "both"}>
+            {variant.for ? <span className="for">{variant.for}</span> : null}
+            <span className="release">Release {variant.release}</span>
+            {variant.requires.length > 0 ? (
+              <Cited
+                what="Requires"
+                parts={variant.requires}
+                className="requires"
+                wrong={trouble?.unmet ?? []}
+              />
+            ) : null}
+            {variant.conflicts.length > 0 ? (
+              <Cited
+                what="Conflicts with"
+                parts={variant.conflicts}
+                className="conflicts"
+                wrong={trouble?.clashing ?? []}
+              />
+            ) : null}
+          </div>
+        );
+      })}
     </div>
   );
 }

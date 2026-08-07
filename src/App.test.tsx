@@ -226,10 +226,15 @@ describe("the page", () => {
     expect(pinnedRows()).toEqual([]);
   });
 
-  /** The row for a part number, wherever the list has put it. */
+  /**
+   * The row for a part number, wherever the list has put it.
+   *
+   * By the part number the row itself carries rather than by its text, since one part number can be
+   * the beginning of another and a row also holds a name, a position and whatever marks it took on.
+   */
   function row(part: string): HTMLElement {
-    const found = [...container.querySelectorAll<HTMLElement>(".option")].find((held) =>
-      held.textContent?.includes(part),
+    const found = [...container.querySelectorAll<HTMLElement>(".option")].find(
+      (held) => held.querySelector(".part")?.textContent === part,
     );
     if (!found) {
       throw new Error(`the list should hold ${part}`);
@@ -320,6 +325,103 @@ describe("the page", () => {
     expect(portable, "nor the other way round").not.toContain("G806");
   });
 
+  /** Whatever a row says the catalogue has against the code, in the order the row says it. */
+  function marks(part: string): string[] {
+    return [...row(part).querySelectorAll(".unmet, .clashing")].map(
+      (held) => held.textContent ?? "",
+    );
+  }
+
+  /**
+   * The catalogue states what an order would have needed alongside an option and what it could not
+   * be ordered with, and a hand-typed code can break either. What that buys is a reading of a code
+   * somebody else wrote: a combination Motorola would not have sold is worth knowing about, whether
+   * it got there by a slip or because the radio really is holding it.
+   *
+   * Nothing is refused. The mark says so and the code stays exactly as it was typed.
+   */
+  it("marks an option the code holds without what the catalogue says it needs", () => {
+    // Digit 9 bit 2 is SMARTZONE OMNILINK, which asks for SMARTZONE Systems at digit 5 bit 3.
+    expect(marks("G173")).toEqual([]);
+    act(() => bit(9, 2).click());
+    expect(marks("G173")).toEqual(["missing requirement"]);
+    expect(row("G173").querySelector(".unmet")?.getAttribute("title")).toBe("Also needs G51");
+
+    act(() => bit(5, 3).click());
+    expect(marks("G173"), "and stops once the code holds it").toEqual([]);
+  });
+
+  it("marks two options the catalogue would not have sold together", () => {
+    act(() => bit(9, 2).click());
+    act(() => bit(5, 3).click());
+    // Digit 5 bit 2 is SMARTNET Systems, which neither of those can be ordered with.
+    act(() => bit(5, 2).click());
+    expect(marks("G173")).toEqual(["conflict"]);
+    expect(marks("G51")).toEqual(["conflict"]);
+    // Both sides of a conflict are in it, and here the catalogue happens to state it from each.
+    expect(marks("G50")).toEqual(["conflict"]);
+    expect(row("G50").querySelector(".clashing")?.getAttribute("title")).toBe(
+      "Not sold with G173, G51",
+    );
+  });
+
+  /**
+   * A requirement nobody has ordered against is not unmet, and one option alone conflicts with
+   * nothing, so an option that is off is in no trouble however the rest of the code reads.
+   */
+  it("says nothing about an option that is off", () => {
+    act(() => bit(5, 2).click());
+    expect(marks("G50"), "on, and everything it excludes is off").toEqual([]);
+    expect(marks("G173"), "off, and what it needs is off too").toEqual([]);
+  });
+
+  it("names the option at fault in the card, and only that one", () => {
+    act(() => bit(9, 2).click());
+    act(() => row("G173").dispatchEvent(new MouseEvent("mouseover", { bubbles: true })));
+    act(() => void vi.advanceTimersByTime(1000));
+
+    const card = container.querySelector(".detail");
+    expect(card?.textContent).toContain("Requires G51 SMARTZONE Systems Operation");
+    expect(card?.textContent).toContain("Conflicts with G50 SMARTNET Systems Operation");
+    // One of those two is the fault and the other is only mentioned, which is what the mark says.
+    const wrong = [...(card?.querySelectorAll(".cited.wrong") ?? [])];
+    expect(wrong.map((held) => held.querySelector(".part")?.textContent)).toEqual(["G51"]);
+  });
+
+  /**
+   * An option the catalogue lists twice is two orders, and meeting either is an order Motorola
+   * would have taken. `GA01545` cannot be ordered with `GA00469` on a mobile, and the portable
+   * entry says nothing about it, so with no model in the box one of them alone settles nothing.
+   */
+  it("marks an option only where no catalogue entry is satisfied", () => {
+    // Digit 0 bit 0 is ASTRO Digital Operation, which both entries ask for.
+    act(() => bit(0, 0).click());
+    act(() => bit(6, 5).click());
+    expect(marks("GA01545")).toEqual([]);
+
+    act(() => bit(7, 2).click());
+    expect(marks("GA01545"), "the portable entry is still an order that stands").toEqual([]);
+
+    typeModel("M37TSS9PW1CN");
+    expect(marks("GA01545"), "and on a mobile it is the only entry there is").toEqual(["conflict"]);
+  });
+
+  /**
+   * A mobile is a radio that cannot read `Q806`, but the bit `Q806` names is the bit `G806` names,
+   * and a code holding ASTRO Digital holds it under whichever name. Reading only what the radio can
+   * read reported a requirement unmet that the code plainly meets.
+   */
+  it("reads a part number the radio does not carry as the bit it names", () => {
+    typeModel("M37TSS9PW1CN");
+    // LTE Operation is a portable option, listed and editable here like everything else, and what
+    // it asks for the catalogue states in the portable's part number.
+    act(() => bit(7, 4).click());
+    expect(marks("QA03344")).toEqual(["missing requirement"]);
+
+    act(() => bit(0, 0).click());
+    expect(marks("QA03344")).toEqual([]);
+  });
+
   function typeModel(text: string) {
     const input = container.querySelector<HTMLInputElement>("input.number")!;
     act(() => {
@@ -389,13 +491,20 @@ describe("the page", () => {
   });
 
   /**
-   * Hiding an option that is *on* would hide a set bit, and a code holding an option its model's
-   * family does not list is exactly the case worth being able to read.
+   * The toggle takes a row the code holds along with the rest, an ask that makes exceptions being
+   * worse than one that does not. What it must not take is the bits: the group reports the value
+   * its bits hold whether or not a row survived to name it, so nothing is edited out of view.
    */
-  it("never hides an option the code holds, whatever the model says", () => {
+  it("hides an option the code holds when asked to, leaving its bits accounted for", () => {
     function rowFor(part: string): Element | undefined {
       return [...container.querySelectorAll(".option")].find(
         (row) => row.querySelector(".part")?.textContent === part,
+      );
+    }
+
+    function header(where: string): Element | undefined {
+      return [...container.querySelectorAll(".group header")].find(
+        (held) => held.querySelector(".where")?.textContent === where,
       );
     }
 
@@ -403,14 +512,14 @@ describe("the page", () => {
     // Digit 14 bit 0 is the ETSI regulatory region, which this radio's family does not list.
     act(() => bit(14, 0).click());
     expect(rowFor("QA08157")?.querySelector(".refused")).not.toBeNull();
+    expect(header("D14 B0"), "nothing to report while the row is there to say it").toBeUndefined();
 
     act(() => toggle().click());
-    expect(rowFor("QA08157"), "a set bit must keep its row").toBeDefined();
-    expect(rowFor("QA08157")?.querySelector(".refused")).not.toBeNull();
-
-    // Turn it back off and the row goes, since now nothing is being hidden from view.
-    act(() => bit(14, 0).click());
     expect(rowFor("QA08157")).toBeUndefined();
+    expect(header("D14 B0")?.textContent).toContain("holds 1");
+
+    act(() => toggle().click());
+    expect(rowFor("QA08157")).toBeDefined();
   });
 
   /**
@@ -438,8 +547,8 @@ describe("the page", () => {
 
   /**
    * The group rule keeps a chooser whose bits are set, but a search is a request to see less, and a
-   * header with nothing under it is not a search result. `shows` does not exempt a set option from
-   * the filter either, so the two rules have to agree about it.
+   * header with nothing under it is not a search result. Neither rule makes an exception of an
+   * option the code holds, so the two have to agree about that as well.
    */
   it("keeps nothing a search excluded, header or row", () => {
     typeModel("H98UCF9PW6AN");
@@ -499,24 +608,19 @@ describe("the page", () => {
     expect(other?.querySelector(".refused")?.textContent).toBe("not offered");
     expect(rowFor("QA00570", "D2 B0"), "its own layout stays too").toBeDefined();
 
-    // The toggle is the one thing that does remove it, being an explicit ask. Even then a row the
-    // code holds stays: digit 2 reads 3, which is this row's value, and hiding a set bit would be
-    // the code editing itself out of view.
+    // The toggle is the one thing that does remove it, being an explicit ask, and the code holding
+    // it is no exception: digit 2 reads 3, which is this row's value. The bits do not go with it,
+    // the field going on reporting the value it holds.
     act(() => toggle().click());
-    expect(rowFor("GA00307", "D2 B0-4 = 3"), "held by the code").toBeDefined();
-
-    // Clear the bits and the toggle may take it, since nothing is standing on it any more.
-    act(() => bit(2, 0).click());
-    act(() => bit(2, 1).click());
-    expect(rowFor("GA00307", "D2 B0-4 = 3"), "not held, not offered").toBeUndefined();
-
-    // And with the toggle off it is back, marked rather than gone.
-    act(() => toggle().click());
-    expect(rowFor("GA00307", "D2 B0-4 = 3")).toBeDefined();
+    expect(rowFor("GA00307", "D2 B0-4 = 3"), "an ask is an ask").toBeUndefined();
     const headers = [...container.querySelectorAll(".group header .where")].map(
       (span) => span.textContent,
     );
     expect(headers).toContain("D2 B0-4");
+
+    // And with the toggle off it is back, marked rather than gone.
+    act(() => toggle().click());
+    expect(rowFor("GA00307", "D2 B0-4 = 3")).toBeDefined();
   });
 
   /**

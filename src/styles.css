@@ -549,6 +549,18 @@ button:disabled {
   white-space: nowrap;
 }
 
+/* What the catalogue would not have sold in this combination.
+ *
+ * Amber rather than red, which is kept for what the radio in the box cannot have at all. This is a
+ * remark about the rest of the code and it changes as the code does, so a row can pick it up and
+ * put it down while the model says the same thing throughout. */
+.option .unmet,
+.option .clashing {
+  color: var(--warn);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
 /* An option the radio in the box does not have.
  *
  * Still listed and still editable, because the table is the whole bit space and a code can hold an
@@ -618,6 +630,13 @@ button:disabled {
 .detail .cited .part {
   color: inherit;
   opacity: 0.75;
+}
+
+/* The cited option the code is in trouble over, among the ones merely mentioned. A requirement or
+ * a conflict can name several part numbers and usually only one of them is the fault, so the list
+ * states the rule and the colour says which line of it the code is breaking. */
+.detail .cited.wrong {
+  color: var(--bad);
 }
 
 /* The OEM view. */

@@ -14,6 +14,8 @@ import {
   optionsAt,
   optionsOn,
   radioOf,
+  troubleIn,
+  troubleWith,
   variantsFor,
   withOption,
 } from "./options";
@@ -335,6 +337,35 @@ describe("what the catalogue says about an option", () => {
         expect(variantsFor(held.info!, radioOf(model)).length, held.part).toBeGreaterThan(0);
       }
     }
+  });
+});
+
+describe("what the catalogue refuses", () => {
+  /**
+   * `GA01545` is listed twice and the two entries refuse different things: a mobile order cannot
+   * carry `GA00469` and a portable one says nothing about it. Meeting either is an order Motorola
+   * would have taken, so with neither met the one reported is the one the code comes nearest to,
+   * that being the shortest way out of the trouble it is in.
+   */
+  it("reports the entry the code comes nearest to satisfying", () => {
+    const tether = option("GA01545");
+    const code = withOption(withOption(empty(), tether, true), option("GA00469"), true);
+
+    // The mobile entry is two things short: what it asks for is off and what it refuses is on.
+    expect(troubleIn(tether.info!.variants[0]!, code, UNKNOWN)).toEqual({
+      unmet: ["G806"],
+      clashing: ["GA00469"],
+    });
+    expect(troubleWith(tether, code, UNKNOWN)).toEqual({ unmet: ["Q806"], clashing: [] });
+  });
+
+  /**
+   * A requirement nobody has ordered against is not unmet, and one option on its own conflicts with
+   * nothing. Reading a code is not ordering one, so an option that is off is asked nothing at all.
+   */
+  it("finds no trouble in an option the code does not hold", () => {
+    const code = withOption(empty(), option("GA00469"), true);
+    expect(troubleWith(option("GA01545"), code, UNKNOWN)).toBeNull();
   });
 });
 

@@ -225,7 +225,7 @@ export default function App() {
               className="offered"
               title={
                 resolved
-                  ? `Leave out the options ${radio.model} does not carry, unless the code holds them`
+                  ? `Leave out the options ${radio.model} does not carry, held by the code or not`
                   : "Enter a model, and the options it does not carry can be hidden"
               }
             >

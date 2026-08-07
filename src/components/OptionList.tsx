@@ -11,6 +11,7 @@ import {
   fieldValueOf,
   isOn,
   readableOn,
+  troubleWith,
   withOption,
 } from "../options";
 
@@ -51,30 +52,29 @@ function matches(option: Option, filter: string): boolean {
  * 2 and 3. Someone reading a code wants all of that in front of them. A model annotates the list,
  * marking what it does not carry and what it names differently, and that is all it does.
  *
- * The filter removes rows, because a search is a request to see less. So does the toggle, which is
- * an explicit ask and still keeps a row whose bits the code currently holds: a set bit no row
- * accounts for would be a code editing itself out of view.
+ * The filter removes rows, because a search is a request to see less. So does the toggle, and it
+ * takes a row the code holds along with the rest: both are asks, and an ask that quietly makes an
+ * exception is worse than one that does not. The bits are not lost with the row, since the group
+ * goes on reporting the value its bits hold. See `showsGroup`.
  */
 export function shows(
   option: Option,
   filter: string,
   radio: Radio,
   offeredOnly: boolean,
-  code: Code,
 ): boolean {
-  const hidden = offeredOnly && carriedBy(option, radio) === false && !isOn(code, option);
-  return matches(option, filter) && !hidden;
+  return matches(option, filter) && !(offeredOnly && carriedBy(option, radio) === false);
 }
 
 /**
- * Whether a group appears at all, which is the same rule as `shows` one level up.
+ * Whether a group appears at all, which is what keeps a hidden row's bits in view.
  *
- * A group holding a value none of its shown options names has no row to keep on the strength of
- * being on, so dropping it would leave its bits set with nothing in the list accounting for them.
- * Its header reports the value, so that is what stays. That goes for a multi-bit flag as much as
- * for a chooser: a field two bits wide holding one of them names no option either.
+ * A group whose rows are all hidden still has bits, and dropping it would leave them set with
+ * nothing in the list accounting for them: the code would be editing itself out of view. Its
+ * header reports the value they hold, so that is what stays. That goes for a multi-bit flag as
+ * much as for a chooser: a field two bits wide holding one of them names no option either.
  *
- * Not against the filter, which `shows` does not exempt a set option from either: a search is a
+ * Not against the filter, for the same reason `shows` makes no exception to it: a search is a
  * request to see less, and a header with nothing under it is not a search result.
  */
 export function showsGroup(shown: number, held: number, filter: string): boolean {
@@ -105,6 +105,7 @@ function Row({
 }) {
   const on = isOn(code, option);
   const carried = carriedBy(option, radio);
+  const trouble = troubleWith(option, code, radio);
   const row = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
@@ -176,6 +177,22 @@ function Row({
         </span>
       ) : null}
       {/*
+        What the catalogue says is wrong with holding this alongside the rest of the code. A mark
+        rather than a sentence, the card being where the part numbers are named. Nothing is refused
+        either way: the catalogue describes an order, this describes bits, and a radio can be
+        holding a combination nobody could have bought.
+      */}
+      {trouble && trouble.unmet.length > 0 ? (
+        <span className="unmet" title={`Also needs ${trouble.unmet.join(", ")}`}>
+          missing requirement
+        </span>
+      ) : null}
+      {trouble && trouble.clashing.length > 0 ? (
+        <span className="clashing" title={`Not sold with ${trouble.clashing.join(", ")}`}>
+          conflict
+        </span>
+      ) : null}
+      {/*
         Which radios this part number names the bit for, whatever is in the model box. It is a fact
         about the option rather than about the radio, and it is the thing that says *why* a row
         reads as not offered, so hiding it once a model resolves threw away the explanation at
@@ -212,7 +229,7 @@ export function OptionList({
   // place rather than fighting over where to land.
   const target = groups
     .flatMap((group) => group.options)
-    .find((option) => pinned.has(option.id) && shows(option, filter, radio, offeredOnly, code));
+    .find((option) => pinned.has(option.id) && shows(option, filter, radio, offeredOnly));
 
   const [described, setDescribed] = useState<{ option: Option; anchor: Anchor } | null>(null);
   const waiting = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -247,7 +264,7 @@ export function OptionList({
   const standing = groups
     .map((group) => ({
       group,
-      shown: group.options.filter((option) => shows(option, filter, radio, offeredOnly, code)),
+      shown: group.options.filter((option) => shows(option, filter, radio, offeredOnly)),
       held: fieldValueOf(code, group),
     }))
     .filter(({ shown, held }) => showsGroup(shown.length, held, filter));
@@ -273,11 +290,19 @@ export function OptionList({
           <section key={group.key} className="group">
             {group.chooser || group.width > 1 || shown.length === 0 ? (
               <header>
+                {/* Written the way a row writes its own position, a one-bit field naming one bit
+                    rather than a range of one. That case is what the toggle leaves behind when it
+                    takes a lone row. */}
                 <span
                   className="where"
-                  title={`Digit ${group.character}, bits ${group.lsb} to ${group.lsb + group.width - 1}`}
+                  title={
+                    group.width > 1
+                      ? `Digit ${group.character}, bits ${group.lsb} to ${group.lsb + group.width - 1}`
+                      : `Digit ${group.character}, bit ${group.lsb}`
+                  }
                 >
-                  D{group.character} B{group.lsb}-{group.lsb + group.width - 1}
+                  D{group.character} B{group.lsb}
+                  {group.width > 1 ? `-${group.lsb + group.width - 1}` : ""}
                 </span>
                 <span className={names ? "held unrecognised" : "held"}>
                   holds {held}
@@ -304,8 +329,13 @@ export function OptionList({
           </section>
         );
       })}
-      {described?.option.info ? (
-        <OptionDetail info={described.option.info} radio={radio} anchor={described.anchor} />
+      {described ? (
+        <OptionDetail
+          option={described.option}
+          code={code}
+          radio={radio}
+          anchor={described.anchor}
+        />
       ) : null}
     </div>
   );
