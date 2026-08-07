@@ -1,4 +1,6 @@
-import { type Info, type Radio, variantsFor } from "../options";
+import { useLayoutEffect, useRef, useState } from "react";
+
+import { type Info, type Radio, nameOf, variantsFor } from "../options";
 
 /** Where on screen the row being described sits, so the card can be put beside it. */
 export interface Anchor {
@@ -15,7 +17,14 @@ interface Viewport {
 
 export const WIDTH = 340;
 const GAP = 10;
-/** Roughly what the tallest card comes to, used only to keep one off the bottom edge. */
+/**
+ * What to assume a card comes to before one has been measured, which is the first paint only.
+ *
+ * A guess is all this can be, and it used to be the only thing keeping a card on screen. That was
+ * fine while every card was a title, a sentence and two lines; naming each cited part number took
+ * the tallest to three times this, and a guess that stale positions a card most of the way off the
+ * bottom. So it is measured after it renders and this is only the opening bid.
+ */
 const TALL = 220;
 
 /**
@@ -27,14 +36,50 @@ const TALL = 220;
  *
  * Where there is no room to the left, it goes right rather than off screen.
  */
-export function place(anchor: Anchor, viewport: Viewport): { top: number; left: number } {
+export function place(
+  anchor: Anchor,
+  viewport: Viewport,
+  height: number = TALL,
+): { top: number; left: number } {
   const beside = anchor.left - WIDTH - GAP;
   const left =
     beside >= GAP ? beside : Math.min(anchor.right + GAP, viewport.width - WIDTH - GAP);
   return {
-    top: Math.max(GAP, Math.min(anchor.top, viewport.height - TALL)),
+    top: Math.max(GAP, Math.min(anchor.top, viewport.height - height - GAP)),
     left: Math.max(GAP, left),
   };
+}
+
+/**
+ * The part numbers a requirement or a conflict names, each with what it is.
+ *
+ * One per line rather than a comma-separated run: with the name attached an entry reaches sixty
+ * characters, and several of those joined by commas is a paragraph to be parsed rather than a list
+ * to be scanned.
+ */
+function Cited({
+  what,
+  parts,
+  className,
+}: {
+  what: string;
+  parts: readonly string[];
+  className: string;
+}) {
+  return (
+    <span className={className}>
+      {what}{" "}
+      {parts.map((part) => {
+        const name = nameOf(part);
+        return (
+          <span className="cited" key={part}>
+            <span className="part">{part}</span>
+            {name ? ` ${name}` : ""}
+          </span>
+        );
+      })}
+    </span>
+  );
 }
 
 /**
@@ -55,13 +100,23 @@ export function OptionDetail({
   radio: Radio;
   anchor: Anchor;
 }) {
-  const { top, left } = place(anchor, {
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+  // Measured rather than assumed, because how tall a card comes to depends on how much the
+  // catalogue has to say about the option, and that ranges from three lines to fifteen. A layout
+  // effect runs before the browser paints, so the corrected position is the first one seen.
+  const card = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<number | undefined>(undefined);
+  useLayoutEffect(() => {
+    setHeight(card.current?.offsetHeight || undefined);
+  }, [info, radio]);
+
+  const { top, left } = place(
+    anchor,
+    { width: window.innerWidth, height: window.innerHeight },
+    height,
+  );
 
   return (
-    <div className="detail" style={{ top, left, width: WIDTH }}>
+    <div className="detail" ref={card} style={{ top, left, width: WIDTH }}>
       <p className="title">{info.title}</p>
       <p className="what">{info.description}</p>
       {variantsFor(info, radio).map((variant) => (
@@ -69,10 +124,10 @@ export function OptionDetail({
           {variant.for ? <span className="for">{variant.for}</span> : null}
           <span className="release">Release {variant.release}</span>
           {variant.requires.length > 0 ? (
-            <span className="requires">Requires {variant.requires.join(", ")}</span>
+            <Cited what="Requires" parts={variant.requires} className="requires" />
           ) : null}
           {variant.conflicts.length > 0 ? (
-            <span className="conflicts">Conflicts with {variant.conflicts.join(", ")}</span>
+            <Cited what="Conflicts with" parts={variant.conflicts} className="conflicts" />
           ) : null}
         </div>
       ))}

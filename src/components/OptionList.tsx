@@ -45,19 +45,15 @@ function matches(option: Option, filter: string): boolean {
 /**
  * Whether a row is shown at all.
  *
- * An option a model does not carry is only hidden where the model settles the question. With no
- * model, `carriedBy` answers `null` for every guarded option and nothing is hidden, which is why
- * the toggle is disabled there rather than quietly doing nothing.
+ * **A model never removes a row.** The table is the whole bit space, and every part number that
+ * names a bit is worth seeing whichever radio is in the box: what a mobile calls a bit a portable
+ * calls something else, and the original and refreshed hardware lay different meanings over digits
+ * 2 and 3. Someone reading a code wants all of that in front of them. A model annotates the list,
+ * marking what it does not carry and what it names differently, and that is all it does.
  *
- * An option the code currently holds is never hidden, whatever the model says. Motorola not
- * offering something is exactly the situation this tool exists for, and a set bit that no row
+ * The filter removes rows, because a search is a request to see less. So does the toggle, which is
+ * an explicit ask and still keeps a row whose bits the code currently holds: a set bit no row
  * accounts for would be a code editing itself out of view.
- *
- * A row that is not a reading of this radio's bits is a different matter, and goes whatever the
- * toggle says. The two band layouts lay different meanings over the same bits, so such a row can
- * read as on by coincidence: its box would be ticked for a value it does not hold, and clearing it
- * would take the whole field with it. It is not that Motorola will not sell it, it is that it does
- * not describe this radio at all, so there is nothing for it to say here.
  */
 export function shows(
   option: Option,
@@ -66,9 +62,6 @@ export function shows(
   offeredOnly: boolean,
   code: Code,
 ): boolean {
-  if (radio.carries && !readableOn(option, radio)) {
-    return false;
-  }
   const hidden = offeredOnly && carriedBy(option, radio) === false && !isOn(code, option);
   return matches(option, filter) && !hidden;
 }
@@ -84,18 +77,7 @@ export function shows(
  * Not against the filter, which `shows` does not exempt a set option from either: a search is a
  * request to see less, and a header with nothing under it is not a search result.
  */
-export function showsGroup(
-  group: Group,
-  shown: number,
-  held: number,
-  filter: string,
-  radio: Radio,
-): boolean {
-  // A group none of whose options this radio could read is the other layout's field, and goes for
-  // the same reason its rows do.
-  if (radio.carries && !group.options.some((option) => readableOn(option, radio))) {
-    return false;
-  }
+export function showsGroup(shown: number, held: number, filter: string): boolean {
   return shown > 0 || (held !== 0 && !filter);
 }
 
@@ -136,6 +118,10 @@ function Row({
   const classes = [
     "option",
     on ? "on" : "",
+    // Colours the name, so a row that does not apply to the radio in the box can be skipped at a
+    // glance. A different class from the badge's `refused`, which sits inside the row, since
+    // `.option.refused` and `.option .refused` differ by one space.
+    carried === false ? "unavailable" : "",
     highlight.has(option.id) ? "lit" : "",
     pinned ? "pinned" : "",
   ]
@@ -177,12 +163,28 @@ function Row({
         {option.width > 1 ? `-${option.lsb + option.width - 1} = ${option.value}` : ""}
       </span>
       {carried === false ? (
-        <span className="refused" title={`Motorola does not list this for ${radio.model}`}>
+        <span
+          className="refused"
+          title={
+            readableOn(option, radio)
+              ? `Motorola does not list this for ${radio.model}`
+              : `These bits mean something else on ${radio.model}: this part number names them ` +
+                "for a different kind of radio, or for the other band layout"
+          }
+        >
           not offered
         </span>
       ) : null}
-      {carried === null && option.guard.length > 0 ? (
-        <span className="guarded">{describeGuard(option.guard)}</span>
+      {/*
+        Which radios this part number names the bit for, whatever is in the model box. It is a fact
+        about the option rather than about the radio, and it is the thing that says *why* a row
+        reads as not offered, so hiding it once a model resolves threw away the explanation at
+        exactly the moment there was something to explain.
+      */}
+      {option.guard.length > 0 ? (
+        <span className="guarded" title={`This part number names these bits for ${describeGuard(option.guard)}`}>
+          {describeGuard(option.guard)}
+        </span>
       ) : null}
     </li>
   );
@@ -248,7 +250,7 @@ export function OptionList({
       shown: group.options.filter((option) => shows(option, filter, radio, offeredOnly, code)),
       held: fieldValueOf(code, group),
     }))
-    .filter(({ group, shown, held }) => showsGroup(group, shown.length, held, filter, radio));
+    .filter(({ shown, held }) => showsGroup(shown.length, held, filter));
 
   return (
     <div className="options" onMouseLeave={() => describe(null, null)}>
@@ -264,14 +266,9 @@ export function OptionList({
       {standing.map(({ group, shown, held }) => {
         // An empty field is not an unrecognised value. Nothing can be on when the bits are clear,
         // since no option's value is zero, and the row of clear checkboxes says so accurately.
-        // Over the options this radio reads rather than the rows a search left standing: an
-        // option filtered out of view still names the value, and saying otherwise would be false.
-        const names =
-          held !== 0 &&
-          !group.options.some(
-            (option) =>
-              isOn(code, option) && (!radio.carries || readableOn(option, radio)),
-          );
+        // Over every option on those bits rather than the rows a search left standing: one
+        // filtered out of view still names the value, and saying otherwise would be false.
+        const names = held !== 0 && !group.options.some((option) => isOn(code, option));
         return (
           <section key={group.key} className="group">
             {group.chooser || group.width > 1 || shown.length === 0 ? (

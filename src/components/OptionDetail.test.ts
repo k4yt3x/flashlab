@@ -40,4 +40,26 @@ describe("placing the detail card", () => {
     const above = { top: -50, left: 600, right: 900 };
     expect(place(above, { width: 1600, height: 900 }).top).toBeGreaterThanOrEqual(0);
   });
+
+  /**
+   * A card is as tall as the catalogue is talkative, and naming every cited part number took the
+   * tallest well past the assumption that used to be the only thing keeping one on screen. So the
+   * height is measured and passed in, and what matters is that the bottom edge lands inside the
+   * window whatever that height turns out to be.
+   */
+  it("keeps a tall card's bottom edge on screen", () => {
+    const viewport = { width: 1600, height: 900 };
+    const anchor = { top: 700, left: 600, right: 900 };
+    for (const height of [80, 220, 400, 640]) {
+      const { top } = place(anchor, viewport, height);
+      expect(top, `${height} tall`).toBeGreaterThanOrEqual(0);
+      expect(top + height, `${height} tall`).toBeLessThanOrEqual(viewport.height);
+    }
+  });
+
+  /** Taller than the window leaves nowhere to put it, so it starts at the top rather than above. */
+  it("does not push a card taller than the window off the top", () => {
+    const { top } = place({ top: 400, left: 600, right: 900 }, { width: 1600, height: 400 }, 900);
+    expect(top).toBeGreaterThanOrEqual(0);
+  });
 });

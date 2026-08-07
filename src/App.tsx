@@ -22,8 +22,7 @@ import {
   type Option,
   UNKNOWN,
   groups as groupsOf,
-  namedFor,
-  readableOn,
+  namedBits,
   radioOf,
 } from "./options";
 
@@ -45,12 +44,10 @@ export default function App() {
   // Nothing can be judged against a model that did not resolve, so nothing can be hidden either.
   const resolved = radio.carries !== null;
   const groups = useMemo(() => groupsOf(OPTIONS), []);
-  // What this radio reads, which is what the grid names and jumps to and what the list shows.
-  const readable = useMemo(
-    () => OPTIONS.filter((option) => readableOn(option, radio)),
-    [radio],
-  );
-  const named = useMemo(() => namedFor(radio), [radio]);
+  // Every bit any option names, for any radio. The grid is a map of the code, not of one model:
+  // narrowing it to what this radio reads would dim bits the list still has rows for, and a right
+  // click would jump to fewer options than the list holds.
+  const named = useMemo(() => namedBits(), []);
 
   // The grid and the list point at each other: whichever the pointer is over lights up the bits or
   // the options the other one holds.
@@ -202,7 +199,7 @@ export default function App() {
             </p>
             <BitGrid
               code={code}
-              options={readable}
+              options={OPTIONS}
               named={named}
               highlight={litBits}
               onChange={adopt}

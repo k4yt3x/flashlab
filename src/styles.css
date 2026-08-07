@@ -205,6 +205,26 @@ button:disabled {
     flex: 1 1 420px;
   }
 
+  /* Wide enough for a whole code, and no wider.
+   *
+   * The column sizes to its contents and a percentage width contributes nothing to that, so
+   * without this the bit grid decides how wide the box is and the end of the code is cut off.
+   * Stated only in CSS: the `size` attribute is the other way to ask, but each engine pads its own
+   * guess differently, and having both meant two rules competing and a different answer in each.
+   *
+   * 29 characters is the written length of a code, dashes and check digit included. `1ch` is a
+   * character's own advance, which for a monospace face is every character. There are 29 letter
+   * spacings and not 28: the spec describes them as falling between characters, but engines add
+   * one after every character including the last, and Firefox holding the box a few pixels short
+   * is what that trailing one costs. The 22px is the padding and border a border box keeps inside
+   * the width, and the 1px is somewhere for the caret to sit past the final character.
+   *
+   * Only in this layout: below it the column is full width and a code already fits, where this
+   * could push a narrow phone into scrolling sideways. */
+  .code .written {
+    min-width: calc(29ch + 29 * 0.06em + 22px + 1px);
+  }
+
   /* Only here can the list take its height from the column beside it. */
   .options {
     flex: 1 1 0;
@@ -529,6 +549,19 @@ button:disabled {
   white-space: nowrap;
 }
 
+/* An option the radio in the box does not have.
+ *
+ * Still listed and still editable, because the table is the whole bit space and a code can hold an
+ * option its model was never sold. Only the name takes the colour. Everything else in the row is a
+ * fact that holds whatever radio is selected: the part number identifies the option, the position
+ * is where the bit is, the guard is who names it that way. The `.on` override has to be restated,
+ * since a set option's name is white otherwise and would come out untouched.
+ */
+.option.unavailable .name,
+.option.unavailable.on .name {
+  color: var(--bad);
+}
+
 /* What the catalogue says about the option under the pointer. */
 
 .detail {
@@ -574,6 +607,17 @@ button:disabled {
 
 .detail .conflicts {
   color: var(--warn);
+}
+
+/* One cited option per line, its part number set apart from what it is. */
+.detail .cited {
+  display: block;
+  margin-left: 10px;
+}
+
+.detail .cited .part {
+  color: inherit;
+  opacity: 0.75;
 }
 
 /* The OEM view. */

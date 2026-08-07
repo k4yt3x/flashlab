@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { shows, showsGroup } from "./components/OptionList";
 import { MODELS } from "./models";
-import { OPTIONS, fieldValueOf, groups, namedFor, radioOf } from "./options";
+import { OPTIONS, fieldValueOf, groups, namedBits, radioOf } from "./options";
 
 /**
  * That no set bit can end up with nothing in the list accounting for it.
@@ -18,7 +18,7 @@ describe("no set bit goes unaccounted for", () => {
     const orphans: string[] = [];
     for (const model of MODELS) {
       const radio = radioOf(model.model);
-      const named = namedFor(radio);
+      const named = namedBits();
       for (const offeredOnly of [false, true]) {
         for (let character = 0; character < 24; character += 1) {
           for (let value = 0; value < 64; value += 1) {
@@ -39,7 +39,7 @@ describe("no set bit goes unaccounted for", () => {
                   return false;
                 }
                 const surviving = g.options.filter((o) => shows(o, "", radio, offeredOnly, code));
-                return showsGroup(g, surviving.length, fieldValueOf(code, g), "", radio);
+                return showsGroup(surviving.length, fieldValueOf(code, g), "");
               });
               if (rows.length === 0 && !header) {
                 orphans.push(`${model.model} D${character}B${bit} value ${value} offeredOnly=${offeredOnly}`);

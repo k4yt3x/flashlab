@@ -60,6 +60,23 @@ export interface Option {
 
 export const OPTIONS: readonly Option[] = table.options;
 
+/**
+ * What to call a part number a requirement or a conflict cites.
+ *
+ * The name the list shows rather than the catalogue's own title. The two differ for 36 of the 88
+ * cited numbers, and the point of naming a conflict is to go and find it, so the card has to agree
+ * with the row it sends you to.
+ *
+ * `undefined` for a number this table does not place in a bit, which the catalogue does cite.
+ */
+const NAMES: ReadonlyMap<string, string> = new Map(
+  OPTIONS.map((option) => [option.part, option.name]),
+);
+
+export function nameOf(part: string): string | undefined {
+  return NAMES.get(part);
+}
+
 /** What a model number says about a radio. `null` for a model that has not been given. */
 export interface Radio {
   model: string;
@@ -313,16 +330,6 @@ export function withOption(code: Code, option: Option, on: boolean): number[] {
 /** Every option a code currently has on, whether or not the radio is supposed to carry it. */
 export function optionsOn(code: Code, options: readonly Option[] = OPTIONS): Option[] {
   return options.filter((option) => isOn(code, option));
-}
-
-/**
- * The bits that name something *for this radio*.
- *
- * A bit only the other band layout reads is not a bit this radio has, and showing it as named would
- * promise a row the list is right not to hold.
- */
-export function namedFor(radio: Radio, options: readonly Option[] = OPTIONS): Set<number> {
-  return namedBits(options.filter((option) => readableOn(option, radio)));
 }
 
 /** The bits any option in the table names, as `character * 6 + bit`. */

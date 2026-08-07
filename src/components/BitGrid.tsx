@@ -1,17 +1,8 @@
 import { ALPHABET, BITS, LENGTH, type Code, bitSet, withBit } from "../flashcode";
-import { type Option, namedBits, optionsAt } from "../options";
-
-/**
- * Every bit any option in the table names, for any radio.
- *
- * `named` is narrower: it holds what *this* radio reads. A bit in this set and not in that one is
- * named by the band layout the radio does not use, and saying no option names it would be a flat
- * statement that the table is silent about a bit it has plenty to say about.
- */
-const ANYWHERE = namedBits();
+import { type Option, optionsAt } from "../options";
 
 interface Props {
-  /** The options this radio reads, so a cell names and jumps to what the list would show. */
+  /** Every option in the table, so a cell names and jumps to exactly what the list holds. */
   options: readonly Option[];
   code: Code;
   named: Set<number>;
@@ -79,9 +70,7 @@ export function BitGrid({ code, options, named, highlight, onChange, onHover, on
                               .join(", ")}. Right click to show ${
                               reading.length === 1 ? "it" : "them"
                             } in the list.`
-                          : ANYWHERE.has(at)
-                            ? `Digit ${character}, bit ${bit}: no option this radio reads names it.`
-                            : `Digit ${character}, bit ${bit}: no option names it.`
+                          : `Digit ${character}, bit ${bit}: no option names it.`
                       }
                       onClick={() => onChange(withBit(code, character, bit, !set))}
                       onContextMenu={(event) => {
